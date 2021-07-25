@@ -1,0 +1,11 @@
+
+
+en = read_ascii('energies.dat', labels='z, wt k, l1, l2, l3')
+
+newplot(en.z, en.k, xlabel="Z", xmax=95, ymax=35, ymin=2,
+     ylabel =r'$E \rm\, (keV)$', linewidth=3)
+plot(en.z, en.l3, linewidth=3)
+
+plot_text(r"$ K $", 40, 26)
+plot_text(r"$ L_{\rm III} $", 65, 12)
+

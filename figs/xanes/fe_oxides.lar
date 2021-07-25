@@ -1,0 +1,19 @@
+
+met = read_ascii("fe_oxides/fe_metal.dat"   , labels='en mu')
+feo = read_ascii("fe_oxides/feo.dat"        , labels='en mu')
+hem = read_ascii("fe_oxides/fe2o3.dat"      , labels='en mu')
+mag = read_ascii("fe_oxides/fe3o4.dat"      , labels='en mu')
+
+
+opts = {'linewidth':4, 'style': 'solid'}
+opts1 = {'linewidth':4, 'style': 'short dashed'}
+
+plot(met.en, met.mu, color='blue', new=True, xmin=7100, xmax=7160,
+     label=r'metal' ,  bgcolor='white', framecolor='white',
+     xlabel =r'$ E \rm\, (eV) $', ylabel=r'$ \mu(E) $ ',   **opts)
+
+_plotter.plot1.SetSize((600, 650))
+
+plot(feo.en, feo.mu, color='black', label=r'$\rm FeO $',   **opts)
+plot(mag.en, mag.mu, color='blue', label=r'$\rm Fe_3O_4 $',  **opts1)
+plot(hem.en, hem.mu, color='red',  label=r'$\rm Fe_2O_3 $',  **opts)

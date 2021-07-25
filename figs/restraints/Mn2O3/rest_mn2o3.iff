@@ -1,0 +1,102 @@
+#
+#  fit MnO  CONSTRAIN   R/N
+#
+
+macro fitmacro 
+  echo ""
+  print  v_x1, v_x2, v_0, delv, restraint, R1,  N1, N2
+end macro		
+      
+read_data(file = "../data/mn2o3.xmu", group=mno)
+spline(mno.energy, mno.xmu, e0 = 6545,rbkg = 0.9, 
+		   kweight=2,kmin=0.5,kmax=12)
+
+
+set mno.chik = mno.chi * mno.k^2
+
+guess e0     = 0.0  # e0 shift
+guess sig2   = 0.008 # sigma2
+set   S02    = 0.6 # Amp factor
+
+set   R_0    = 1.76 # B.V. for Mn(II)
+set   V_0    = 3.0  # Formal Valence
+
+guess R1     = 2.01
+guess R21    = 1.90
+set   R22    = R1 -0.02
+guess R23    = 2.28
+guess N1     = 6  # Coord. Number
+def   N2     = N1
+
+set   delV   = 1
+
+
+def   V_x1   =  N1    *   exp( (R_0 - R1)  /0.37)
+def   V_x2   = (N2/3) * ( exp( (R_0 - R21) /0.37) 
+                        + exp( (R_0 - R22) /0.37)
+                        + exp( (R_0 - R23) /0.37) )
+
+def   restraint = (abs((V_x1 - V_0)/delV)  + abs((V_x2 - V_0)/delV))
+
+path(index  = 1,        degen  = 1,     label  = 'path1', 
+     feff   = ../feff/f_mn2o3_1.dat, 
+     delr   = (r1-reff), 
+     amp    = S02 * N1/2, 
+     e0     = e0,    sigma2 = sig2 )
+
+path(index  = 21,        degen  = 1,     label  = 'path 21', 
+     feff   = ../feff/f_mn2o3_21.dat, 
+     delr   = (r21-reff), 
+     amp    = S02 * N2/6, 
+     e0     = e0,    sigma2 = sig2 )
+
+path(index  = 22,        degen  = 1,     label  = 'path 22', 
+     feff   = ../feff/f_mn2o3_22.dat, 
+     delr   = (r22-reff), 
+     amp    = S02 * N2/6, 
+     e0     = e0,    sigma2 = sig2 )
+
+path(index  = 23,        degen  = 1,     label  = 'path 23', 
+     feff   = ../feff/f_mn2o3_23.dat, 
+     delr   = (r23-reff), 
+     amp    = S02 * N2/6, 
+     e0     = e0,    sigma2 = sig2 )
+
+
+ff2chi(1,21,22,23,  group=init)
+
+kmin=1.5, kmax=12.5, dk = 3, kweight=2
+$kwindow = hanning
+rmin = 1.03, rmax =2.1
+
+feffit(chi= mno.chi, 1,21,22,23, group=fit, 
+	    restratint=restraint )
+ 
+set fit.chik = fit.chi * fit.k^2
+
+print " v_exp, v_0, delv, restraint, R,  N"
+fitmacro
+show @variables
+show r_factor, chi_square, n_idp
+
+
+newplot mno.r, mno.chir_mag, xmax = 7, charfont=2
+   plot fit.r, fit.chir_mag
+   plot fit.r, fit.chir_re-1
+   plot mno.r, mno.chir_re-1
+   plot xlabel = 'R (\A)', ylabel = '|\gx(R)| (\A\u-3\d)'
+
+
+set fit.chir_real = fit.chir_re-1
+set mno.chir_real = mno.chir_re-1
+
+write_data(file=mn2o3_fit.dat, mno.r, mno.chir_mag, fit.chir_mag, 
+ mno.chir_real, fit.chir_real ) 
+
+
+# pause
+# 
+# newplot mno.k, mno.chik
+#    plot mno.k, mno.win
+#    plot fit.k, fit.chik
+# 

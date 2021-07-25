@@ -1,0 +1,24 @@
+
+cr6 = read_ascii("cr/cr_6.dat"   , labels='en mu')
+cr3 = read_ascii("cr/cr_3.dat"   , labels='en mu')
+
+opts = dict(linewidth=4, style='solid',
+            legendfontsize=10,
+            labelfontsize=10,
+            grid=False,
+            fullbox=False,
+            xmin=5985, xmax=6045,
+            ymin=0, ymax=1.7, show_legend=False,
+            xlabel =r'$ E \rm\, (eV) $',
+            ylabel=r'$ \mu(E) $ ')
+
+plot(cr3.en, cr3.mu, color='blue', new=True, label=r' $\rm Cr^{3+} $', **opts)
+
+get_display().SetSize((600,650))
+
+plot(cr6.en, cr6.mu, color='red', label=r'$\rm Cr^{6+}$',   **opts)
+
+plot_text(r'$\rm Cr^{6+} $ ',  5994, 0.9)
+plot_text(r'$\rm Cr^{3+} $ ',  6017, 1.4)
+
+save_plot('cr.png')

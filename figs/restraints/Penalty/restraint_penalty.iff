@@ -1,0 +1,77 @@
+# # > Finally, I never actually told you how to set up a restraint that
+# # > offers no penalty if the s02 is between 0.7 and 1.0 but to start
+# # > applying a penalty if it drifts out of that range.  I'm leaving that
+# # > as an exercise for the reader.  I am doing so largely because I can't
+# # > think of the answer off the top of my head. ;-)
+# # 
+# # It's not pretty, but I think this will effectively set penalties for 
+# # going above and below some value:
+# # 
+# #  guess  target   = 0.8
+# # 
+# #  set    lo_val   = 0.7
+# #  set    up_val   = 1.0
+# #  set    scale    = 100.0
+# #  def    penalty  = (max((target-lo_val), abs(target-lo_val)) - 
+# #                     min((target-up_val),-abs(target-up_val)) + 
+# #                     lo_val - up_val)*scale
+# # 
+# # This penalty could then be used as a restraint.  Whereas contraints
+# # give an infinite penalty for going above some value, this allows the
+# # target value to fall outside the desired range, but gives a finite
+# # penalty that increases linearly as with 'distance' from the desired
+# # range. Setting just a  lower or upper bound would go like this:
+# # 
+# #   lower_penalty =  max((target-lo_val), abs(target-lo_val))-(target-lo_val)
+# #   upper_penalty = -min((target-up_val),-abs(target-up_val))+(target-up_val)
+# # 
+# # To visualize this, an array of penalties can be plotted v. value 
+# # (with scale set to 1):
+
+  lo_val   = 0.7
+  up_val   = 1.0
+  target   = 0.8
+
+  # array of target values
+   m.x = range(0,2,0.02)
+
+  m.lower_p =  max((m.x-lo_val), abs(m.x-lo_val))-(m.x-lo_val)
+  m.upper_p = -min((m.x-up_val),-abs(m.x-up_val))+(m.x-up_val)
+  m.p1      = (max((m.x-lo_val), abs(m.x-lo_val)) - 
+               min((m.x-up_val),-abs(m.x-up_val))+
+               lo_val-up_val)
+
+
+  m.p2 = penalty(m.x,0.6,1.0)
+  
+  newplot m.x, m.p1, style=linespoints2
+     plot m.x, m.p2
+
+  write_data(file=penalty.dat, m.x, m.p2)
+
+
+#   plot    m.x, m.lower_p
+#   plot    m.x, m.upper_p
+# 
+# 
+#   m.low0 = max((m.x-0.2),abs((m.x-0.2)))-(m.x-0.2)
+#   plot m.x,m.low0
+
+###
+## for a scalar variable, it would look like this
+ 
+
+  lo_val   = 0.7
+  up_val   = 1.0
+  scale    = 1.000   ## scale can be increased to weight this restraint
+
+  target   = 0.8     ## this could be a variable
+
+## use penalty as a restraint in feffit()
+
+  def  penal  = (max((target-lo_val), abs(target-lo_val)) - 
+	         min((target-up_val),-abs(target-up_val)) + 
+                 lo_val - up_val)*scale
+
+#######
+

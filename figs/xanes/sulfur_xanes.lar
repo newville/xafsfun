@@ -1,0 +1,30 @@
+
+sulfite =read_ascii("sulfur/2013.2_Langman_s_xanes_nasulfite.001",  labels='en mu')
+sulfate =read_ascii("sulfur/2013.2_Langman_s_xanes_nisulfate.001",  labels='en mu')
+pyrite  =read_ascii("sulfur/2014.1_Langmann_s_xanes_pyrite.001",     labels='en mu')
+pyrho   =read_ascii("sulfur/2014.1_Langmann_s_xanes_pyrrhotite.002",  labels='en mu')
+elem    =read_ascii("sulfur/sulfur_trans_norm.dat",  labels='en mu')
+
+opts = {'linewidth':3, 'style': 'solid', 'fullbox': False}
+opts1 = {'linewidth':3, 'style': 'short dashed'}
+
+plot(elem.en*1000.0, elem.mu, color='blue', new=True, xmin=2460, xmax=2500,
+     ymin=0, ymax=2.8,  show_legend=False,
+     xlabel =r'$ E \rm\, (eV) $', ylabel=r'$ \mu(E) $ ',   **opts)
+
+_plotter.plot1.SetSize((800, 600))
+
+
+plot(sulfate.en, sulfate.mu*9-0.4, color='red',  **opts)
+plot(sulfite.en, sulfite.mu*10-0.4, color='black',  **opts)
+plot(pyrite.en,  pyrite.mu-0.05, color='black',  **opts1)
+
+plot_text('pyrite',    2466, 1.8)
+plot_text('S(0)',      2471, 2.4)
+plot_text('sulfite',   2475, 2.6)
+plot_text('sulfate',   2482, 2.3)
+#plot_text(r'$\rm As^{5+} $ ',  11878, 2.3)
+#
+
+
+

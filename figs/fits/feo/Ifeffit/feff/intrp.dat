@@ -1,0 +1,53 @@
+#
+#  TITLE   name:     FeO
+#  TITLE   formula:  FeO
+#  TITLE   sites:    Fe1,O1
+#  TITLE   refer1:   wyckoff 1,III,88
+#  TITLE   refer2:   (who also gives lattice constant a=4.3108)
+#  TITLE   schoen:
+#  TITLE   notes1:   salt, halite
+#
+# Cluster size = 5.23873 Angstroms, containing 82 atoms.
+# 36 paths were calculated by feff.
+# Curved wave criteria = 2.5.
+# Cutoff angle for forward scattering is 20 degrees.
+# The central atom is denoted by this token: Fe1
+# intrp version 1.14p
+# ------------------------------------------------------------
+# index degen reff    amp  fs         scattering path
+   0001   6  2.139  100.00  0 -->   Fe1     O1    Fe1
+   0002  12  3.025   90.38  0 -->   Fe1    Fe1    Fe1
+   0003  24  3.651   13.98  0 -->   Fe1     O1     O1    Fe1
+   0004  48  3.651   19.69  0 -->   Fe1    Fe1     O1    Fe1
+   0005   8  3.704   34.87  0 -->   Fe1     O1    Fe1
+   0006   6  4.277   19.56  0 -->   Fe1    Fe1    Fe1
+   0007   6  4.277   14.18  0 -->   Fe1     O1     O1    Fe1
+   0008  12  4.277   48.60  1 -->   Fe1    Fe1     O1    Fe1
+   0009   6  4.277   12.11  1 -->   Fe1     O1    Fe1     O1    Fe1
+   0010   6  4.277    4.50  0 -->   Fe1     O1    Fe1     O1    Fe1
+   0011   6  4.277   30.16  2 -->   Fe1     O1    Fe1     O1    Fe1
+   0012  24  4.277    7.36  0 -->   Fe1     O1    Fe1     O1    Fe1
+   0014  48  4.434    6.63  0 -->   Fe1    Fe1     O1    Fe1
+   0015  48  4.434   21.11  0 -->   Fe1     O1     O1    Fe1
+   0016  48  4.434   25.97  0 -->   Fe1     O1    Fe1    Fe1
+   0017  48  4.537    7.70  0 -->   Fe1    Fe1    Fe1    Fe1
+   0018  24  4.782   52.95  0 -->   Fe1     O1    Fe1
+   0019  48  4.973   21.20  0 -->   Fe1    Fe1     O1    Fe1
+   0020  48  4.973   47.46  0 -->   Fe1     O1     O1    Fe1
+   0021  48  4.973   31.04  0 -->   Fe1     O1    Fe1    Fe1
+   0022  96  5.060    8.67  0 -->   Fe1     O1    Fe1     O1    Fe1
+   0023  48  5.163    6.84  0 -->   Fe1    Fe1    Fe1    Fe1
+   0024  24  5.163    4.95  0 -->   Fe1     O1     O1     O1    Fe1
+   0025  48  5.163    3.63  0 -->   Fe1    Fe1     O1     O1    Fe1
+   0026  48  5.163    6.24  0 -->   Fe1    Fe1    Fe1     O1    Fe1
+   0027  48  5.163    9.80  0 -->   Fe1    Fe1     O1     O1    Fe1
+   0028  24  5.163   10.51  0 -->   Fe1     O1     O1     O1    Fe1
+   0029  24  5.163   16.76  0 -->   Fe1     O1     O1     O1    Fe1
+   0031  24  5.163    4.70  0 -->   Fe1    Fe1     O1    Fe1    Fe1
+   0032  24  5.163    5.21  0 -->   Fe1    Fe1     O1    Fe1    Fe1
+   0033  48  5.163    5.75  0 -->   Fe1    Fe1    Fe1     O1    Fe1
+   0034  96  5.163    8.91  0 -->   Fe1    Fe1     O1     O1    Fe1
+   0035  48  5.163   14.60  0 -->   Fe1    Fe1     O1     O1    Fe1
+   0036  48  5.163    9.11  1 -->   Fe1    Fe1    Fe1     O1    Fe1
+   0037  96  5.163    2.68  0 -->   Fe1    Fe1    Fe1     O1    Fe1
+   0038  24  5.239   45.97  0 -->   Fe1    Fe1    Fe1

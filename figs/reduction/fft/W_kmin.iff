@@ -1,0 +1,30 @@
+#
+# plot some typical window functions
+# as in Reference Manual
+
+read_data(../feo/feo_ksp.dat , group=dat, label='k chi chik win win2')
+
+
+kmin=2.5
+kmax=13.5
+kweight=2
+dk = 3
+offset = 0.75
+
+fftf(k=dat.k, real=dat.chi,  kmin=0, kwindow='hanning')
+set dat.chirx0 = dat.chir_mag + offset * 0
+
+fftf(k=dat.k, real=dat.chi,  kmin=2, kwindow='hanning')
+set dat.chirx2 = dat.chir_mag + offset * 1
+
+fftf(k=dat.k, real=dat.chi,  kmin=4, kwindow='hanning')
+set dat.chirx4 = dat.chir_mag + offset * 2
+
+fftf(k=dat.k, real=dat.chi,  kmin=6, kwindow='hanning')
+set dat.chirx6 = dat.chir_mag + offset * 3
+
+
+
+write_data(file='windows_kmin.dat', 
+     dat.r, dat.chirx0, dat.chirx2, dat.chirx4, dat.chirx6)
+

@@ -1,0 +1,10 @@
+macro u file off
+  read_data(x$1,type=xmu,group=x)
+  set y.xmu = x.xmu + $2
+  write_data(file=$1,x.energy, y.xmu)
+end macro
+
+u fe_metal.dat 0.3
+u feo.dat      0.2
+u fe3o4.dat    0.1
+u fe2o3.dat    0.0

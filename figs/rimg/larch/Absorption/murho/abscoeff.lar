@@ -1,0 +1,31 @@
+#gnuplot file to make figures for gas absorption coefs
+fe = read_ascii('fe.dat', labels='en mu')
+ox = read_ascii('o.dat', labels='en mu')
+cd = read_ascii('cd.dat', labels='en mu')
+pb = read_ascii('pb.dat', labels='en mu')
+
+#  set logscale y ;  set format y "$10^{%T}$"
+# set logscale x ;
+
+xlabel = r'$ E \rm\, (keV) $'
+ylabel = r'$ \mu/\rho \rm\,(barns/atom) $'
+
+newplot(fe.en, fe.mu, linewidth=3, xlabel=xlabel, ylabel=ylabel, xmin=1, xmax=100)
+ plot(ox.en, ox.mu, linewidth=3)
+ plot(cd.en, cd.mu, linewidth=3)
+ plot(pb.en, pb.mu, linewidth=3, ymin=1.5, ymax=8e6)
+
+plot_text("O" ,    1.8,  40000.)
+plot_text("Fe" ,   5.0,  26000.)
+plot_text("Cd" ,  20.0,   7000.)
+plot_text("Pb" ,  65.0,   2500.)
+
+#
+#  plot "fe.dat" u 1:2 w l ls 5, "o.dat" u 1:2  w l ls 3, \
+#       "cd.dat" u 1:2 w l ls 2, "pb.dat" u 1:2 w l ls 1
+
+axes = get_display().panel.axes
+axes.set_xscale('log', base=10)
+axes.set_yscale('log', base=10)
+axes.xaxis.set_ticklabels(['1', '10', '100'])
+

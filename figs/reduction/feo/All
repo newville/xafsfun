@@ -1,0 +1,18 @@
+gp2ps mu_preedge.gp
+
+# gp2ps chi_04.gp
+# gp2ps chiq.gp
+# gp2ps chir.gp
+# gp2ps chir_complex.gp
+# gp2ps chir_win.gp
+# gp2ps mu_norm.gp
+# gp2ps bkg.gp
+# gp2ps bkg_xanes.gp
+# gp2ps chi.gp
+# gp2ps chi_01.gp
+# gp2ps chi_02.gp
+# gp2ps chi_03.gp
+# gp2ps chik.gp
+# gp2ps chikw.gp
+# gp2ps xanes.gp
+# gp2ps xanes_deriv.gp

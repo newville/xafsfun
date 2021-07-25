@@ -1,0 +1,19 @@
+
+kfit = read_ascii("fe_kfit2.dat", labels='k dat win xk fit path1 path2')
+
+opts = {'linewidth':3, 'style': 'solid'}
+opts1 = {'linewidth':3, 'style': 'short dashed'}
+
+plot(kfit.k, kfit.dat, color='blue', new=True, xmin=0, xmax=15,
+     label=r'data' ,  bgcolor='white', framecolor='white',
+     xlabel =r'$ k \rm\, (\AA^{-1}) $',
+     ylabel=r' $ k^2\chi(k) \rm\, (\AA^{-2}) $ ',   **opts)
+
+_plotter.plot1.SetSize((700, 750))
+
+plot(kfit.k, kfit.fit,   color='red', label=r'fit',   **opts)
+plot(kfit.k, kfit.path1, color='blue', label=r'Fe-O',  **opts1)
+plot(kfit.k, kfit.path2, color='red',  label=r'Fe-FE',  **opts1)
+
+plot_text('Fe-O',  12.2, -1.35)
+plot_text('Fe-Fe', 12.2, -1.85)

@@ -1,0 +1,16 @@
+title name:     FeO
+title formula:  FeO
+title sites:    Fe1,O1
+title refer1:   wyckoff 1,III,88
+title refer2:
+title schoen:
+title notes1:   salt, halite
+space  f m 3 m
+a    = 4.31
+alpha= 90
+rmax = 5.4
+core = Fe1
+atom
+Fe     0.00000   0.00000   0.00000  Fe1 (4a)
+O      0.50000   0.50000   0.50000  O1 (4b)
+------

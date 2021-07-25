@@ -1,0 +1,28 @@
+# 
+
+  set xr [-1:5]; set yr [-1:5] ; set nokey
+#
+  set label ' $ x_0 $ '                 at   2.450, -0.300
+  set label ' $ y_0 $ '                 at  -0.400,  2.250
+  set label ' $ x_0 - \Delta x $ '      at   0.050, -0.250
+  set label ' $ x_0 + \Delta x $ '      at   4.100, -0.250
+  set label " $ x_0 + \Delta x' $ "     at   3.100, -0.550
+  set label ' $ y_0 - \Delta y $ '      at  -0.900,  0.835786
+  set label ' $ y_0 + \Delta y $ '      at  -0.900,  3.664214
+  set label ' $ \chi_0^2 $ '            at   2.150,  2.05000
+  set label ' $ \theta_{\rm c} $ '      at   3.350,  2.95000
+  set label ' $ \chi^2 =\chi^2_0 +1 $ ' at   1.000,  0.5000
+  set label 'A'                     at   3.914,  3.864214
+  set label 'B'                     at   4.600,  3.250000
+#
+
+plot "ellipse.dat"  u 1:2 w lines 1 \
+  ,  "ellipse.dat"  u 3:4 w lines 2 \
+  ,  "dxprime.dat"  u 1:2 w lines 2 \
+  ,  "center.dat"   u 1:2 w points 1 2 \
+  ,  "limits.dat"   u 1:2 w lines 1 \
+  ,  "axis.dat"     u 1:2 w lines 1 \
+  ,  "correl.dat"   w lines 1 
+
+
+

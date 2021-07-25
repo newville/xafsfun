@@ -1,0 +1,10 @@
+read_data sf6.dat , group=sf6, label='energy xmu'
+read_data xmu_distort.dat, group=d, type=xmu.dat
+read_data xmu_undistort.dat, group=u, type=xmu.dat
+set e0shift = 16
+set d.e = d.energy+e0shift
+write_data(file='distort_calc.dat', d.e, d.mu, e0shift)
+
+set e0shift = 14
+set u.e = u.energy+e0shift
+write_data(file='undistort_calc.dat', u.e, u.mu, e0shift)

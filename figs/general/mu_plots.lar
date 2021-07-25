@@ -1,0 +1,49 @@
+from scipy.constants import atomic_mass as AMU_kg
+AMU = AMU_kg * 1.e27
+
+ex = linspace(-0.3, 3.2, 701)
+en_kev = 10**ex
+en = 1000*en_kev
+
+mu = {}
+
+for elem in ('O', 'S', 'Fe', 'Ag', 'Pb'):
+   mu[elem] = mu_chantler(elem, en) * AMU * atomic_mass(elem)
+#endfor
+
+mu100kev = []
+mu050kev = []
+mu020kev = []
+mu010kev = []
+mu005kev = []
+
+z = arange(1, 90, dtype='int')
+
+for iz in range(1, 90):
+   mu005kev.append(mu_chantler(iz,  5e3) * AMU *atomic_mass(iz))
+   mu010kev.append(mu_chantler(iz,  1e4) * AMU *atomic_mass(iz))
+   mu020kev.append(mu_chantler(iz,  2e4) * AMU *atomic_mass(iz))
+   mu050kev.append(mu_chantler(iz,  5e4) * AMU *atomic_mass(iz))
+   mu100kev.append(mu_chantler(iz,  1e5) * AMU *atomic_mass(iz))
+#endfor
+
+plot(en_kev, mu['Pb'], label='Pb', ylog_scale=True, xlog_scale=True,
+     # title='photo-electric cross-section',
+     xmin=0.6, xmax=200, ymin=1.1, ymax=5.e6,
+     xlabel='Energy (keV)', ylabel=r'$\mu/\rho \, \rm (barns/atom) $',
+     new=True, show_legend=False, linewidth=3)
+plot(en_kev, mu['Ag'], label='Ag')
+plot(en_kev, mu['Fe'], label='Fe')
+plot(en_kev, mu['O'], label='O')
+
+xaxis = get_display(win=1).panel.axes.get_xaxis()
+
+xaxis.set_ticklabels(('0.01', '0.1', '1', '10', '100'))
+
+plot_text('O',  1.5, 56000)
+plot_text('Fe', 5, 18000)
+plot_text('Ag', 19, 5000)
+plot_text('Pb', 65, 2000)
+
+
+

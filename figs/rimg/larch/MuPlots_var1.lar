@@ -1,0 +1,71 @@
+
+
+feo = read_ascii('feo.dat', labels='energy time i0 it')
+
+feo.xmu = ln(feo.i0/feo.it)
+
+autobk(feo.energy, feo.xmu, group=feo, kweight=2.5, rbkg=0.7)
+
+opts=dict(labelfontsize=10, legendfontsize=10, linewidth=3)
+opts['win'] = 1
+
+newplot(feo.energy, feo.xmu, xlabel= 'E (eV)', ylabel=r'$\mu(E)$',
+        xmin=7030, xmax=7500, zorder=5, **opts)
+
+
+plot(feo.energy, feo.bkg, key='mu0', zorder=2, **opts)
+
+plot_text(r'$\Delta\mu_0$', 7065, 0.6)
+plot_text(r'$\mu_0$', 7285, 1.6)
+## plot_text('pre-edge line', 7520, -0.25)
+
+xox = 7106
+
+panel = get_display().panel
+panel.axes.annotate('', xy=(7106,  0.7),  xycoords='data',
+                    xytext=(7106,  1.22), textcoords='data',
+                    arrowprops=dict(arrowstyle="<-"))
+panel.axes.annotate('', xy=(7106, -0.17),  xycoords='data',
+                    xytext=(7106,  0.5), textcoords='data',
+                    arrowprops=dict(arrowstyle="->"))
+# connectionstyle="arc=.22"))
+panel.axes.annotate('', xy=(7155, 1.165),  xycoords='data',
+                    xytext=(7280, 1.6), textcoords='data',
+                    arrowprops=dict(arrowstyle="->",
+                                connectionstyle="arc3,rad=.3"))
+
+
+panel.draw()
+
+#
+# newplot(feo.energy, feo.norm,
+#         xmin =7090, xmax=7230, ymin=-0.05,  ymax=1.5,
+# 	xlabel= 'E (eV)', ylabel=r'$\mu(E)$', win=3)
+# plot(feo.energy, smooth(feo.energy, deriv(feo.norm)/deriv(feo.energy), 0.1),
+#      side='right', y2label=r'$d\mu/dE$',
+#      xmin =7090, xmax=7230, ymin=-0.2,  ymax=0.5, win=3)
+#
+# # plot_text(, 7185, 0.55, win=3)
+# plot_text(r'$E_0$', 7120, 0.05, win=3)
+#
+# plot_axvline(feo.e0, win=3, linewidth=1.5, ymin=0.12, color='black', linestyle='dashed', zorder=3)
+#
+# #
+# # pause == hit enter for smooth background spline
+# # spline(feo.energy,feo.xmu, kweight=3, rbkg=0.7)
+# #
+# # newplot(feo.energy, feo.xmu, key = '\gm(E)',
+# # 	xlabel= 'E (eV)', ylabel= '\gm(E)')
+# # plot(feo.energy, feo.bkg,  key= '\gm\d0\u')
+# #
+# # write_data(file = 'feo.bkg', feo.energy, feo.xmu, feo.bkg, feo.norm,
+# #           feo.preline,feo.normline)
+# #
+# # pause == hit enter for isolated EXAFS chi(k)
+# #
+label_k    = r'$k \rm\,(\AA^{-1})$'
+label_chi  = r'$\chi(k)$'
+opts=dict(labelfontsize=10, legendfontsize=10, linewidth=3)
+opts['win'] = 2
+
+newplot(feo.k, feo.chi, xlabel=label_k, ylabel=label_chi, **opts)

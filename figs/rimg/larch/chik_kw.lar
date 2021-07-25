@@ -1,0 +1,15 @@
+#
+# Reduction of FeO XAFS Data:   data  -->  chi(R)
+
+
+feo = read_ascii('feo_ksp.dat', labels='k chi chik2')
+
+newplot(feo.k, feo.chi, color='blue', linewidth=3,
+        xlabel=r'$k\rm\,(\AA^{-1})$',
+        ylabel=r'$\chi(k)$')
+
+
+plot(feo.k, feo.chi*feo.k**2, side='right', color='red', linewidth=3,
+     xmax=14.5, y2label=r'$k^2\chi(k)\rm\,(\AA^{-2})$')
+
+

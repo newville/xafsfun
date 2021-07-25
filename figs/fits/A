@@ -1,0 +1,7 @@
+convert -antialias -density 300 feo_k_1sh.pdf feo_k_1sh.png
+convert -antialias -density 300 feo_k_2sh.pdf feo_k_2sh.png
+convert -antialias -density 300 feo_r_1sh_cmplx.pdf feo_r_1sh_cmplx.png
+convert -antialias -density 300 feo_r_1sh_mag.pdf feo_r_1sh_mag.png
+convert -antialias -density 300 feo_r_2sh_cmplx.pdf feo_r_2sh_cmplx.png
+convert -antialias -density 300 feo_r_2sh_mag.pdf feo_r_2sh_mag.png
+convert -antialias -density 300 feo_r_2sh_paths.pdf feo_r_2sh_paths.png

@@ -1,0 +1,50 @@
+from scipy.constants import atomic_mass as AMU_kg
+AMU = AMU_kg * 1.e27
+
+ex = linspace(0, 2.5, 501)
+en_kev = 10**ex
+en = 1000*en_kev
+
+mu_photo = {}
+mu_compton = {}
+mu_rayleigh = {}
+mu_total = {}
+for elem in ('O', 'S', 'Fe', 'Ag', 'Pb'):
+   mu_photo[elem] = mu_elam(elem, en, kind='photo') * AMU * atomic_mass(elem)
+   mu_compton[elem] = mu_elam(elem, en, kind='incoh') * AMU * atomic_mass(elem)
+   mu_rayleigh[elem] = mu_elam(elem, en, kind='coh') * AMU * atomic_mass(elem)
+   mu_total[elem] = mu_elam(elem, en) * AMU * atomic_mass(elem)
+#endfor
+
+elem='O'
+
+plot(en_kev, mu_total[elem], ylog_scale=True, xlog_scale=True,
+     title='attenuation cross-sections: %s' % elem,
+     label='Total',
+     xmin=0.6, xmax=200, ymin=1.1, ymax=5.e6,
+     show_grid=False, show_legend=True,
+     fullbox=False,
+     xlabel='Energy (keV)', ylabel=r'$\mu/\rho \, \rm (barns/atom) $',
+     new=True, linewidth=4)
+plot(en_kev, mu_photo[elem], label='Photo')
+plot(en_kev, mu_compton[elem], label='Compton')
+plot(en_kev, mu_rayleigh[elem], label='Rayleigh')
+
+# 
+# plot(en_kev, mu_total['Fe'])
+# plot(en_kev, mu_photo['Fe'])
+# plot(en_kev, mu_compton['Fe'])
+# plot(en_kev, mu_rayleigh['Fe'])
+
+
+xaxis = get_display(win=1).panel.axes.get_xaxis()
+
+xaxis.set_ticklabels(('0.01', '0.1', '1', '10', '100'))
+
+# plot_text('O',  1.5, 56000)
+# plot_text('Fe', 5, 18000)
+# plot_text('Ag', 19, 5000)
+# plot_text('Pb', 65, 2000)
+
+
+

@@ -1,0 +1,10 @@
+#
+
+set m.i = range(1,1024,1)
+set m.x =  2.5 + 2 * sin(m.i*2*pi/1024)
+set m.y =  1.0 + 1 * cos(m.i*2*pi/1024)  + x / 2.0
+set frac =  1. - exp(-1)
+set m.x1 =  2.50*(1-frac)  + m.x*frac
+set m.y1 =  2.25*(1-frac)  + m.y*frac
+write_data(file="e2.dat",  m.x1, m.y1)
+newplot m.x1, m.y1

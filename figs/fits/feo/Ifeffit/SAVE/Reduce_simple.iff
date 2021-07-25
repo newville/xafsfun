@@ -1,0 +1,11 @@
+#
+
+read_data(file = feo.dat, group = feo, label = 'energy time i0 it')
+
+set feo.xmu    = log(feo.i0/feo.it)
+
+spline(feo.energy, feo.xmu, kweight=3, rbkg=0.7)
+
+write_data(file = 'feo.chi', feo.k, feo.chi)
+
+

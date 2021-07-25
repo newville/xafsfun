@@ -1,0 +1,24 @@
+
+as3 = read_ascii("as/as2o3_norm.dat"   , labels='en mu')
+as5 = read_ascii("as/as2o5_norm.dat"   , labels='en mu')
+
+opts = dict(linewidth=4, style='solid',
+            legendfontsize=10,
+            labelfontsize=10,
+            grid=False,
+            fullbox=False,
+            xmin=11855, xmax=11915,
+            ymin=0, ymax=2.8, show_legend=False,
+            xlabel =r'$ E \rm\, (eV) $',
+            ylabel=r'$ \mu(E) $ ')
+
+plot(as3.en, as3.mu, color='blue', new=True, **opts)
+
+get_display().SetSize((600,650))
+
+plot(as5.en, as5.mu, color='red', label=r'$\rm As^{5+}$',   **opts)
+
+plot_text(r'$\rm As^{3+} $ ',  11865, 2.0)
+plot_text(r'$\rm As^{5+} $ ',  11878, 2.3)
+
+save_plot('as.png')

@@ -1,0 +1,79 @@
+#
+# plot some typical window functions
+# as in Reference Manual
+
+read_data(../feo/feo_ksp.dat , group=dat, label='k chi chik win win2')
+
+
+kmin=2.5
+kmax=13.5
+kweight=2
+offset = 0.5
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=0.0, kwindow='hanning')
+set dat.chir_h0 = dat.chir_mag + offset * 0
+set dat.win_h0  = dat.win
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=2.0, kwindow='hanning')
+set dat.chir_h2 = dat.chir_mag + offset * 1
+set dat.win_h2  = dat.win
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=4.0, kwindow='hanning')
+set dat.chir_h4 = dat.chir_mag + offset * 2
+set dat.win_h4  = dat.win
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=6.0, kwindow='hanning')
+set dat.chir_h6 = dat.chir_mag + offset * 3
+set dat.win_h6  = dat.win
+
+write_data(file='windows_chir0.dat', 
+     dat.r, dat.chir_h0,dat.chir_h2,dat.chir_h4, dat.chir_h6)
+
+set dat.chik = dat.chi * dat.k^2
+write_data(file='windows_win0.dat', 
+     dat.k, dat.chik, dat.win_h0,dat.win_h2,dat.win_h4, dat.win_h6)
+
+
+
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=3.0, kwindow='hanning')
+set dat.chir_h3 = dat.chir_mag + offset * 0
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=3.0, kwindow='parzen')
+set dat.chir_p3 = dat.chir_mag + offset * 1
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=3.0, kwindow='kaiser')
+set dat.chir_k3 = dat.chir_mag + offset * 2
+
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=5.0, kwindow='kaiser')
+set dat.chir_k5 = dat.chir_mag + offset * 3
+
+
+write_data(file='windows_chir1.dat', dat.r, dat.chir_h3, dat.chir_p3,
+dat.chir_k3, dat.chir_k5)
+
+
+
+offset = 4
+fftf(k=dat.k, real=dat.chi, kweight=0, dk=3.0, kwindow='hanning')
+set dat.chir_kw0 = (dat.chir_mag ) * 5^3 
+
+fftf(k=dat.k, real=dat.chi, kweight=1, dk=3.0, kwindow='hanning')
+set dat.chir_kw1 = offset + (dat.chir_mag  ) * 5^2 
+
+fftf(k=dat.k, real=dat.chi, kweight=2, dk=3.0, kwindow='hanning')
+set dat.chir_kw2 = offset*2 + (dat.chir_mag  ) * 5^1 
+
+fftf(k=dat.k, real=dat.chi, kweight=3, dk=3.0, kwindow='hanning')
+set dat.chir_kw3 = offset*3 + (dat.chir_mag ) * 5^0 
+
+
+newplot dat.r, dat.chir_kw0
+   plot dat.r, dat.chir_kw1
+   plot dat.r, dat.chir_kw2
+   plot dat.r, dat.chir_kw3
+
+write_data(file='windows_kw.dat', dat.r, dat.chir_kw0, dat.chir_kw1,
+dat.chir_kw2, dat.chir_kw3)
+

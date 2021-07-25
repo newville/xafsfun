@@ -1,0 +1,27 @@
+#gnuplot file to make figures for gas absorption coefs
+read_data(o.dat,   group=o, label = 'en sig sig2 mu')
+read_data(fe.dat, group=fe, label = 'en sig sig2 mu')
+read_data(pb.dat, group=pb, label = 'en sig sig2 mu')
+read_data(cd.dat, group=cd, label = 'en sig sig2 mu')
+
+
+plot ((o.en), log10(o.sig), color='blue', linewidth=7, xmax=100,
+     charsize=1.7,
+     xlabel='E (keV)', ylabel="  \gm/\gr (10\u-24\d cm\u2\d/atom) " )
+
+plot ((fe.en), log10(fe.sig), color='red')
+plot ((cd.en), log10(cd.sig), color='darkgreen')
+plot ((pb.en), log10(pb.sig), color='black')
+# 
+#  set xlabel "Energy (keV)" 0, -0.5 
+#  set xrange [1:100] 
+#  set label 1 "O"  at  40.0, 10.
+#  set label 2 "Fe" at  30.0, 1000.
+#  set label 3 "Pb" at  12.0, 100000.
+#  set label 4 "Cd" at  22.0,  7000.
+#  set ylabel ' $ \\rm\\mu/\\rho \\,(10^{-24} cm^2/atom) $ '  1, 0
+#  plot "fe.dat" u 1:2 w line 1, "o.dat" u 1:2 w line 2, \
+#       "cd.dat" u 1:2 w line 3, "pb.dat" u 1:2 w line 4
+
+
+

@@ -1,0 +1,15 @@
+#
+
+set m.i = range(1,1024,1)
+set m.x1 = 2.5 + 2 * sin(m.i*2*pi/1024)
+set m.y1 = 1.0 + 1 * cos(m.i*2*pi/1024) + m.x1 / 2.0
+
+set frac =  1. - exp(-1)
+set m.x2 =  2.50*(1-frac)  + m.x1*frac
+set m.y2 =  2.25*(1-frac)  + m.y1*frac
+
+write_data(file="ellipse.dat", m.x1, m.y1, m.x2, m.y2)
+
+plot m.x1, m.y1
+plot m.x2, m.y2
+#

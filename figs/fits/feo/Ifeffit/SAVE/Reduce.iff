@@ -1,0 +1,84 @@
+#
+# Reduction of FeO XAFS Data:   data  -->  chi(R)
+
+#
+# read in energy, i0, it data
+
+read_data(file = feo.dat, group = feo, label = 'energy time i0 it')
+
+newplot(feo.energy, feo.i0/feo.time, xlabel= 'E (eV)', ylabel= 'Intensity', 
+       key='I\d0\u', linewidth=4)
+
+
+pause == hit enter to see i_t as well
+newplot(feo.energy, feo.it/feo.time, key = 'I')
+
+
+set feo.xmu    = log(feo.i0/feo.it)
+pause == hit enter to absorption mu(E) 
+
+newplot(feo.energy, feo.xmu,  title = 'Absorption Coefficient \gm(E)', 
+	xlabel= 'E (eV)', ylabel= '\gm(E)')
+
+#
+# pre-edge subtraction:
+pause == pre edge 
+
+pre_edge(feo.energy, feo.xmu, norm1=200, norm2=700)
+
+set feo.preline  = pre_offset + pre_slope * feo.energy
+
+set feo.normline = norm_c0 + norm_c1  * feo.energy + norm_c2  * feo.energy^2
+plot(feo.energy, feo.preline, key='pre-edge')
+
+plot(feo.energy, feo.normline, key='normalization')
+
+pause == hit enter for normalized mu(E) plot == 
+
+newplot(feo.energy, feo.norm, key = '\gm(E)',
+	xlabel= 'E (eV)', ylabel= '\gm(E)')
+
+
+pause == hit enter for smooth background spline 
+spline(feo.energy,feo.xmu, kweight=3, rbkg=0.7)
+
+newplot(feo.energy, feo.xmu, key = '\gm(E)',
+	xlabel= 'E (eV)', ylabel= '\gm(E)')
+plot(feo.energy, feo.bkg,  key= '\gm\d0\u')
+
+write_data(file = 'feo.bkg', feo.energy, feo.xmu, feo.bkg, feo.norm,
+          feo.preline,feo.normline)
+
+pause == hit enter for isolated EXAFS chi(k)
+
+newplot(feo.k, feo.chi, xlabel = 'k (\A\u-1\d)', 
+        title = 'Extracted EXAFS \gx(k)',       
+        ylabel = '\gx(k) (\A\u-1\d)')
+
+pause == hit enter for isolated k^2 * chi(k)
+
+feo.chi_kw = feo.chi * feo.k^2
+
+newplot(feo.k, feo.chi_kw,
+        title = 'k-weighted EXAFS k\u2\d\gx(k)',       
+        ylabel = 'k\u2\d\gx(k) (\A\u-2\d)')
+
+fftf(feo.chi, kmin=2.5, kmax=13., kweight=2, dk=1.5)
+
+pause == hit enter for Fourier Transform Window
+
+feo.win2 = feo.win*5
+plot(feo.k, feo.win*5, key='Window')
+
+write_data(file = 'feo.chi', feo.k, feo.chi, feo.chi_kw,feo.win, feo.win2)
+
+pause == hit enter for Fourier Transform chi(R)
+
+newplot(feo.r, feo.chir_mag, xlabel = 'R (\A)', 
+        title = 'Fourier Transformed EXAFS |\gx(R)|',       
+        ylabel = '|\gx(R)| (\A\u-3\d)')
+
+
+write_data(file = 'feo.rsp', feo.r, feo.chir_mag, feo.chir_re)
+
+

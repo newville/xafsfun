@@ -1,0 +1,37 @@
+
+
+
+met = read_ascii("fe_models/fe_metal.dat"   , labels='en mu')
+sul = read_ascii("fe_models/fes2.dat"       , labels='en mu')
+sid = read_ascii("fe_models/fe_siderite.dat", labels='en mu')
+feo = read_ascii("fe_models/feo.dat"        , labels='en mu')
+hem = read_ascii("fe_models/fe2o3.dat"      , labels='en mu')
+goe = read_ascii("fe_models/fe_goethite.dat", labels='en mu')
+fer = read_ascii("fe_models/fe_ferrihydrite.dat", labels='en mu')
+
+
+opts = {'linewidth':3, 'style': 'solid', background='white'}
+
+plot(met.en, met.mu, color='blue', new=True, xmin=7100, xmax=7160,
+     xlabel =r'$ E \rm\, (eV) $', ylabel=r'$ \mu(E) $ ',   **opts)
+
+_plotter.plot1.SetSize((700, 750))
+
+
+plot(sul.en, sul.mu, color='red', **opts)
+plot(sid.en, sid.mu, color='black', **opts)
+plot(feo.en, feo.mu, color='blue', **opts)
+plot(hem.en, hem.mu, color='red', **opts)
+plot(goe.en, goe.mu, color='black', **opts)
+plot(fer.en, fer.mu, color='blue', **opts)
+
+
+
+plot_text(r' metal ',          7101 , 2.33)
+plot_text(r' $\rm FeS_2 $ ',   7101 , 1.93)
+plot_text(r' $\rm FeCO_3 $ ',  7101 , 1.58)
+plot_text(r' $\rm FeO $ ',     7101 , 1.22)
+plot_text(r' $\rm Fe_2O_3 $ ', 7101 , 0.84)
+plot_text(r' $\rm FeO(OH) $ ', 7101 , 0.53)
+plot_text(r' ferrihydrite   ', 7101 , 0.19)
+# ;

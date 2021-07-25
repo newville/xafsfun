@@ -1,0 +1,33 @@
+#
+# plot some typical window functions
+# as in Reference Manual
+
+read_data(../feo/feo_ksp.dat , group=dat, label='k chi chik win win2')
+
+
+kmin=2.5
+kmax=13.5
+offset = 0.5
+window(dat.k, dk=3.0,kwindow='kaiser')
+set dat.kaiser3 = dat.win + offset * 0
+
+window(dat.k, dk=5.0,kwindow='kaiser')
+set dat.kaiser5 = dat.win + offset * 1
+
+window(dat.k, dk=3,kwindow='sine')
+set dat.sine3 = dat.win + offset * 2
+
+window(dat.k, dk=3.0,kwindow='hanning')
+set dat.hann3 = dat.win + offset * 3
+
+window(dat.k, dk=3.0,kwindow='welch')
+set dat.welch3 = dat.win  + offset * 5
+
+window(dat.k, dk=3.0,kwindow='parzen')
+set dat.parzen3 = dat.win + offset * 4
+
+
+write_data(file='windows_off.dat', dat.k, dat.chik, dat.hann3, dat.kaiser3, dat.kaiser5,
+dat.welch3, dat.parzen3, dat.sine3)
+
+
