@@ -4,33 +4,33 @@ feo = read_ascii('feo.dat', labels='energy time i0 it')
 
 feo.xmu = ln(feo.i0/feo.it)
 
-autobk(feo.energy, feo.xmu, group=feo, kweight=2.5, rbkg=0.7)
+autobk(feo.energy, feo.xmu, group=feo, e0=7122, kweight=2., rbkg=0.6)
 
-opts=dict(labelfontsize=10, legendfontsize=10, linewidth=3)
+opts=dict(labelfontsize=10, legendfontsize=10, linewidth=4, grid=False, fullbox=False)
 opts['win'] = 1
 
 newplot(feo.energy, feo.xmu, xlabel= 'E (eV)', ylabel=r'$\mu(E)$',
-        xmin=7030, xmax=7500, zorder=5, **opts)
+        xmin=7000, xmax=7500, zorder=5, **opts)
 
 
 plot(feo.energy, feo.bkg, key='mu0', zorder=2, **opts)
 
 plot_text(r'$\Delta\mu_0$', 7065, 0.6)
-plot_text(r'$\mu_0$', 7285, 1.6)
+plot_text(r'$\mu_0$', 7205, 1.6)
 ## plot_text('pre-edge line', 7520, -0.25)
 
 xox = 7106
 
 panel = get_display().panel
-panel.axes.annotate('', xy=(7106,  0.7),  xycoords='data',
-                    xytext=(7106,  1.22), textcoords='data',
+panel.axes.annotate('', xy=(7080,  0.7),  xycoords='data',
+                    xytext=(7080,  1.22), textcoords='data',
                     arrowprops=dict(arrowstyle="<-"))
-panel.axes.annotate('', xy=(7106, -0.17),  xycoords='data',
-                    xytext=(7106,  0.5), textcoords='data',
+panel.axes.annotate('', xy=(7080, -0.17),  xycoords='data',
+                    xytext=(7080,  0.5), textcoords='data',
                     arrowprops=dict(arrowstyle="->"))
 # connectionstyle="arc=.22"))
 panel.axes.annotate('', xy=(7155, 1.165),  xycoords='data',
-                    xytext=(7280, 1.6), textcoords='data',
+                    xytext=(7200, 1.6), textcoords='data',
                     arrowprops=dict(arrowstyle="->",
                                 connectionstyle="arc3,rad=.3"))
 
@@ -65,7 +65,7 @@ panel.draw()
 # #
 label_k    = r'$k \rm\,(\AA^{-1})$'
 label_chi  = r'$\chi(k)$'
-opts=dict(labelfontsize=10, legendfontsize=10, linewidth=3)
+
 opts['win'] = 2
 
 newplot(feo.k, feo.chi, xlabel=label_k, ylabel=label_chi, **opts)
