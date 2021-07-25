@@ -1,0 +1,298 @@
+\usepackage{color,fancybox,alltt,graphicx}
+
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps,pgfshade}
+
+\usepackage[latin1]{inputenc}
+\usepackage{colortbl}
+\usepackage[english]{babel}
+\usepackage{multimedia}
+\usepackage{amssymb,amsmath}
+\usepackage{ragged2e}
+\usepackage{animate}
+\usepackage{listings}
+
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+\pdffalse % we are not running PDFLaTeX
+\else
+\pdfoutput=1 % we are running PDFLaTeX
+\pdftrue
+\fi
+
+\mode<article>{ \usepackage{fullpage}  \usepackage{pgf}  \usepackage{hyperref} }
+
+
+\mode<presentation>{
+  \usetheme{XAFS}
+  \setbeamercovered{transparent}
+}
+
+\usepackage{amsmath}
+\usepackage{tikz}
+
+\usepackage[customcolors,shade]{hf-tikz}
+
+\usetikzlibrary{calc}
+
+% put color to \boxed math command
+\newcommand*{\cmboxcolor}{orange}
+\makeatletter
+\newcommand{\cmbox}[1]{\textcolor{\cmboxcolor}{%
+ \makeatother
+\tikz[baseline={([yshift=-1ex]current bounding box.center)}] \node [rectangle, minimum width=1ex,rounded corners,draw] {\normalcolor\m@th$\displaystyle#1$};}}
+
+
+
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\setbeamertemplate{navigation symbols}{}
+
+\setlength{\fboxrule}{1pt}
+
+
+\newcommand{\vmm}{{\vspace{2mm}}}
+\newcommand{\hmm}{{\hspace{1mm}}}
+\newcommand{\Justify}{\justify\vspace{-\baselineskip}}
+
+\newcommand{\Program}[1]{\scshape{#1}}
+\newcommand{\atoms}{{\Program{atoms}}}
+\newcommand{\feffit}{{\Program{feffit}}}
+\newcommand{\ifeffit}{{\Program{ifeffit}}}
+\newcommand{\larch}{{\Program{larch}}}
+\newcommand{\xasviewer}{{\Program{xasviewer}}}
+
+\newcommand{\ease}{{\Program{EASE}}}
+\newcommand{\autobk}{{\Program{autobk}}}
+\newcommand{\ffchi}{{\Program{ff2chi}}}
+\newcommand{\diffkk}{{\Program{diffkk}}}
+\newcommand{\sixpack}{{\Program{sixpack}}}
+\newcommand{\hephaestus}{{\Program{hephaestus}}}
+\newcommand{\athena}{{\Program{athena}}}
+\newcommand{\artemis}{{\Program{artemis}}}
+\newcommand{\feff}{{\Program{feff}}}
+\newcommand{\mxan}{{\Program{mxan}}}
+\newcommand{\fdmnes}{{\Program{fdmnes}}}
+\newcommand{\gnuplot}{{\Program{gnuplot}}}
+
+\newcommand{\file}[1]{{{\slshape\ttfamily{#1}}}}
+\newcommand{\feffndat}{\file{feffnnnn.dat}}
+\newcommand{\feffbin}{\file{feff.bin}}
+
+
+\newcommand{\bmu}{{\mu}}
+\newcommand{\bepsilon}{{\epsilon}}
+\newcommand{\bDelta}{{\Delta}}
+\newcommand{\bOmega}{{\Omega}}
+\newcommand{\bdelta}{{\delta}}
+\newcommand{\bsigma}{{\sigma}}
+\newcommand{\bln}{{\ln}}
+\newcommand{\bsum}{{\sum}}
+\newcommand{\bsim}{{\sim}}
+\newcommand{\bsin}{{\sin}}
+\newcommand{\bexp}{{\exp}}
+\newcommand{\bint}{{\int}}
+\newcommand{\bpsi}{{\psi}}
+\newcommand{\bpropto}{{\propto}}
+\newcommand{\bapprox}{{\approx}}
+\newcommand{\bchi}{{\chi}}
+\newcommand{\brho}{{\rho}}
+\newcommand{\bpi}{{\pi}}
+\newcommand{\balpha}{{\alpha}}
+\newcommand{\bbeta}{{\beta}}
+\newcommand{\blambda}{{\lambda}}
+\newcommand{\blesssim}{{\lesssim}}
+\newcommand{\brightarrow}{{\rightarrow}}
+\newcommand{\bAA}{{\rm\AA}}
+\newcommand{\mbf}[1]{{\ensuremath{\mathbf\mathit{#1}}}}
+
+\newcommand{\chie}{{\ensuremath{\chi(E)}}}
+\newcommand{\chik}{{\ensuremath{\chi(k)}}}
+\newcommand{\chir}{{\ensuremath{\chi(R)}}}
+\newcommand{\mue}{{\ensuremath{\mu(E)}}}
+\newcommand{\bkg}{{\ensuremath{\mu_0(E)}}}
+
+\definecolor{lightyellow}{rgb}{1.0,1.0,0.8}
+\definecolor{lightyellow2}{rgb}{1.0,1.0,0.97}
+\definecolor{golden}{rgb}{0.75,0.75,0.37}
+\definecolor{lightpink}{rgb}{1.0,0.9,0.9}
+\definecolor{nearwhite}{rgb}{0.95,0.94,0.94}
+\definecolor{verywhite}{rgb}{0.99,0.99,0.99}
+\definecolor{white}{rgb}{1.0,1.0,1.0}
+\definecolor{DarkBlue}{rgb}{0,0,0.3}
+\definecolor{BrightBlue}{rgb}{0,0,0.7}
+\definecolor{DarkRed}{rgb}{0.65,0,0}
+\definecolor{BrightRed}{rgb}{0.8,0,0}
+\definecolor{RRed}{rgb}{0.95,0,0}
+\definecolor{BlueGrey}{rgb}{0.2,0.1,0.1}
+
+\definecolor{VBlue}{rgb}{0,0,0.9}
+\definecolor{BrightGreen}{rgb}{0,0.6,0.0}
+\definecolor{DarkGreen}{rgb}{0,0.3,0}
+
+
+\newcommand{\Color}[2]{{\textcolor{#1}{#2}}}
+\newcommand{\Red}[1]{{\Color{BrightRed}{#1}}}
+\newcommand{\RRed}[1]{{\Color{RRed}{#1}}}
+\newcommand{\DarkRed}[1]{{\Color{DarkRed}{#1}}}
+\newcommand{\Blue}[1]{{\Color{BrightBlue}{#1}}}
+\newcommand{\BrightBlue}[1]{{\Color{BrightBlue}{#1}}}
+\newcommand{\Black}[1]{{\Color{black}{#1}}}
+\newcommand{\RedM}[1]{{\Color{red}{\mbf{#1}}}}
+\newcommand{\BlueM}[1]{{\Color{blue}{\mbf{#1}}}}
+\newcommand{\BlackM}[1]{{\Color{black}{\mbf{#1}}}}
+
+
+\newcommand{\DarkGreen}[1]{{\Color{DarkGreen}{#1}}}
+\newcommand{\DarkBlue}[1]{{\Color{DarkBlue}{#1}}}
+
+
+\newcommand{\RedEmph}[1]{{\Color{BrightRed}{\emph{#1}}}}
+\newcommand{\RedSl}[1]{{\Color{BrightRed}{\slshape{#1}}}}
+\newcommand{\BlueSl}[1]{{\Color{BrightBlue}{\slshape{#1}}}}
+\newcommand{\BlueEmph}[1]{{\Color{BrightBlue}{\emph{#1}}}}
+
+
+\newcommand{\LString}[1]{{\Color{BrightGreen}{{#1}}}}
+\newcommand{\LKeyword}[1]{{\Color{DarkRed}{{#1}}}}
+\newcommand{\LFunc}[1]{{\Color{VBlue}{{#1}}}}
+\newcommand{\LComment}[1]{{\Color{BrightRed}{{#1}}}}
+
+
+\newcommand{\pthpar}[1]{{\ensuremath{{\tt{\Blue{#1}}}}}}
+
+\newcommand{\feffc}[1]{{{\ensuremath{{\Red{#1}}}}}}
+\newcommand{\reff}{{{\feffc{R_{\rm eff}}}}}
+\newcommand{\twothirds}{{{\textstyle{2 \over 3}}}}
+\newcommand{\fourthirds}{{{\textstyle{2 \over 3}}}}
+\newcommand{\masse}{{({{2m_e} / {\hbar^2}})}}
+
+\newcommand{\highlightbox}[1]{{ \fcolorbox{black}{lightyellow}{#1}}}
+
+\newenvironment{VerbSBox}[1]%
+{\VerbatimEnvironment\begin{Sbox}%
+\begin{minipage}{#1}\begin{alltt}}%
+{\end{alltt}\end{minipage}\end{Sbox}\setlength{\fboxsep}{2mm}{%
+\begin{flushright}\shadowbox{\TheSbox}\end{flushright}}}
+%%
+
+\newenvironment{VerbSSBox}[1]%
+{\VerbatimEnvironment\begin{Sbox}%
+\begin{minipage}{#1}\begin{alltt}}%
+{\end{alltt}\end{minipage}\end{Sbox}\setlength{\fboxsep}{2mm}{%
+\begin{center}\shadowbox{\TheSbox}\end{center}}}
+%%
+
+% \newenvironment{VerbBox}[1]%
+% {\VerbatimEnvironment\begin{Sbox}%
+% \begin{minipage}{#1}\begin{alltt}}%
+% {\end{alltt}\end{minipage}\end{Sbox}\setlength{\fboxsep}{2mm}{%
+% \shadowbox{\TheSbox}
+% %%
+
+\newenvironment{CodeBlock}[2]%
+{\VerbatimEnvironment\begin{minipage}{#1}\begin{block}{\small{#2}}\begin{semiverbatim}\tiny}%
+{\end{semiverbatim}\end{block}\end{minipage}}%%
+
+\definecolor{DeepGrey}{rgb}{0.15,0.05,0.05}
+\newcommand{\GreyLine}{{\color{DeepGrey}{\rule{\linewidth}{1.00pt}}}}
+
+\newcommand{\STitle}[1]{{\hspace{2mm}{\bfseries\sl\Large%
+      \BrightBlue{#1}}}\hfill\par%
+  \vspace{-3.5mm}\GreyLine\vspace{-0.1mm}}
+
+\newenvironment{ListingBlock}[2]%
+{\begin{minipage}{#1}\begin{block}{\small{#2}}\begin{lstlisting}}
+{\end{lstlisting}\end{block}\end{minipage}}%%
+
+\newenvironment{figblock}[3]%
+{\begin{minipage}{#1}\begin{exampleblock}{#2}{\wgraph{#1}{#3}}}%
+{\end{exampleblock}\end{minipage}}%
+
+\newenvironment{MFrame}[1]%%
+{\subsection{#1}\begin{frame}\frametitle{#1}}%
+{\end{frame}}%
+
+\newenvironment{Boxedminipage}%
+    {\begin{Sbox}\begin{minipage}}%
+    {\end{minipage}\end{Sbox}\shadowbox{\TheSbox}}
+
+
+\setbeamercolor{postit}{fg=black,bg=lightyellow}
+
+\newenvironment{postitbox}[1]%%
+{\begin{center}\begin{minipage}{#1}\begin{beamercolorbox}[shadow=true,rounded=true]{postit}}%
+{\end{beamercolorbox}\end{minipage}\end{center}}%
+
+
+\newenvironment{postitboxC}%%
+{\begin{center}\begin{beamercolorbox}[center,shadow=true,rounded=true]{postit}}%
+{\end{beamercolorbox}\end{center}}%
+
+\newcommand{\entrylabel}[1]{ {\Blue{#1:}}}
+%%\newcommand{\entrylabel}[1]{{\parbox[b]{10mm}{%
+%%      \makebox[10mm][l]{{\Red{#1:}}}\\}}}
+
+\newenvironment{entry}
+{\begin{list}{}{\renewcommand{\makelabel}{\entrylabel}%
+      \setlength{\labelwidth}{7mm}
+      \setlength{\leftmargin}{6mm}}}{\end{list}}
+
+\newcommand{\redlabel}[1]{ {\Color{DarkRed}{#1}}}
+\newenvironment{redlist}[1]{\begin{list}{}{\renewcommand{\makelabel}{\redlabel}%
+      \setlength{\leftmargin}{#1}}}{\end{list}}
+
+
+\newcommand{\bluelabel}[1]{ {\Color{BrightBlue}{#1}}}
+\newenvironment{bluelist}[1]{\begin{list}{}{\renewcommand{\makelabel}{\bluelabel}%
+      \setlength{\leftmargin}{#1}}}{\end{list}}
+
+\newcommand{\xbluelabel}[1]{{\Color{BrightBlue}{#1\hspace{2mm}}}}
+\newenvironment{xbluelist}[1]{\begin{list}{}{\renewcommand{\makelabel}{\xbluelabel}%
+      \setlength{\leftmargin}{#1}}}{\end{list}}
+
+\newenvironment{cenpage}[1]%%  centered minipage
+{\begin{center}\begin{minipage}{#1}}%
+    {\end{minipage}\end{center}}%%
+
+\newenvironment{slide}[1]%%  begin named slide
+{\begin{frame}\frametitle{#1}}%
+{\end{frame}}%%
+
+\newenvironment{fslide}[1]%%  begin named slide
+{\subsection{#1}\begin{frame}[fragile]\frametitle{#1}}%
+{\end{frame}}%%
+
+
+\newcommand{\xdgraph}[2]{{%
+        \ifpdf  \includegraphics[width={#1}]{figs/#2.png}%
+        \else   \includegraphics[width={#1}]{figs/#2.eps}\fi}}
+
+\newcommand{\rgraph}[2]{\includegraphics[width={#1}]{figs/rimg/#2}}
+\newcommand{\wgraph}[2]{\includegraphics[width={#1}]{figs/#2.png}}
+\newcommand{\hgraph}[2]{\includegraphics[height={#1}]{figs/#2.png}}
+\newcommand{\wpdf}[2]{\includegraphics[width={#1}]{#2.pdf}}
+
+\newcommand{\webpage}[1]{{{\Blue{{#1}}}}}
+
+%% \pgfdeclareimage[interpolate=true,width=45mm]{xafscartoon}{figs/xafsabsorb}
+%% \pgfdeclareimage[interpolate=true,width=50mm]{xafsxanes}{figs/xafsxanes}
+%% \pgfdeclareimage[interpolate=true,width=50mm]{feff}{figs/scattamp}
+%% \pgfdeclareimage[interpolate=true,width=55mm]{tdlplot}{figs/tdlplot}
+
+%% \pgfdeclareimage[interpolate=true,width=15mm]{ravel}{figs/RavelHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{calvin}{figs/CalvinHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{frenkel}{figs/FrenkelHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{haskel}{figs/HaskelHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{jox}{figs/JoxHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{newville}{figs/NewvilleHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{kelly}{figs/KellyHead}
+
+%% \pgfdeclareimage[interpolate=true,width=15mm]{rehr}{figs/RehrHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{fons}{figs/FonsHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{webb}{figs/WebbHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{glover}{figs/GloverHead}
+%% \pgfdeclareimage[interpolate=true,width=15mm]{trainor}{figs/TrainorHead}
+
+%% \pgfdeclareimage[interpolate=true,width=85mm]{APS2005_Photo}{figs/APS2005_Photo}
+
+%% \pgfdeclareimage[interpolate=true,width=68mm]{EASE}{figs/EASE}
