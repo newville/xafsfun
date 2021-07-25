@@ -1,6 +1,10 @@
 
 %% Slide
 \begin{slide}{Photo-Electron Mean-Free Path (extrinsic losses)}
+
+    \vmm
+    \begin{cenpage}{125mm}
+
   To get to
 
     \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
@@ -16,54 +20,56 @@
   \end{center}
 
 
- But \ldots   \vmm \pause
-
-  \begin{minipage}{100mm}
-
-    The photo-electron can also scatter {\BlueEmph{inelastically}}, and may
-    not be able to get back the absorbing atom in tact.
-
+  But this ignores two things:
   \vmm
+\onslide+<2->
+  
+ \begin{minipage}{105mm}
+   \begin{enumerate}
+     \item     The photo-electron can also scatter {\BlueEmph{inelastically}}, and may
+       not be able to get back the absorbing atom in tact.
+     \item   The hole in the core electron level has a {\RedEmph{finite lifetime}},
+       also limiting how far the photo-electron can go out and make it back to
+       ``the same'' absorbing atom.
+     \end{enumerate}
 
+     \vmm
+     
   A {\RedEmph{mean free path}} ($\lambda$) describes how far the
   photo-electron can go before it scatters, losing energy to other
   electrons, phonons, etc.
 
-  \pause \vmm
-
-  {\BlueEmph{Plus}}: the core-level has a {\RedEmph{finite lifetime}},
-  also limiting how far the photo-electron can go out and make it back to
-  ``the same'' absorbing atom.
-
   \end{minipage}
 
-
+\end{cenpage}
   \vfill
+  
 \end{slide}
 
 %% Slide
 \begin{slide}{Photo-Electron Mean-Free Path}
 
-  To account for the mean-free-path,  we can
+
+  \vmm
+    \begin{cenpage}{125mm}
+
+
+      To account for the mean-free-path,  we can
 replace the
   spherical photo-electron wavefunction:
 
 
-  \begin{center}
-      \begin{minipage}{40mm}
-        {$\displaystyle        \psi(k,r) \sim   {{e^{ikr}}/{kr}}  $}
-      \end{minipage}
-  \end{center}
+  \begin{cenpage}{40mm}
+    {$\displaystyle        \psi(k,r) \sim   {{e^{ikr}}/{kr}}  $}
+  \end{cenpage}
 
 
-\vmm  with a damped wave-function: \vmm
-
-  \begin{center}
-      \begin{minipage}{40mm}
-        {$\displaystyle \psi(k,r) \sim \frac{e^{ikr} e^{-r/\lambda(k)}}{kr} $ }
-      \end{minipage}
-  \end{center}
-
+  \vmm  with a damped wave-function: \vmm
+  
+  \begin{cenpage}{40mm}
+    {$\displaystyle \psi(k,r) \sim \frac{e^{ikr} e^{-r/\lambda(k)}}{kr} $ }
+  \end{cenpage}
+    
 which simply adds another term to the EXAFS equation:
 \vmm
   \onslide+<2->
@@ -74,13 +80,15 @@ which simply adds another term to the EXAFS equation:
       {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
 
   \vfill
+  \end{cenpage}
 \end{slide}
 
-\begin{slide}{The Photo-Electron Mean-Free Path}
+\begin{slide}{Photo-Electron Mean-Free Path: nearly universal shape}
 
-  \vspace{-1mm}
+  \vspace{1mm}
+  \begin{cenpage} {125mm}
 
-  \begin{cenpage}{70mm} \rgraph{70mm}{lambda}   \end{cenpage}
+  \begin{cenpage}{85mm} \rgraph{85mm}{lambda}   \end{cenpage}
 
   $\lambda$ is mostly independent of the system, and depends strongly on $k$:
 
@@ -89,9 +97,11 @@ which simply adds another term to the EXAFS equation:
     30\,\AA$
   \item This (and the $R^{-2}$ term) makes EXAFS a {\RedEmph{local
         atomic probe}}.
-  \item For XANES  ($k < 3\rm\,\AA^{-1}$)    Both $\lambda$ and $R^{-2}$ get
-    large:  \par XANES is not really a {\RedEmph{local probe}}.
+  \item For XANES  ($k < 2\rm\,\AA^{-1}$)    Both $\lambda$ and $R^{-2}$ get
+    large:   XANES is not really a {\RedEmph{local probe}}.
   \end{itemize}
+
+\end{cenpage}
 
 \vfill
 \end{slide}

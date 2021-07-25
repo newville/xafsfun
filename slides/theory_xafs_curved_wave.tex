@@ -1,32 +1,38 @@
 %% Slide
 \begin{slide}{The EXAFS Equation: simple description}
 
-  \begin{columns}[T]
+    \vmm
+    \begin{cenpage}{125mm}
 
-    \begin{column}{60mm}
-      With ${ \chi \sim \psi_{\rm scatt}(0)}$, and a spherical wave for the
-      photo-electron
+      \begin{columns}[T]
+
+    \begin{column}{65mm}
+      With ${ \chi \sim \psi_{\rm scatt}(0)}$, We'll start with a spherical
+      wave function for the photo-electron
 
       \[ \psi(k,r) = {{e^{ikr}}/{kr}} \]
 
-      we can model $\chi(k)$ as the photo-electron
+      we can model $\chi(k)$ as the photo-electron 
         \begin{enumerate}
           \item leaves the absorbing atom
           {\onslide+<2->{ \item scatters from the neighbor atom}}
           {\onslide+<3->{ \item returns to the absorbing atom}}
         \end{enumerate}
       \end{column}
-      \begin{column}{50mm}
-        \begin{overprint}[48mm]
-          \onslide+<1| handout: 0> \rgraph{48mm}{xafscartoon_bare}
-          \onslide+<2| handout: 0> \rgraph{48mm}{xafscartoon_noscatter}
-          \onslide+<3| handout: 1> \rgraph{48mm}{xafscartoon_scatter}
+      \begin{column}{60mm}
+        \begin{overprint}[55mm]
+          \onslide+<1| handout: 0> \rgraph{53mm}{xafscartoon_bare}
+          \onslide+<2| handout: 0> \rgraph{53mm}{xafscartoon_noscatter}
+          \onslide+<3| handout: 1> \rgraph{53mm}{xafscartoon_scatter}
         \end{overprint}
 
       \end{column}
     \end{columns}
 
-     {\large
+
+    \vmm
+
+    {\large
        \[ {\displaystyle
          {\onslide+<1-> \chi(k) \sim \psi_{\rm scatt}(0)}
          {\onslide+<1-> = {{e^{ikR}}\over{kR}} \> }
@@ -48,4 +54,5 @@
 
      {\onslide+<3-> \hspace{5mm} turning complex number into real numbers gives the EXAFS Equation\ldots }
 
+     \end{cenpage}
 \end{slide}
