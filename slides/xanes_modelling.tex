@@ -1,0 +1,47 @@
+
+\begin{slide}{Modeling XANES}
+
+    \vmm
+
+    Ideally, we could model XANES by refining a structural model to best
+    match data.
+
+    \vmm
+
+    This requires calculations that are good enough.  \ldots  Maybe.
+
+    \vmm
+
+    It also means  considering XANES as a multivariate function of a
+    \begin{equation*}
+      \mu(E,x_i,\alpha_j,\beta_k)
+    \end{equation*}
+
+    where
+
+    \begin{tabular}{ll}
+      $x_i$      & atomic positions \\
+      $\alpha_j$ & parameters of the potentials (muffin tin radii, loss terms,\ldots) \\
+      $\beta_k$  & empirical parameters (broadening, $E_0$, background  function, \ldots)
+    \end{tabular}
+
+  Then we could fit to XANES data:
+
+  \begin{equation*}
+  %     \mu_0(E, x_i, \alpha_j, \beta_k) @>>>
+  %     \mathrm{compare~to~data} @>>> \mathrm{adjust}~ x_i, \alpha_j, \beta_k \\
+  %     && @AAA @VVV \\
+  %     &&  \mu(E, x_i, \alpha_j, \beta_k) @<<< \mathrm{converged?}
+  % \end{equation*}
+
+  \vmm
+
+  This is still an ongoing development, but shows promise. See
+
+  \hspace{4mm} Benfatto  {\emph{et al}}, Phys.\ Rev.\ \textbf{B65} 174205 (2002).
+
+  \hspace{4mm} Smolentsev and Soldatov, J. Synch. Rad \textbf{13}, p19 (2006).
+
+
+\vfill
+\end{slide}

@@ -1,0 +1,190 @@
+\begin{slide}{The Status of EXAFS Analysis (summary so far...)}
+    
+   For analyzing EXAFS data we can:
+    
+    \begin{itemize}
+    \item use {\Blue{Constraints}} to build physical models for our data.
+      
+    \item use {\Blue{Bayesian Principles}} and {\Blue{Restraints}} to
+      express imperfect Prior Knowledge of our system.
+      
+    \item select which $k$- and $R$-components to use in the analysis.
+
+    \item simultaneously refine multiple data sets, multiple $k$-weights,
+      etc. 
+
+    \end{itemize}
+
+    so many clever things we can do in the analysis \ldots
+
+\vspace{1mm}
+
+\vfill
+\end{slide} 
+
+\begin{slide}{The Status of EXAFS Analysis (summary so far...)}
+    
+   For analyzing EXAFS data we can:
+    
+    \begin{itemize}
+    \item use {\Blue{Constraints}} to build physical models for our data.
+      
+    \item use {\Blue{Bayesian Principles}} and {\Blue{Restraints}} to
+      express imperfect Prior Knowledge of our system.
+      
+    \item select which $k$- and $R$-components to use in the analysis.
+
+    \item simultaneously refine multiple data sets, multiple $k$-weights,
+      etc. 
+
+    \end{itemize}
+
+    so many clever things we can do in the analysis \ldots and
+    
+    {\begin{center} \large \highlightbox{ {\RedEmph{Our fits are
+              TERRIBLE!}} } 
+      \end{center} }
+
+    \vmm
+    
+    The ``goodness-of-fit statistic'' reduced chi-square, $\chi^2_\nu =
+    \chi^2 / (N_{\rm idp}-N_{\rm varys})$ should be $\sim$ 1 for a ``Good
+    Fit'':
+
+    \[    \begin{array}{ll}
+      \chi^2_\nu & = \displaystyle \frac{N_{\rm idp}}{\epsilon^2 N_{\rm fit} (N_{\rm 
+          idp}-N_{\rm varys})} 
+      \sum_i^{N_{\rm fit}} [\chi_i^{\rm data} - \chi_i^{\rm
+      model}(\vec{x})]^2 \\
+    \end{array}
+    \]
+    
+    \vmm
+    
+    We're lucky if $\chi_\nu^2$ is below 20!  \hspace{4mm}
+    What are we doing wrong?
+
+\vspace{1mm}
+
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Noise Levels in Data }
+    
+    Is the estimated noise in the data, $\epsilon$, way off?  Here are some
+    typical EXAFS spectra (both transmission, 1 sec/point):
+
+    \vmm
+
+      \begin{tabular}{lcl}\setlength{\baselineskip}{2pt}
+        0.2 mM Zn nitrate solution & & Cu foil Room Temperature   \\
+        \hspace{-7mm} \wgraph{48mm}{errors/noise_data01} & \hspace{2mm} & 
+        \hspace{-5mm} \wgraph{48mm}{errors/noise_data02} \\
+        $\epsilon \approx 6.6 \times 10^{-4}$ ``Normal Data''& &
+        $\epsilon \approx 1.6 \times 10^{-4}$ ``Good Data''\\
+      \end{tabular}
+
+      \vmm
+
+      For the Zn solution, this noise level is consistent with counting
+      statistics for ``Number of Photons in Ion Chambers''! 
+      
+      \vmm A first shell fit to this Cu data gives $\chi^2_\nu \approx 200 $.  
+      We multiply the uncertainties by $\sqrt(\chi^2_\nu) \approx 14$,
+      as if $\epsilon$ was $14\times$ larger than our estimate.
+
+      
+      \begin{center}
+        \highlightbox{That's $3\times$ data worse than the noise in the Zn
+        data!}
+      \end{center}
+
+\vfill
+\end{slide} 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Room Temperature Cu Fit}
+
+    Simple fit to first shell of Cu foil (300K): $k = [2,16] \rm\,
+    \AA^{-1}$, $R = [1.7,2.6] \rm\, \AA$, $k$-weight=2, $N_{\rm idp} = 8.4
+    $.  Fit results and statistics:
+    
+
+    {
+      \hspace{0.1mm}\begin{tabular}{lll}
+        $R = 2.548(0.007) \, \rm\AA$ 
+        &     
+        $\Delta E_0 = 4.5(0.6)$ 
+        &  
+        $C_3      = 9(9) \times10^{-5} \rm\, \AA^3$ 
+        \\
+        $\epsilon_k = 1.6 \times 10^{-4}$ 
+        &
+        $S_0^2 = 0.96(0.04)$  
+        &
+        $\sigma^2 = 8.5(0.3) \times10^{-3} \rm\, \AA^2$ 
+        \\
+        $\chi^2 = 678$ &
+        $\chi^2_\nu = 196.7$   & ${\cal{R}} = 0.00107 $\\
+      \end{tabular}
+    }
+
+    \vmm
+      \begin{tabular}{lcl}
+        \hspace{-10mm} \wgraph{49mm}{errors/cufit02} & \hspace{2mm} & 
+        \hspace{-3mm}  \wgraph{49mm}{errors/cufit01} \\
+      \end{tabular}
+
+      \begin{itemize}
+      \item ${\cal{R}} = 0.1\% $ -- a good fit!  But like $\chi^2_\nu$,
+        ${\cal{R}}$ is larger than the $\epsilon_k$ suggests.
+      \item These error bars account for correlations.  They increase
+        $\chi^2$ by $\chi^2_\nu$ (not 1), which scales them by
+        $\sqrt{\chi^2_\nu}\approx 14$ over ``increase $\chi^2$ by 1''.
+      \end{itemize}
+
+      \vmm
+
+\vfill
+\end{slide} 
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{$\epsilon$: Noise Levels in Data}
+    
+    $\epsilon$ is estimated from the high-$R$ (15
+    to 25 \AA) components of the data.  
+    
+    \vmm
+      \begin{tabular}{lcl}
+        \hspace{-10mm} \wgraph{52mm}{errors/znnoise01} &      & 
+        \hspace{-5mm}  \wgraph{52mm}{errors/znnoise02} \\
+        $|\chi(R)|$ &    &  $ \hspace{4mm} \log_{10}(|\chi(R)|)$ \\
+      \end{tabular}
+      
+      \begin{itemize}
+        \item The Zn data really shows ``white noise''.
+          
+        \item The Zn data is much noisier than the Cu data.  You need to
+          look above $R \sim 12\rm \, \AA$ to see this.
+
+      
+      \item The Cu data has signal well above the noise level past 10\AA.
+
+      \item Using the range $R=[15,25]\rm\, \AA$ may 
+        {\RedEmph{overestimate}} $\epsilon$ for room temperature Cu.  
+         This will be {\RedEmph{worse}} for low temperature data!
+
+         \vmm
+        \hspace{5mm} That's the wrong way: a smaller $\epsilon$  will
+        make $\chi^2_\nu$ bigger! 
+
+      \end{itemize}
+
+      
+
+\vfill
+\end{slide} 

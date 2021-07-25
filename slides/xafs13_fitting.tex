@@ -1,0 +1,413 @@
+\begin{slide}{EXAFS Analysis and Information Theory}
+    
+    The basic difficulties with EXAFS Analysis are:
+
+    \begin{enumerate}
+    \item The basis functions (Paths, Shells, \ldots) are not very well
+      resolved, and their number grows exponentially with $R$.
+
+    \item The scattering factors $f(k)$, $\delta(k)$ are not simple to
+      calculate.
+      
+    \item There's not much information in a real measurement:
+      \[ N_{\rm idp} \approx \frac{2\Delta k\Delta R}{\pi} \]
+      
+    \end{enumerate}
+    
+    \hrule \vmm
+    
+    Quantitative EXAFS analysis procedures address these with methods to:
+    
+    \begin{enumerate}
+    \item {reduce} the number of Paths to consider (Fourier analysis).
+
+    \item re-use or parametrize {\emph{ab initio}} calculations of
+      $f(k)$, $\delta(k)$ (using {\scshape{FEFF}} or something similar).
+      
+      
+    \item recycle parameters to cut down the number of independent
+      variables in the fit, while keeping a meaningful analysis.
+      
+    \end{enumerate}
+
+    \hrule \vmm
+    
+    Generally, we parametrize the EXAFS with a physical model, and then
+    put {\RedEmph{Constraints}} and {\RedEmph{Restraints}} on the
+    parameters in a least-squares analysis.
+
+    \vmm
+\vfill
+\end{slide} 
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Constraints: why we need them}
+    
+    The EXAFS Equation (simplified here, a more accurate version is used):
+
+    \begin{center}
+      \fcolorbox{black}{lightyellow2}{
+        $\displaystyle  \chi(k) = \sum_j {{{\Blue{S_0^2 N_j}} {\Red{f_j(k)}}
+            e^{-2R_j/{\Red{\lambda(k)}}}\,
+            e^{-2k^2{\Blue{\sigma_j^2}}}}\over{k{\Blue{R_j}}^2}}
+        {\sin[2k{\Blue{R_j}} - 
+          {4 \over 3} {\Blue{C_3}} + 
+          {\Red{\delta_j(k)}} ] }
+        $
+      }
+    \end{center}
+
+    
+    \vmm has many {\Blue{Path Parameters}} that could be refined 
+    for each Path $j$, mainly:
+
+    \begin{center} 
+
+      {\Blue{$S_0^2 N$, $R$,  $\sigma^2$, $C_3$,}} and {\Blue{$E_0$ ($k=0$)}}.
+      
+    \end{center}
+    
+    
+    \vmm 
+    
+    But the information content of EXAFS is low:
+    \begin{center} $ N_{\rm idp} = 8 \> \> \> 
+      {\rm for} \> \Delta R = 1 \, {\rm \AA} \>\> {\rm and} \>\> \Delta k = 12.5\,
+    {\rm \AA^{-1} } $ \end{center}
+    
+  
+    \vmm \hrule \vmm
+
+    For well-isolated single path problems, it's fine to just fit $N$, $R$,
+    $\sigma^2$, and $E_0$.
+    
+    \vmm 
+    
+    But for more complicated problems, including all the ``multiples'':
+
+    \vmm
+
+    {\Red{
+        \begin{tabular}{clcl}
+          \hspace{3mm}
+          &multiple neighboring species  &&  multiple sites for central atom \\
+          &multiple scattering paths     &&  multiple polarizations \\
+          &multiple data sets            &\hspace{4mm}&  multiple edges to co-refine   \\
+        \end{tabular}
+        }}
+
+    \vmm
+    
+    we need to limit the number of parameters, and want to impose a
+    physical model to get more meaningful results.
+
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Constraints, continued}
+    
+    {\BlueEmph{Constraints}} allow us to impose relationships between the
+    parameters, and create physical models about our data.  For example: 
+
+    \begin{itemize} 
+    \item force the same $E_0$ for all Paths (may not always \ldots).
+      
+    \item allow mixed coordination shell: $x$ (Fe-O) + (1-$x$)(Fe-Fe).
+      
+    \item make $\sigma^2$ follow a simple temperature law (e.g,  an
+      Einstein model).
+      
+    \item force one $R$ for the same bond for data taken from different
+      edges.
+
+    \item model complex distortions (height of a sorbed atom above a surface).
+
+    \end{itemize}
+  
+    \hrule \vmm \vmm \vmm
+
+    {\ifeffit} uses a concept of {\RedEmph{Generalized Variables}} for
+    Constraints: 
+
+    \vmm\vmm
+
+
+    The {\BlueEmph{Path Parameters}} $R$, $S_0^2 N$, $\sigma^2$, $E_0$, etc
+    are not directly adjusted in the fit.  
+
+    \vmm
+    Instead, Path Parameters are written as mathematical expressions of the
+    Generalized Variables.
+    This makes it easy to share Variables across:
+
+    \begin{itemize}
+    \item different Path Parameters for a Path
+    \item different Scattering Paths (including Multiple Scattering)
+    \item different data sets (different temperature, edge, polarization 
+      \ldots)
+    \end{itemize}
+      
+
+\vfill
+\end{slide} 
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Constraints, continued}
+    
+    Examples of Path Parameters written as functions of the Generalized
+    Variables:
+
+    \vmm
+    
+    \begin{tabular}{ll}
+      \hspace{-5mm} \begin{minipage}{40mm}
+           \begin{CodeBlock}{38mm}
+{\Blue{# simplest case: Parameter=Variable}}
+
+ {\Red{guess e0    = 1.0 }}
+
+ path(1,  e0 = e0)
+ path(2,  e0 = e0)
+   \end{VerbSBox}
+
+   \vspace{3.5mm}
+
+   \begin{VerbSBox}{38mm} \bfseries
+{\Blue{# mixed coordination shell}}
+ set S02   = 0.80
+
+ {\Red{guess x   = 0.5}}
+  
+ path(1,  S02 = S02 * x )
+
+ path(2,  S02 = S02 * (1-x) )
+   \end{VerbSBox}
+   \end{minipage}
+   & 
+   \begin{minipage}{59mm}
+   \begin{VerbSBox}{58mm} \bfseries
+{\Blue{# Einstein Temperature }}
+
+ set   factor  = 24.254337   {\Blue{#= (hbar*c)^2/(2 k_boltz)}}
+{\Blue{# mass and reduced mass in amu}}
+ set   mass1 = 63.54,  mass2 = 63.54
+ set   r_mass =  1/ (1/mass1 +  1/mass2)
+
+{\Blue{# the Einstein Temp will be adjusted in the fit!}}
+ {\Red{guess thetaE = 200}}
+{\Blue{# use for data set 1, T=77}}
+ set   temp1 = 77
+ {\Red{def ss2_path1 = factor*coth(thetaE/(2*temp1))/r_mass )}}
+ path(101,  sigma2 = ss2_path1   )
+
+{\Blue{# use for data set 2, T=300}}
+ set   temp2 = 300
+ {\Red{def ss2_path2 = factor*coth(thetaE/(2*temp2))/r_mass )}}
+ path(201,  sigma2 = ss2_path2   )
+    \end{VerbSBox} 
+    \end{minipage}\\
+  \end{tabular}    
+    
+
+%% \sigma^2 = {{(\hbar c)^2} \over{2k_{B}}} { {\coth(\theta /2T) }
+%% \over{M_{\rm R}\theta}}
+
+    \vmm \vmm
+    
+    Constraints are one kind of ``Prior Knowledge'', and allow us to easily
+    impose simple physical models for our data and compare these models.
+
+    \vmm 
+    
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Restraints: Imprecise Prior Knowledge}
+
+    A {\BlueEmph{Constraint}} expresses exact ``Prior Knowledge'' (e.g.,
+    force 1 $E_0$ for all paths), and reduces the number of variables 
+    $\vec{x}$ in the least-squares problem:
+
+    \[ 
+    \chi^2  =  \sum_{i}
+    \biggl[ { {  \chi_{i}^{\rm data} - \chi_{i}^{\rm model}(\vec{x})
+      }\over{\epsilon_i}} 
+    \biggr]^2  
+    \]
+
+    \hrule \vmm
+    
+    A {\BlueEmph{Restraint}} expresses imprecise ``Prior Knowledge'', and
+    adds another term to the least-squares problem:
+   
+    \[ 
+    \chi^2  =  \sum_{i}
+    \biggl[ { {  \chi_{i}^{\rm data} - \chi_{i}^{\rm model}(\vec{x})
+      }\over{\epsilon_i}} 
+    \biggr]^2  
+    + 
+    {\Red{
+     \biggl[\frac{\lambda_0 - \lambda(\vec{x})}{\delta\lambda}\biggr]^2
+      }}
+    \]
+    
+    \vmm
+    
+    We add ``Data'' $\lambda_0$ to the fit, with ``Model''
+    $\lambda(\vec{x})$ and confidence level $\delta\lambda$:
+    
+    \vmm
+
+    {\hspace{25mm}} \highlightbox{{\Red{ $ \Lambda = [\lambda_0 -
+          \lambda(\vec{x})]/{\delta\lambda} $ }}} {\hspace{5mm}} 
+
+    \vmm
+    becomes another part of the ``Vector to Minimize'' in the least-squares
+    sense.
+    
+    
+    \vmm \hrule  \vmm 
+
+    \begin{center}
+      \fcolorbox{black}{lightyellow2}{
+        \begin{minipage}{88mm}  \setlength{\baselineskip}{10pt}
+          
+    Restraints give us a {\RedEmph{Bayesian}} approach to analysis:
+    if we can quantify our ``Prior Knowledge'', we can use it in our fit 
+    along side our data.
+        \end{minipage}
+        }
+    \end{center}
+
+    \vmm
+
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Restraints as ``Soft Limits'' on Parameters}
+
+    For some parameters (say, $S_0^2$), there may be an
+    acceptable range of values.
+
+    You could use a {\BlueEmph{constraint}}: \vmm
+
+    \hspace{10mm}\begin{VerbSBox}{60mm} \bfseries
+  guess S02_Var = 0.8
+  path(1,  S02 = {\Red{max(0.6,  min(1.0, S02_Var) ) }} )
+   \end{VerbSBox}
+   
+   This ``hard wall'' constraint complicates finding error bars when the
+   free variable {\tt{S02\_Var}} goes outside the limits $[0.6,1.0]$.  And
+   we do want the error bars!
+
+   \vmm \hrule \vmm
+    
+   An alternative: use a Restraint to make an increasingly worse fit when a
+   variable is ``out-of-bounds'':
+
+   \begin{tabular}{lr}
+     \begin{minipage}{45mm} \vspace{-5mm}
+       \[ \Lambda(x) =  \left\{ 
+       \begin{array}{ll}
+         x - x_{\rm hi} & x > x_{\rm hi} \\
+         0  &    x_{\rm hi} \ge x \ge x_{\rm lo} \\
+         x_{\rm lo} - x &     x_{\rm lo} \ge x\\
+       \end{array}
+     \right.
+     \]
+     \end{minipage}
+   & 
+   \hspace{1mm}\begin{minipage}{50mm} \wgraph{47mm}{restraints/penalty} \end{minipage}
+   \\ 
+ \end{tabular}
+
+ \vspace{-0.3mm}
+ \hspace{10mm}\begin{VerbSBox}{60mm} \bfseries
+   guess S02_Var = 0.8
+   path(1,  S02 = S02_Var)
+   feffit(\ldots , restraint = {\Red{penalty(S02_Var,0.6,1.0)}} )
+ \end{VerbSBox}
+
+ \vmm
+ 
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Example Restraint: Bond Valence Sums}
+    
+    The {\BlueEmph{Bond Valence}} expresses the Valence of an ion $i$ in terms
+    of its ligands. It is commonly parametrized as [Altermatt and Brown,
+    {\emph{Acta Cryst.} {\bf{B41}}} (1985)]
+    
+    \[  V_i =  \sum_{j=1}^N \exp[(R'_{ij} - R_{ij})/ 0.37]   \]
+    
+    where $R_{ij}$ is the interatomic distance and $R'_{ij}$ is an
+    empirical parameter for atom types (Fe-S, Cu-O, etc).
+
+    \vmm
+    
+    We usually can tell the formal valence from XANES, and this model
+    correlates this with $N$ and $R$ to keep them {\RedEmph{Chemically
+        Reasonable}}.
+    
+    \vmm \vmm
+    \vmm \vmm
+    
+    The Bond Valence Sums work to $\sim$ 10\% -- inappropriate for a
+    constraint.
+
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Bond Valence Sums as Restraint}
+    
+    As a {\Red{Restraint}}, the Bond Valence Sum becomes a ``Model''
+    that we fit to our  Valence ``Data'' ($V_{\rm XANES} = 2,3,\ldots$):
+
+    \[ \Lambda   = \frac{V_{\rm XANES} - \sum_{j=1}^N \exp[(R'_{j} -
+      R_{j})/ 0.37]}{\delta\lambda} \]
+
+    \vmm \vmm
+    
+    $\delta\lambda$ is our ``Bayesian Parameter'', letting us control how
+    much we prefer what our $\chi(k)$ data tells us about $N$ and $R$
+    compared to our ``Prior Knowledge'' of what the XANES and Bond Valence
+    Sum tells us about $N$ and $R$:
+
+    \vmm \vmm
+
+    \begin{center} 
+      \begin{tabular}{lll} \hline
+        ${\delta \lambda} \rightarrow 0$ & Force $V = V_{\rm XANES}$ &
+        {\Blue{constraint}} \\
+
+        ${\delta \lambda} \rightarrow \infty$ & $V$ determined by our
+        data alone &  {\Blue{no prior knowledge}}  \\ 
+        Finite ${\delta \lambda}$ & 
+
+        $V$ influenced by our data and $V_{\rm XANES}$  & {\Blue{restraint}}\\
+        \hline
+
+      \end{tabular}
+    \end{center} 
+
+    \vmm \vmm \vmm\vmm
+    
+    \begin{cenpage}{85mm}
+    Bond Valence Sums give a simple, flexible way to restrain the EXAFS
+    results to agree with the qualitative XANES interpretation. 
+    \end{cenpage}
+
+\vfill
+\end{slide} 
+

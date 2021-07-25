@@ -1,0 +1,51 @@
+
+%% Slide
+\begin{slide}{Sum over Paths and Multiple Scattering}
+
+  A sum over scattering paths allows {\RedEmph{multiple-scattering paths}}:
+  the photo-electron scatters from {\BlueEmph{more than one atom}} before
+  returning to the central atom:
+
+    \vmm
+
+    \begin{tabular}{ll}
+      \begin{minipage}{57mm}
+        \onslide+<2->
+        \scalebox{1}{\rgraph{58mm}{mspaths}}
+      \end{minipage}
+      &
+      \begin{minipage}{55mm}\setlength{\baselineskip}{10pt}
+        \onslide+<2->
+        For multi-bounce paths, the total amplitude depends on the
+        {\Red{angles}} in the photo-electron path.
+
+        \onslide+<3->
+        \vspace{2mm} {\Blue{Triangle Paths}} with angles $ 45 < \theta <
+        135^{\circ}$ aren't strong, but there can be a lot of them.
+
+        \onslide+<4->
+        \vspace{2mm}
+        {\Blue{Linear paths}}, with angles $\theta \approx 180^{\circ}$,
+        are very strong: the photo-electron can be {\Red{focused}} through
+        one atom to the next.
+
+        % \vspace{2mm} {\feff} calculates these effects and includes them
+        % in $\Red{f(k)}$ and $\Red{\delta(k)}$ for the EXAFS equation so
+        % that all paths look the same in the analysis.
+
+      \end{minipage}
+    \end{tabular}
+
+    \onslide+<5->{
+      \begin{center}
+        \begin{postitbox}{80mm}
+            Multiple Scattering is strongest when   $ \theta > 150^{\circ}$.
+        \end{postitbox}
+      \end{center}
+
+      The strong angular dependence can be used  to measure bond angles.
+
+
+\vmm   For first shell analysis, multiple scattering is hardly ever needed.
+}
+\end{slide}

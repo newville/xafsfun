@@ -1,0 +1,97 @@
+\subsection{Constraints and Generalized Variables}
+\begin{frame}[fragile] \frametitle{Constraints and Generalized Variables}
+
+  Instead of varying the Path Parameters directly, we write them in terms of
+  {\RedEmph{Generalized Variables}}.  This allows simple {\RedEmph{Constraints}} and model building:
+
+\begin{columns}
+  \begin{column}{53mm}
+
+  \begin{CodeBlock}{50mm}{Parameter=Variable}
+{\Blue{\# one variable e0 for 2 paths}}
+{\Red{params = group(e0 = guess(1.0), \ldots)}}
+
+path1  = feffpath('feo.dat', {\Red{e0='e0'}})
+path2  = feffpath('fefe.dat', {\Red{e0='e0'}})
+  \end{CodeBlock}
+  \hspace{1mm}   \vmm
+
+  \onslide+<2->
+  \begin{CodeBlock}{50mm}{Mixed Coordination Shell}
+{\Blue{\# mix O and S in 1st coordination shell}}
+params = group(s02   = param(0.80, vary=False),
+               sfrac = guess(0.5))
+
+path1 = feffpath('feo.dat', {\Red{s02='s02*sfrac'}})
+path2 = feffpath('fes.dat', {\Red{s02='s02*(1-sfrac)'}})
+  \end{CodeBlock}
+
+  \vmm
+
+  \end{column}
+  \begin{column}{57mm}
+    \onslide+<3->
+  \begin{CodeBlock}{55mm}{Einstein Temperature }
+{\Blue{\# Use 1 ``theta'' to set sigma2 for multiple paths}}
+
+params = group(amp=param(1, vary=True),
+               theta=param(250, min=0, vary=True), \ldots)
+
+path1_100K = feffpath('fefe.dat', s02='amp', \ldots,
+                      sigma2='sigma2_eins(100, theta)')
+
+path1_200K = feffpath('fefe.dat', s02='amp', \ldots,
+                      sigma2='sigma2_eins(200, theta)')
+
+path1_300K = feffpath('fefe.dat', s02='amp', \ldots,
+                      sigma2='sigma2_eins(300, theta)')
+
+  \end{CodeBlock}\\
+\end{column}
+\end{columns}
+
+\vmm This allows us to use {\BlueEmph{Prior  Knowledge}} into the data analysis, and
+consider more complicated problems:
+
+\vfill
+
+  \begin{itemize}
+  \item force one $R$ for the same bond for data taken from different
+    edges.
+
+  \item model complex distortions (height of a sorbed atom above a surface).
+  \end{itemize}
+
+
+\end{frame}
+
+% \begin{slide}{Constraints, Generalized Variables examples}
+
+
+%   Constraints and Generalized Variables are one kind of ``Prior
+%   Knowledge'',  allowing us to build and compare simple physical models for
+%   our data.
+
+%   \vmm   This allows us to consider more complicated problems:
+
+%   \vmm
+
+%   {\Red{
+%       \begin{tabular}{clcl}
+%         &multiple neighboring species  &&  multiple sites for central atom \\
+%         &multiple scattering paths     &&  multiple polarizations \\
+%         &multiple data sets            &\hspace{4mm}&  multiple edges to co-refine   \\
+%       \end{tabular}
+%     }}
+
+%   \vmm Other constraints:
+
+%   \begin{itemize}
+%   \item force one $R$ for the same bond for data taken from different
+%     edges.
+
+%   \item model complex distortions (height of a sorbed atom above a surface).
+%   \end{itemize}
+
+% \vfill
+% \end{slide}

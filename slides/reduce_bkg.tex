@@ -1,0 +1,37 @@
+\begin{slide}{Data Reduction: Post-Edge Background Subtraction}
+
+  \begin{tabular}{ll}
+    \begin{minipage}{65mm}  {\wgraph{65mm}{reduction/bkg}}  \end{minipage}
+    &
+    \begin{minipage}{37mm}  \setlength{\baselineskip}{10pt}
+      {\Red{Post-Edge Background}}\vspace{0.5mm}
+      
+      We can't measure ${\mu_0(E)}$ (the absorption coefficient without
+      neighboring atoms).
+      
+      \vspace{1mm} 
+
+      We approximate ${\mu_0(E)}$ by an adjustable, smooth
+      function: a {\BlueEmph{spline}}.
+      
+      \vspace{1mm} 
+
+    \end{minipage}\\
+    \begin{minipage}{65mm} 
+            \onslide+<2->{\wgraph{65mm}{reduction/bkg_xanes}} \end{minipage}
+    &
+    \begin{minipage}{37mm} \setlength{\baselineskip}{10pt}
+      \onslide+<2->{
+
+      This can be somewhat dangerous -- a flexible enough
+      spline could match the $\mu(E)$ and remove all the EXAFS!
+
+      \vspace{1mm} 
+      We want a spline that will match the {\BlueEmph{low frequency}}
+      components of ${\mu_0(E)}$.
+      }
+    \end{minipage}
+  \end{tabular}
+
+\vfill
+\end{slide} 

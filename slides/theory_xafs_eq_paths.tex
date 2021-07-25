@@ -1,0 +1,49 @@
+%% Slide
+\begin{slide}{The EXAFS Equation: Sum over Scattering Paths}
+
+  We need some way to account for different neighbor species (Fe-O, Fe-Fe):
+
+  \[ \chi(k) = {\Red{\sum_j}} \, \frac{ {\Blue{N_j}} S_0^2 {\Red{f_j(k)}}
+      e^{-2{\Blue{R_j}}/{\Red{\lambda(k)}}}\,
+      e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+    \sin{ [ 2k{\Blue{R_j}} + \Red{\delta_j(k)} ]}  \]
+
+    \begin{cenpage}{85mm}
+      This sum  could be over ``shells'' of atoms, but more generally it is over
+      {\RedEmph{scattering paths}} for the photo-electron.  This allows
+      {\RedEmph{multiple scattering}} to be taken into account.
+    \end{cenpage}
+
+  \vmm
+  \onslide+<2->
+
+    \begin{tabular}{ll}
+      \begin{minipage}{50mm}
+        \onslide+<2->
+        \scalebox{1}{\rgraph{50mm}{mspaths}}
+      \end{minipage}
+      &
+      \begin{minipage}{62mm}\setlength{\baselineskip}{10pt}
+        \onslide+<2->
+        \vspace{2mm} {\Blue{Triangle Paths}} with angles $ 45 < \theta <
+        135^{\circ}$ aren't strong, but there can be a lot of them.
+
+        \onslide+<2->
+        \vspace{2mm}
+        {\Blue{Linear paths}} with angles $\theta \approx 180^{\circ}$,
+        are very strong: the photo-electron can be {\Red{focused}} through
+        one atom to the next.
+
+        \vspace{1mm}
+        \hspace{1mm} Scattering is strongest when   $ \theta > 150^{\circ}$.
+
+        \vspace{1mm}
+        \hspace{1mm} This can be used  to measure bond angles.
+
+      \end{minipage}
+    \end{tabular}
+
+\vmm   For first shell analysis, multiple scattering is hardly ever needed.
+
+
+\end{slide}

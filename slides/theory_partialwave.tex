@@ -1,0 +1,43 @@
+%% Slide
+\begin{slide}{What we left out: Muffin-Tin and Curved Wave Scattering}
+
+    \vmm
+    
+    {\Red{Curved-Wave Scattering:}}
+
+    A plane-wave scattering calculation for $f(k)$ isn't good enough for
+    EXAFS.     We need to replace 
+
+    \[ f = \Sigma_l (-1)^l (2l+1) e^{i\delta_l} \sin\delta_l \]
+
+    with 
+    \[ f \approx \Sigma_l (-1)^l (2l+1) e^{i\delta_l} \sin\delta_l \Red{ e^{il(l+1)/2kR} } \] 
+    
+  
+    This gives large scattering phase shifts, and requires the calculation
+    to $l\approx 25$. 
+
+    \vmm  \hrule \vmm
+
+    {\RedEmph{Muffin-Tin Approximation:}}
+
+    The muffin-tin approximation allows spherically symmetric charge
+    densities to be used, greatly simplifying the calculations (and relying
+    on a wealth of literature).  
+  
+    \vmm  \hrule \vmm
+
+    {\Red{Green's Functions:}}
+
+    More efficient than evaluating wave-functions $\psi$ is to use Green's
+    functions:
+    
+    \[ -{\frac{1}{\pi}}{\rm Im} G(dr',r,E) = \Sigma_f | f \rangle>\delta(E-E_f) \langle f| \]
+
+    \[ {  \mu(E) \propto -{\frac{1}{\pi}}{\rm Im} \langle i | 
+      \hat\epsilon\cdot{r'} G({r'},{r},E) \hat\epsilon\cdot {r} |
+      i \rangle \Theta(E-E_f)  } 
+    \] 
+
+
+\end{slide} 

@@ -1,0 +1,81 @@
+
+\begin{slide}{EXAFS Analysis and Information Theory}
+
+  The two fundamental equations for EXAFS analysis are in conflict:
+
+  \vmm \vmm \vmm
+
+  The {\RedEmph{EXAFS Equation}} to model the  data has a sum over paths:
+  \begin{center}
+    $\displaystyle   \chi(k) = \sum_j{ 
+        \frac{ {\Blue{S_0^2 N_j}}{\Red{f_j(k)}} 
+          e^{-2R_j/\lambda(k)}   e^{-2k^2{\Blue{\sigma_j^2}}}
+        }{ k{\Blue{R_j}}^2    }
+             {\sin[{2k{\Blue{R_j}} +
+                   {\Red{\delta_j(k)}}} 
+             ]}
+      }
+      $
+  \end{center}
+
+  \vmm 
+  The {\RedEmph{Nyquist Formula}} for the number of independent parameters
+  in the data: 
+  \begin{center}
+    $ \displaystyle N_{\rm idp} \approx \frac{2\Delta k\Delta R}{\pi} $
+  \end{center}
+
+\pause\hrule \vmm
+
+The number of parameters needed to describe $g(R)$ grows exponentially with $R$.
+
+\vmm
+
+The number of parameters available grows linearly with $R$. \par
+
+%% \vmm\pause
+%% \begin{center}(This limitations apply to PDF analysis of $g(R)$, too).\end{center}
+
+\vfill 
+\end{slide}
+
+\begin{slide}{EXAFS Analysis with Limited Information}
+    
+    The basic difficulties with EXAFS Analysis are:
+
+    \begin{enumerate}
+    \item The basis functions (Paths) of $g(R)$ grow exponentially with $R$.
+
+    \item The scattering factors $f(k)$, $\delta(k)$ are difficult to
+      calculate, and dominate our uncertainties.
+      
+    \item There's not much information in a real measurement:
+      $  N_{\rm idp} \approx \frac{2\Delta k\Delta R}{\pi} $
+      
+    \end{enumerate}
+    
+    \hrule  \vmm \pause
+    
+    Quantitative EXAFS Analysis must conserve the information:
+    
+    \begin{enumerate}
+     \item {\BlueEmph{reduce}} the number of Paths to consider
+    (Fourier analysis). 
+
+    \item {\Blue{reuse}} or parameterize {\emph{ab initio}}
+    calculations of $f(k)$, $\delta(k)$ using {\feff} or
+    something similar. 
+      
+     \item {\Blue{recycle}} parameters. Use algebraic constraints
+    to use fewer and more meaningful independent variables in the modeling.
+      
+    \end{enumerate}
+
+    \hrule \vmm \pause
+   
+    We parameterize the EXAFS with a physical model built from \par
+    \vmm \hspace{40mm} {\RedEmph{Constraints}} and {\RedEmph{Restraints}}.
+    
+\vfill
+\end{slide} 
+

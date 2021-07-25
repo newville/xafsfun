@@ -1,0 +1,56 @@
+
+\subsection{The EXAFS Equation}
+\begin{frame}
+  \frametitle{The EXAFS Equation} %% Analysis with {\feff} \&  {\arch} or {\ifeffit} }
+
+  The XAFS Equation used with {\feff} and {\larch}:
+
+  \[
+  \chi(k) = \sum_j {{ S_0^2 {\Blue{N_j}} {\Red{f_j(k)}}  e^{-2R_j/\lambda(k)}
+      e^{-2k^2{\Blue{\sigma_j^2}}}}\over{k{\Blue{R_j}}^2}}
+  {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}} ]}
+   \]
+
+\begin{itemize}
+   \pause
+     \item  The sum is over  {\RedEmph{Scattering Paths}} of the
+       photo-electron.   Both:
+
+       \begin{description}
+
+       \item[Single Scattering] {\tiny{ absorbing atom $\Rightarrow$ neighbor atom
+             $\Rightarrow$ absorbing atom}}
+
+
+       \item[Multiple Scattering] {\tiny{absorbing atom $\Rightarrow$ neighbor
+             atom  $\Rightarrow$ neighbor atom $\Rightarrow$ \ldots  $\Rightarrow$
+             absorbing atom}}
+
+       \end{description}
+
+       \pause\item $\Red{f(k)}$ and $\Red{\delta(k)}$ are
+       {{photo-electron scattering amplitude and phases}}:
+
+   \begin{itemize}
+   \item Energy ($k$) dependent.
+   \item $Z$ dependent -- $Z$ of the scattering atoms(s).
+   \item non-trivial: must be calculated (or extracted from measured spectra).
+
+   \end{itemize}
+ \end{itemize}
+
+   \vmm \hrule \vmm
+
+   \onslide+<4->
+
+   Knowing  $\Red{f(k)}$ and $\Red{\delta(k)}$, we can determine structural information:
+
+     \begin{itemize}
+     \item ${\Blue{R}}$ --  near neighbor distance.
+     \item ${\Blue{N}}$ -- coordination number.
+     \item ${\Blue{\sigma^2}}$ -- mean-square  disorder in ${\Blue{R}}$.
+     \end{itemize}
+
+   \vmm
+
+\end{frame}

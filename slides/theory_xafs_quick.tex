@@ -1,0 +1,89 @@
+%% Slide
+\begin{slide}{The EXAFS Equation: simple description}
+
+   \begin{center}
+     \begin{postitbox}{98mm}
+       The XAFS -- the change in $\mu$ -- is the {\BlueEmph{overlap}} of the
+       returning, scattered photo-electron with the tightly bound core electron
+      \end{postitbox}
+    \end{center}
+
+ \begin{tabular}{ll}
+
+   \begin{minipage}{60mm}
+     With a spherical wave for the
+     photo-electron:
+     \[ \psi(k,r) = {{e^{ikr}}/{kr}} \]
+
+     $\chi(k)$ is due to the photo-electron:
+     \begin{enumerate}
+       {\onslide+<2-> \item leaves the absorbing atom}
+       {\onslide+<3-> \item scatters from the neighbor atom}
+       {{\onslide+<4-> \item returns to the absorbing atom}}
+     \end{enumerate}
+   \end{minipage}
+   &
+   {\onslide+<1->
+     \begin{minipage}{50mm}
+       \rgraph{48mm}{xafscartoon_scatter}
+     \end{minipage}
+   }
+\end{tabular}
+
+\vmm
+
+     \[ {\displaystyle  {\onslide+<2->\chi(k) = {{e^{ikR}}\over{kR}} \> }
+       {\onslide+<3-> [{\Red{2k f(k)e^{i\delta(k)}}} ] \> }
+       {\onslide+<4-> {{e^{ikR}}\over{kR}}}
+       {\onslide+<5-> + C.C. }}
+     \]
+
+  \onslide+<3->
+
+  \begin{cenpage}{80mm}
+
+  \begin{description} \settowidth{\labelwidth}{5mm} \setlength{\itemindent}{-5mm}
+  \item[{{\Red{ $f(k)$}} \hspace{1mm}}] the scattering amplitude for the atom.
+  \item[{ {\Red{$\delta(k)$}} \hspace{1mm}}] the scattering phase-shift for the atom.
+  \end{description}
+  \end{cenpage}
+
+\vfill
+\end{slide}
+
+%% Slide
+\begin{slide}{Development of the EXAFS Equation: Coordination Sphere}
+
+  Including the complex conjugate, and insisting on a real result, we get
+
+   \[ \chi(k) = \frac{f(k)}{kR^2} {\sin[{2kR + \delta(k)}]} \]
+
+    The EXAFS Equation for 1 scattering atom.
+
+    \vmm
+    \onslide+<2->
+
+    For $N$ neighboring atoms, with (thermal and static) disorder in the
+    distribution of $R$  described by  $\sigma^2$, we have
+
+     \[ \chi(k) = \frac{N f(k) e^{-2k^2\sigma^2}}{kR^2} \sin{[2kR + \delta(k)]} \]
+
+     \onslide+<3->
+
+     \begin{columns}
+       \begin{column}{45mm}
+         In general, we would integrate over the {\RedEmph{Partial}} Pair
+         distribution function, $g(R)$.  Using $N$, $R$, and  $\sigma^2$,
+         is a common simplification.
+
+       \end{column}
+       \begin{column}{55mm}
+         \rgraph{52mm}{gnxas}
+       \end{column}
+
+     \end{columns}
+
+
+ \vfill
+
+ \end{slide}

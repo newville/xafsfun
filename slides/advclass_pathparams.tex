@@ -1,0 +1,165 @@
+\section{Path Parameters,  Pair Distribution Function}
+
+%% Slide
+\begin{slide}{Path Parameters: The Pair Distribution Function}
+  \small
+  \begin{cenpage}{100mm}\setlength{\baselineskip}{11pt}
+    
+    \vmm
+    
+    An EXAFS measurement averages billions of 1 femto-second ``snapshots''
+    of the absorber-scatterer.  We put this in the 
+    EXAFS Equation as $\mathbf{N}$ and $\mathbf{\sigma^2}$.
+
+    
+    \vmm 
+    
+    More generally, we sample a {\RedEmph{Partial Pair Distribution
+        Function}}, {\RedEmph{$\mathbf{g(R)}$}} : the probability that at
+    atom is a distance ${\mathbf{R}}$ away from the absorbing atom:
+
+    \[  \displaystyle{\mathbf{
+        \bchi(k)  = \Biggl\langle \sum_j 
+        \frac{f(k)e^{-2R/\lambda(k)}}{kR^2} \bsin[2kR + \bdelta(k)]
+        \Biggr\rangle  }}
+    \]
+
+    
+    where  $  \langle f(R) \rangle = \int dR\, f(R) \, g(R) / \int dR\, g(R) $.
+
+    \vmm \hrule \vmm
+    
+    We'll go back to using {\RedEmph{complex notation}}, use {$\mathbf{p
+        \approx k + i/\lambda(k)}$}, and ignore the $\mathbf{R}$ dependence
+    of \feffc{f(k)} and \feffc{\delta(k)}.  
+
+    For now, we'll neglect the $R$ dependence of the $1/R^2$ too, so that:
+        
+    \[  \displaystyle{\mathbf{
+        \bchi_j(p)  = \biggl\langle
+        {f(k)\over{kR^2}} e^{i[2pR + \bdelta(k)]}  \biggr\rangle
+        \approx  {f(k)e^{i\bdelta(k)}\over{kR^2}} \biggl\langle e^{i2pR}  \biggr\rangle 
+      }} 
+    \]
+    
+    \vmm We can then use {\RedEmph{the cumulant expansion}} from
+    intermediate statistics, which relates $\langle e^x \rangle$ to
+    $\langle x \rangle$, the moments of $g(R)$.
+
+  \end{cenpage}
+  \vfill
+\end{slide} 
+
+
+%% Slide
+\begin{slide}{The Cumulant Expansion}
+  \small
+  \begin{cenpage}{98mm}\setlength{\baselineskip}{11pt}
+    
+    Note that we're ignoring the $\mathbf{1/R^2}$ term -- (for now!):
+
+    \[  \displaystyle{\mathbf{
+        \bchi_j(p)  
+        \approx  {f(k)e^{i\bdelta(k)}\over{kR^2}} \biggl\langle e^{i2pR}  \biggr\rangle 
+      }} 
+    \]
+    
+
+    The cumulant expansion gives the average  of $\exp{i2pR}$ as
+
+    \[ \displaystyle{\mathbf{
+        \biggl\langle e^{i2pR} \biggr\rangle
+        = \exp \bigg[ \sum_{n=1}^{\infty} { {(2ip)^n}\over{n!}}C_n  \bigg].}}
+    \]
+    
+    \vmm $C_n$ are the {\RedEmph{cumulants}} of $g(R)$, related to the
+    moments of $g(R)$: $\langle r^n \rangle$,
+
+    with
+    $r= R - R_0$ and $R_0$ is the centroid of the distribution (we'll use {\reff}):
+    
+    \begin{tabular}{lll} 
+      \hspace{4mm} & 
+      $C_1 (\Delta R) $ & $ = \langle r \rangle    $ \\
+      & $C_2 (\sigma^2) $ & $ = \langle r^2 \rangle - \langle r \rangle^2    $  \\
+      & $ C_3 $ & $ = \langle r^3 \rangle - 3 \langle r^2 \rangle  
+      \langle r \rangle  + 2 \langle r \rangle^3   $  \\
+      & $ C_4 $ & $ =  \langle r^4 \rangle - 3 \langle r^2 \rangle^2 
+      - 4\langle r^3 \rangle \langle r \rangle
+      +12  \langle r^2 \rangle  \langle r \rangle^2 
+      - 6\langle r \rangle^4  $   \\
+    \end{tabular}
+
+    \vmm
+        
+    These four cumulants are {\ifeffit}'s Path Parameters for adjusting
+    $g(R)$ for a path: \pthpar{delR}, \pthpar{sigma2}, \pthpar{third}, and
+    \pthpar{fourth}
+
+
+    \vmm \begin{center}\highlightbox{\pthpar{third} is sometimes important!! }\end{center}
+    
+
+\vmm \vmm
+    
+\end{cenpage}
+\vfill
+\end{slide} 
+
+%% Slide
+\begin{slide}{Corrections to the cumulant expansion}
+  \small
+  \begin{cenpage}{105mm}\setlength{\baselineskip}{11pt}
+   
+    
+    For the cumulants we ignored the $\mathbf{1/R^2}$ term.  A simple
+    Taylor series expansion gives two corrections (with $C_1$ =
+    \pthpar{delR} and $R_0$ = \reff):
+    
+    \begin{eqnarray*}
+      {\displaystyle{\mathbf{\frac{1}{k\reff^2}}}} & 
+      {\displaystyle{\mathbf{\rightarrow}}} & 
+      {\displaystyle{\mathbf{\frac{1}{k(\reff + \pthpar{delR})^2} }}} \\
+      {\displaystyle{\mathbf{2p \pthpar{delR}}}}  &
+      {\displaystyle{\mathbf{\rightarrow}}} & 
+      {\displaystyle{\mathbf{2p(\pthpar{delR}- 2 \pthpar{sigma2}/{\reff}) }}} \\
+    \end{eqnarray*}       
+
+
+
+    
+      For any other corrections (ie, when more than 4 cumulants would be
+    needed), we just add more paths to the distribution function.
+
+    \vmm \hrule \vmm
+
+    And now \vmm
+    
+    \fcolorbox{black}{lightyellow2}{\begin{minipage}{103mm}
+        \begin{eqnarray*}
+          \mathbf{\bchi_j(k)} = & 
+          \mathbf{\displaystyle{ \hspace{-2mm}
+              \frac{\feffc{f(k)}\times \feffc{N} \times {\pthpar{S02}}}
+              {k( \reff + \pthpar{delR} ) ^2}
+            }
+            \enskip\bexp(-2p''\reff - 2p^2\pthpar{sigma2} + \twothirds p^4 \pthpar{fourth}) } \\
+          &  
+          \mathbf{\times \enskip\bexp \biggl\{ i\big[
+            2k\reff + \feffc{\delta(k)}
+            + 2p(\pthpar{delR} - 2{\textstyle{\pthpar{sigma2}\over\reff }})
+            -\fourthirds p^3\pthpar{third}
+            \big]  \biggr\}     } 
+        \end{eqnarray*}
+      \end{minipage} 
+
+    }
+    
+    \vmm \vmm
+    
+    doesn't seem that bad, huh? 
+
+\end{cenpage}
+\vfill
+\end{slide} 
+
+

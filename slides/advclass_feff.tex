@@ -1,0 +1,380 @@
+\section{Intermediate  FEFF}
+%% Slide
+\subsection{FEFF.DAT Files}
+\begin{frame}[fragile] 
+  \frametitle{Intermediate FEFF: Anatomy of a {\feffndat} file}
+
+    \vmm
+    \begin{tabular}{lr}
+      \hspace{-5mm} \begin{minipage}{20mm} {\small
+          
+          \vmm \vmm 
+
+          Header  \vmm
+
+          {\tt{---------}}
+
+
+          $N_{\rm leg}$, {\feffc{N}},  {\reff }
+
+          {\Blue{Path Geometry}}
+          
+          \vmm \vmm \vmm
+          
+          columns of $k$-dependent data
+          
+        }
+      \end{minipage}  
+      & \begin{minipage}{84mm}
+    \begin{block}{FEFF OUTPUT FILE}
+
+      {\tiny{  \begin{semiverbatim}
+ Cu  metal  fcc a=3.603                                           Feff XX 6.10
+ Abs   Z=29 Rmt= 1.289 Rnm= 1.424 K shell
+ Pot 1 Z=29 Rmt= 1.272 Rnm= 1.392
+ Gam_ch=1.761E+00 H-L exch
+ Mu=-5.535E+00 kf=1.806E+00 Vint=-1.796E+01 Rs_int= 2.008
+ Path    1      icalc       2
+ -----------------------------------------------------------------------
+{\Red{   2  12.000   2.5478 }}   2.6300   -5.53502 {\Red{nleg, deg, reff}}, rnrmav(bohr), edge
+{\Blue{        x         y         z   pot at#
+      .0000     .0000     .0000  0  29 Cu       absorbing atom
+      .0000   -1.8016    1.8016  1  29 Cu}}
+{\Red{    k   real[2*phc]   mag[feff]  phase[feff] red factor   lambda     real[p]@#}}
+   .000  3.5015E+00  0.0000E+00 -5.1320E+00  9.872E-01  1.5637E+01  1.8071E+00
+   .100  3.5020E+00  3.3976E-02 -5.6318E+00  9.873E-01  1.5660E+01  1.8098E+00
+   .200  3.5035E+00  6.7038E-02 -6.1121E+00  9.877E-01  1.5726E+01  1.8177E+00
+   .300  3.5060E+00  9.8421E-02 -6.5731E+00  9.882E-01  1.5831E+01  1.8309E+00
+   .400  3.5093E+00  1.2760E-01 -7.0153E+00  9.890E-01  1.5963E+01  1.8491E+00
+   .500  3.5132E+00  1.5432E-01 -7.4387E+00  9.901E-01  1.6111E+01  1.8724E+00
+    \end{semiverbatim}
+  }}\end{block}
+  \end{minipage}   \\
+\end{tabular}  
+{}
+    \vmm \hrule\vmm
+
+    Conversion from {\feffndat} to the EXAFS Equation:
+
+
+    \begin{tabular}{lll}
+      \feffc{N} : \Red{\bf{\tt{deg}}}  &  \hspace{9mm} \reff     : \Red{\bf{\tt{reff}}} &
+      \feffc{k_{\rm FEFF}} : \Red{\bf{\tt{k}}}  \\
+      \multicolumn{2}{l}{
+      \feffc{f(k)} : \Red{\bf{\tt{mag[feff] * red factor}}}} \hspace{5mm} &       
+      \feffc{\lambda(k)} : \Red{\bf{\tt{lambda}}}   \\
+      \multicolumn{2}{l}{
+      \feffc{\delta(k)} : \Red{\bf{\tt{real[2*phc]+phase[feff]}}} }& 
+            \feffc{real\_p(k)} : \Red{\bf{\tt{real[p]}}}  \\
+    \end{tabular}
+
+\end{frame} 
+
+
+\begin{slide}{Scattering Amplitude and Phase-Shift:
+    ${f(k)}$ and ${\delta(k)}$ }
+
+    
+    The scattering amplitude ${\Red{f(k)}}$ and phase-shift
+    ${{\Red{\delta(k)}}}$ depend on atomic number.
+
+    \vspace{1mm}
+
+    \begin{tabular}{ll}
+      \begin{minipage}{55mm}
+        \scalebox{1}{\wgraph{55mm}{theory/scatt_amp}}
+      \end{minipage}
+      & 
+      \begin{minipage}{45mm}\setlength{\baselineskip}{10pt}
+        The scattering amplitude ${{\Red{f(k)}}}$ peaks at
+        different ${k}$ values and extends to
+        higher-${k}$ for heavier elements.  For very heavy
+        elements, there is structure in ${{\Red{f(k)}}}$.
+        
+      \end{minipage}
+      \\
+      \begin{minipage}{55mm}
+        \scalebox{1}{\wgraph{55mm}{theory/scatt_pha}}
+      \end{minipage}
+      & 
+      \begin{minipage}{45mm}\setlength{\baselineskip}{10pt}
+        The phase shift ${{\Red{\delta(k)}}}$ shows sharp
+        changes for very heavy elements.
+        
+        \vspace{2mm}
+        
+        \fcolorbox{black}{lightyellow2}{
+          \begin{minipage}{42mm}
+            These scattering functions can be accurately calculated (say with
+            the program {\feff}, and used in the EXAFS modeling.
+          \end{minipage}}
+        
+        
+      \end{minipage}
+    \end{tabular}
+  
+  \begin{center}
+    \fcolorbox{black}{lightyellow}{
+      \begin{minipage}{68mm}
+        ${Z}$ can usually be determined to with 5 or so.  Fe and O can be
+        distinguished, but Fe and Mn cannot be.
+      \end{minipage}}
+  \end{center}
+  
+  \vfill
+\end{slide} 
+
+
+%% Slide
+\begin{slide}{FEFF and The EXAFS Equation: What's so hard???}
+  
+  \vmm
+    
+    {\feff} includes sophisticated techniqies to calculate of {\feffc{f(k)}}
+    and \feffc{\delta(k)}:
+
+    \begin{description}
+    \item[\RedEmph{Curved Wave Effects}] the photo-electron goes out as
+      spherical wave and scatters from an atom with finite size: A partial
+      wave expansion is needed.
+
+    \item[\RedEmph{Muffin-Tin Approximation:}] scattering calculation needs
+      a real-space potential, and a muffin-tin approximation is most
+      tractable, if approximate.
+
+    \item[\RedEmph{Extrinsic Losses}] photo-electron mean-free path,
+      including self-energy and finite core-hole lifetime.
+      
+    \item[\RedEmph{Intrinsic Losses}] relaxation of absorbing atom to the
+      presence of the core hole.
+      
+    \item[\RedEmph{Multiple Scattering}] the photo-electron can scatter
+      multiple times, which is important at low $k$, and can be important
+      at high $k$ for some systems.  Luckily, all paths from {\feff} appear
+      the same.
+      
+    \item[\RedEmph{Polarization Effects}] synchrotron beams are highly
+      polarized, which needs to be taken into account.  This is simple for
+      $K$-edges ($s\rightarrow p$ is dipole), and less so for $L$-edges
+      (where both $p \rightarrow d$ and $p \rightarrow s$ contribute).
+
+    \end{description}
+
+\vfill
+\end{slide} 
+
+
+%% Slide
+\begin{slide}{Intermediate FEFF: Extrinsic Loss Terms}
+  
+  \vmm
+    The photo-electrons are quasiparticles, and can inelastically scatter.
+    This leads to ``Extrinsic Losses'':
+
+    \begin{description}
+    \item[{\RedEmph{self-energy}}] $\Sigma$.  The potential for a one-particle Dyson
+      equation becomes 
+      
+      \[ {\cal{H}}\psi = \Bigl[ -{\frac{1}{2}}\bigtriangledown^2 + V_{\rm
+        coul} + V_{\rm core-hole} + \Sigma(E) \Bigr] \psi = E\psi
+      \]
+
+      
+      The self-energy for the {\RedEmph{excited atom}}, goes beyond
+      ``normal'' ground state DFT, and follows work of L. Hedin and S.
+      Lundqvist J. Phys C {\bf{4}}, 2064 (1971).
+
+      
+    \item[{\RedEmph{core-hole width}}] $\Gamma$.  
+      
+      This ranges from ~0.1 to 10 eV for most hard x-ray core-levels, which
+      corresponds to a {\RedEmph{core-hole lifetime}} $\tau$ on the order
+      of 1 fs (fast!)  ($\Gamma \tau \approx \hbar$).
+
+    \end{description}
+
+    \vmm \hrule \vmm
+    
+    Conceptually, these two terms can be combined into a {\BlueEmph{mean
+        free path}}, ${\lambda(k)}$, and the photo-electron wave
+    function be changed from
+    
+    \[ \displaystyle{{
+        \psi(k,r)  =  {\frac{e^{ikr}}{kr}} \Rightarrow   {\frac{e^{ikr}e^{-r/\lambda(k)}}{kr}}
+        \Rightarrow {\frac{e^{ipr}}{pr}} }}
+    \]
+
+    which is why we use the complex wavenumber of the photo-electron:
+    \[{p(k) = k + \Sigma + i / \lambda(k) } \]
+
+\vfill
+\end{slide} 
+
+%% Slide
+\begin{slide}{${p(k)}$: the complex momentum of the photo-electron }
+
+    \[{p(k) = k + \Sigma + i / \lambda(k) } \]
+
+    ${E = p(k)^2 \hbar^2 / 2m_e }$ is the ``kinetic energy'' of the
+    photo-electron.
+
+    \vmm 
+
+    \begin{center} 
+      \scalebox{1}{\wgraph{75mm}{theory/pvk}}
+    \end{center}
+      
+    \vmm \vmm 
+    
+    Due to the finite, positive self-energy (${\Sigma(E)}$), and
+    that ${p(k)}$ is referenced to the continuum level
+    (${E_0}$) and ${k}$ is referenced to the Fermi level
+    (${E_f}$):
+
+    \[{Re[p(k)] \gtrsim k}\]
+
+      
+    \vmm \vmm
+    
+
+  \vfill
+\end{slide} 
+
+% %% Slide
+% \begin{slide} \STitle{${\lambda(k)}$: The Photo-Electron Mean-Free Path}
+
+%     
+%     \begin{center} 
+%       \scalebox{1}{\wgraph{75mm}{theory/scatt_lam}}
+%     \end{center}
+%       
+%     \vmm \vmm 
+% 
+%     \begin{center}
+%       \highlightbox{ \begin{minipage}{75mm}
+%         ${\rm 5 \AA < \lambda < 25\,\AA}$ for the EXAFS ${k}$-range.
+%         
+%         \vspace{2mm} 
+%         
+%         The ${\lambda}$ and ${R^{-2}}$ terms make EXAFS a
+%         {\RedEmph{local probe}}.
+% 
+%         \vspace{2mm} 
+%         
+%         XANES ( $k<3\rm\,\AA^{-1}$ ) is more sensitive to larger
+%         distances.
+%         
+%       \end{minipage} }
+%     \end{center}
+
+% \vfill
+% \end{slide} 
+% 
+% %% Slide
+% \begin{slide}$S_0^2$:  Amplitude Reduction Term}
+%     
+%     {\RedEmph{Intrinsic Losses}}, due to the relaxation of all the other
+%     electrons in the absorbing atom to the hole in the core level, can be
+%     described as an {\Red{Amplitude Reduction Term}}:
+% 
+%     \vmm
+% 
+%     \[
+%     S_0^2 =  {  |{\langle \Phi^{N-1}_f |\Phi^{N-1}_0 \rangle}|^2}
+%     \]
+% 
+%      \vspace{1mm}
+%      
+%      where ${\langle \Phi^{N-1}_f|}$ accounts for the relaxation of the
+%      other ($N-1$) electrons relative to these electrons in the unexcited
+%      atom, ${| \Phi^{N-1}_0 \rangle }$
+%      
+% 
+%      \vmm
+% 
+%      ${S_0^2}$ is most often taken as a constant: $ 0.7 < S_0^2 < 1.0 $.
+%     
+%  
+%      and is used as a fitting parameter that multiplies {$\chi$}.
+%      
+%      \vmm
+% 
+%      \begin{center}
+%        {\Red{Note that ${S_0^2}$ is Completely Correlated with $N$      (!!!)}}
+%      \end{center}
+% 
+%      \vmm
+% 
+%      \begin{center}
+%        \highlightbox{
+%          \begin{minipage}{75mm}
+%            $ S_0^2 $  and experimental issues make EXAFS amplitudes
+%            ({\Blue{$N$}}) less precise than EXAFS phases ({\Blue{$R$}}).
+%          \end{minipage}}
+%      \end{center}
+%      
+% 
+%      \vmm
+% 
+%      In principle, $S_0^2$  includes {\RedEmph{multi-electron excitations}},
+%      which are often ignored for EXAFS.
+%      
+%      \vspace{1mm}
+%      
+%      For improved calculations of $S_0^2(E)$, see Campbell, et al, PRB
+%      {\bf{65}} 064107.
+% 
+% 
+%      \vmm
+%      
+%      
+% \vfill
+% \end{slide} 
+% 
+% 
+% 
+% %% Slide
+% \begin{slide} \STitle{Multiple Scattering}
+% 
+
+%     \vmm
+%     
+%     The photo-electron can scatter multiple times:
+% 
+%     \vmm
+% 
+%     \begin{center}\scalebox{1}{\wgraph{85mm}{theory/mspaths2}}\end{center}
+%     
+%     
+%     A {\Blue{Path Formalism}} based on Green's Functions is used in modern
+%     EXAFS, for `''Real Space'' calculations on arbitrary clusters of atoms:
+%     
+%     \[ G = G^0 + G^0 t G^0 + G^0 t G^0 t G^0 + 
+%     G^0 t G^0 t G^0 t G^0 + \ldots \]
+%     
+%     where ${\Blue{G^0}}$ describes the propagation of the electron, and
+%     $\Blue{t}$ describes the scattering from the potential of the
+%     neighboring atom.
+% 
+% 
+%    \vmm
+%        
+%     \vmm {\Blue{Triangle Paths}} with angles $ 45 < \theta <
+%     135^{\circ}$ are weak, but there are many of them.
+%     
+%     \vmm {\Blue{Linear paths}} with angles $\theta \approx 180^{\circ}$ 
+%     are very strong: the photo-electron can be {\Red{focused}} through
+%     one atom to the next.
+%     This strong angular dependence  can be used to measure bond angles.
+% 
+%     
+% 
+%     \vmm  
+% 
+%     \highlightbox{\Red{{\feffndat} looks the same for Single- and Multiple-Scattering Paths!}}
+% 
+% 
+%     \vfill
+% 
+% \end{slide} 
+% 

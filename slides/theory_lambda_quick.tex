@@ -1,0 +1,74 @@
+%% Slide
+\begin{slide}{Photo-Electron Mean-Free Path}
+
+ We used a spherical wave for the photo-electron, $ \psi(k,r) \sim
+ {{e^{ikr}}/{kr}}  $ to get to
+
+    \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
+        e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+      {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
+
+ 
+  \begin{cenpage}{95mm}
+    The photo-electron can also scatter {\BlueEmph{inelastically}}, and may
+    not be able to get back the absorbing atom in tact (in phase, at energy).
+
+    \vmm
+
+    {\BlueEmph{Plus}}: the core-level has a {\RedEmph{finite lifetime}},
+    before it is filled.   This also limits how far the photo-electron can
+    go out.
+  \end{cenpage}
+
+  \vmm \pause
+
+    A {\RedEmph{mean free path}} -- $\lambda$ -- describes how far the
+    photo-electron can go before it loses energy/coherence.
+
+
+    \begin{cenpage}{50mm}
+      {$\displaystyle \psi(k,r) \sim \frac{e^{ikr} e^{-r/\lambda(k)}}{kr} $ }
+    \end{cenpage}
+
+
+\end{slide}
+
+%% Slide
+\begin{slide}{Photo-Electron Mean-Free Path}
+
+Using  {$\displaystyle \psi(k,r) \sim \frac{e^{ikr} e^{-r/\lambda(k)}}{kr} $ }
+adds a term to the EXAFS equation:
+\vmm
+
+    \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
+        e^{-2{\Blue{R_j}}/{\Red{\lambda(k)}}}
+        e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+      {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
+
+\vmm\pause
+
+\begin{columns}
+  \begin{column}{58mm}
+    \rgraph{59mm}{lambda}
+  \end{column}
+  \begin{column}{58mm}
+
+  \begin{itemize}
+  \item  $\lambda \lesssim 30\,\rm\AA$  for $k > 3\rm\,\AA^{-1}$.
+
+  \item This (and the $R^{-2}$) makes EXAFS a {\RedEmph{local
+        atomic probe}}.
+  \item  $\lambda $ increases at low $k$. \par 
+
+  \item XANES is less a {\RedEmph{local probe}} than EXAFS.
+  \end{itemize}
+  \end{column}
+\end{columns}
+
+\vmm
+
+$\lambda$ has a universal and strong $k$ dependence, but is mostly
+independent of the material.
+
+
+\end{slide}

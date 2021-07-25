@@ -1,0 +1,97 @@
+
+%% Slide
+\begin{slide}{Photo-Electron Mean-Free Path (extrinsic losses)}
+  To get to
+
+    \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
+        e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+      {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
+
+ we used a spherical wave for the photo-electron:
+
+  \begin{center}
+      \begin{minipage}{40mm}
+        {$\displaystyle        \psi(k,r) \sim   {{e^{ikr}}/{kr}}  $}
+      \end{minipage}
+  \end{center}
+
+
+ But \ldots   \vmm \pause
+
+  \begin{minipage}{100mm}
+
+    The photo-electron can also scatter {\BlueEmph{inelastically}}, and may
+    not be able to get back the absorbing atom in tact.
+
+  \vmm
+
+  A {\RedEmph{mean free path}} ($\lambda$) describes how far the
+  photo-electron can go before it scatters, losing energy to other
+  electrons, phonons, etc.
+
+  \pause \vmm
+
+  {\BlueEmph{Plus}}: the core-level has a {\RedEmph{finite lifetime}},
+  also limiting how far the photo-electron can go out and make it back to
+  ``the same'' absorbing atom.
+
+  \end{minipage}
+
+
+  \vfill
+\end{slide}
+
+%% Slide
+\begin{slide}{Photo-Electron Mean-Free Path}
+
+  To account for the mean-free-path,  we can
+replace the
+  spherical photo-electron wavefunction:
+
+
+  \begin{center}
+      \begin{minipage}{40mm}
+        {$\displaystyle        \psi(k,r) \sim   {{e^{ikr}}/{kr}}  $}
+      \end{minipage}
+  \end{center}
+
+
+\vmm  with a damped wave-function: \vmm
+
+  \begin{center}
+      \begin{minipage}{40mm}
+        {$\displaystyle \psi(k,r) \sim \frac{e^{ikr} e^{-r/\lambda(k)}}{kr} $ }
+      \end{minipage}
+  \end{center}
+
+which simply adds another term to the EXAFS equation:
+\vmm
+  \onslide+<2->
+
+    \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
+        e^{-2{\Blue{R_j}}/{\Red{\lambda(k)}}}
+        e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+      {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
+
+  \vfill
+\end{slide}
+
+\begin{slide}{The Photo-Electron Mean-Free Path}
+
+  \vspace{-1mm}
+
+  \begin{cenpage}{70mm} \rgraph{70mm}{lambda}   \end{cenpage}
+
+  $\lambda$ is mostly independent of the system, and depends strongly on $k$:
+
+  \begin{itemize}
+  \item For $3\rm \,\AA^{-1} <k<15 \rm \,\AA^{-1}$ , $\lambda \rm<
+    30\,\AA$
+  \item This (and the $R^{-2}$ term) makes EXAFS a {\RedEmph{local
+        atomic probe}}.
+  \item For XANES  ($k < 3\rm\,\AA^{-1}$)    Both $\lambda$ and $R^{-2}$ get
+    large:  \par XANES is not really a {\RedEmph{local probe}}.
+  \end{itemize}
+
+\vfill
+\end{slide}

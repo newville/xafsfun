@@ -1,0 +1,37 @@
+%% Slide
+\begin{slide}{Development of the EXAFS Equation}
+
+    \[ \chi(k) = \frac{f(k)}{kR^2} {\sin[{2kR + \delta(k)}]} \]
+
+    \vmm
+    The EXAFS Equation for 1 scattering atom.
+
+    \vmm\vmm \hrule \vmm \vmm
+
+    \onslide+<2->
+
+    For $N$ neighboring atoms, and with thermal and static disorder of
+    $\sigma^2$, giving the {\BlueEmph{mean-square disorder}} in ${R}$, we
+    have
+
+    \[ \chi(k) = \frac{N f(k) e^{-2k^2\sigma^2}}{kR^2} \sin{[2kR + \delta(k)]} \]
+
+
+    A real system has atoms at different distances and of different types.
+    We add all these contributions to get a better version of the EXAFS
+    equation:
+
+      \vspace{2mm}
+
+      \begin{center}
+        \begin{postitbox}{77mm}
+    \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
+        e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+      {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
+  \end{postitbox}
+      \end{center}
+
+\vfill
+
+
+\end{slide}

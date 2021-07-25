@@ -1,0 +1,60 @@
+
+\begin{frame} \frametitle{Self-Consistent Potentials for XANES calculations}
+  \small
+  \begin{cenpage}{100mm}\setlength{\baselineskip}{10pt}
+
+    \vmm
+   
+    For XANES, we should use a  {\RedEmph{Self-Consistent Potential}}.   
+
+    \vmm
+    
+    The electron density is modified by the neighboring atoms just as
+    $\mu$.  Since the electron density of states gives $\mu$, is must be
+    consistent with it:
+
+    \vspace{-1mm}
+
+    \begin{eqnarray*} 
+      \mu(E)      &=&  \mu_0(E) [ 1 + \chi(E) ]  \qquad   \qquad   \qquad   \qquad  \\
+      \rho_l(E)   &=&  \rho_{0,l}(E) [ 1 + \chi_l(E) ]  \,\qquad l = 0,1,2,3,...\\
+    \end{eqnarray*}
+
+    \vspace{-4mm} \hrule \vmm
+
+    A self-consistent loop is used to refine the potential for the XANES:
+    
+    \vmm
+
+    \begin{tabular}{ll}
+      \hspace{-4mm}  \begin{minipage}{60mm}
+
+        math here
+        
+        % \begin{equation*}
+        %     \rho_0(E) @>>> \psi(E),\Phi(E) @>>> \chi(E) \\
+        %     && @AAA @VVV \\
+        %     && \mathrm{converged?} @<<< \rho(E)
+        % \end{equation*}
+      \end{minipage} & 
+      \begin{minipage}{42mm}
+        convergence in $\sim 10$ iterations.
+        
+        
+        Gives the DOS for each $l$ ($s$, $p$, $d$, $f$), and improves
+        the calculation of $E_{\rm Fermi}$
+      \end{minipage} \\
+    \end{tabular}
+    \vmm
+      
+    Note: self-consistency  wasn't needed for EXAFS because $\chi \ll 1 $.
+    
+    
+    \vmm 
+    
+    With a SCF and Full Multiple Scattering, a cluster of $\sim 100$
+    atoms  is usually sufficient for a good qualitative match to experiment.
+    
+  \end{cenpage}
+\vfill
+\end{frame} 

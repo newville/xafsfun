@@ -1,0 +1,46 @@
+\begin{slide}{Fluorescence Measurements: Self-Absorption}
+
+    The fluorescent x-ray has to get out of the sample, and can be
+    attenuated by the sample itself.  This {\RedEmph{self-absorption}} by
+    can damp the XAFS -- even completely wiping it out for highly
+    concentrated elements.  \vspace{2mm}
+
+    The measured fluorescence intensity goes as:
+
+    \[ {
+      I_f = I_0 {{\bepsilon\bDelta\bOmega}\over{4\bpi}} \,
+      {{\bmu_{\bchi}(E)}\over{\bmu_{\rm tot}(E)+\bmu_{\rm tot}(E_f)}}
+      \,
+      \big[ 1- e^{-[\bmu_{\rm tot}(E) + \bmu_{\rm tot}(E_f)]t}\big]
+      }
+    \]
+ 
+    where 
+
+    \begin{tabular}{ll}\setlength{\parskip}{1pt}
+       {\Blue{$\bepsilon$}} &is the fluorescence efficiency.\\
+       {\Blue{$\bDelta\bOmega$}} &is the solid angle of the detector.\\
+       {\Blue{${E_f}$}} &is the energy of the fluorescent x-ray.\\
+       {\Blue{${\bmu_{\bchi}(E)}$}} &is the absorption from the
+       element of interest. \\ 
+  
+       {\Blue{${\bmu_{\rm tot}(E)}$}} & is the {\emph{total}}
+       absorption in the sample:\\
+   \end{tabular}
+
+    \[{  \bmu_{\rm tot}(E) = \bmu_{\bchi}(E) + \bmu_{\rm other}(E)    }\]
+
+  \vspace{2mm}
+
+  \begin{center}
+    \fcolorbox{black}{lightyellow}{
+      \begin{minipage}{75mm}  
+        When ${\mu_{\chi}(E)}$ dominates ${\mu_{\rm tot}(E)}$,
+        the fluorescence intensity will be severely attenuated.
+      \end{minipage}
+      }
+  \end{center}    
+
+  \vfill
+
+\end{slide} 

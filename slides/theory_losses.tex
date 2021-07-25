@@ -1,0 +1,49 @@
+%% Slide
+\begin{slide}{What we left out: Extrinsic Loss Terms}
+
+    \vmm
+    
+    The photo-electrons are quasiparticles, and can inelastically scatter.
+
+    \vmm 
+
+    Extrinsic Losses include:
+    
+    \begin{description}
+    \item[{\RedEmph{self-energy}}] $\Sigma$.  The potential for a one-particle Dyson
+      equation becomes 
+      
+      \[ {\cal{H}}\psi = \Bigl[ -{\frac{1}{2}}\bigtriangledown^2 + V_{\rm
+        coul} + V_{\rm core-hole} + \Sigma(E) \Bigr] \psi = E\psi
+      \]
+
+      
+      The self-energy for the {\RedEmph{excited atom}}, goes beyond
+      ``normal'' ground state DFT, and follows work of L. Hedin and S.
+      Lundqvist J. Phys C {\bf{4}}, 2064 (1971).
+
+      
+    \item[{\RedEmph{core-hole width}}] $\Gamma$.  This ranges from ~0.1 to
+      10 eV for most deep core-levels, corresponding to a
+      {\RedEmph{core-hole lifetime}} $\tau$ on the order of 1 fs.  ($\Gamma
+      \tau \approx \hbar$).
+
+    \end{description}
+
+    \vmm \hrule \vmm
+
+    Conceptually, these two terms can be combined into a {\BlueEmph{mean
+        free path}}, $\lambda(k)$,  and the photo-electron wave function be changed from
+    
+    \begin{equation*} 
+      \psi(k,r)  =  {\frac{e^{ikr}}{kr}} \Rightarrow   {\frac{e^{ikr}e^{-r/\lambda(k)}}{kr}}
+      \Rightarrow {\frac{e^{ipr}}{pr}}
+    \end{equation*} 
+
+    or we can use a complex wavenumber of the photo-electron:
+
+    \[p(k) = k + i / \lambda(k) \] 
+
+
+\vfill
+\end{slide} 

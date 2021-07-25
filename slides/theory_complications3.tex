@@ -1,0 +1,84 @@
+\begin{slide}{The EXAFS Equation: Even more stuff we left out \ldots}
+
+  These effects also need to be considered for  quantitative  EXAFS
+  calculations:
+
+    \vspace{2mm}
+
+    \begin{minipage}{102mm}
+    \begin{description}
+    \item[\RedEmph{Curved Wave Effects}] scattering calculation needs
+      a partial wave expansion.
+
+    \item[\RedEmph{Muffin-Tin Approximation:}] scattering calculation needs
+      a real-space potential, and a muffin-tin approximation is  tractable,
+      but not perfect.
+
+    % \item[\RedEmph{Polarization Effects}] synchrotron beams are highly
+    %   polarized, which needs to be taken into account in anisotropic
+    %   samples.  This is simple for $K$-edges ($s\rightarrow p$ is dipole),
+    %   and less so for $L$-edges (where both $p \rightarrow d$ and $p
+    %   \rightarrow s$ contribute).
+
+    \item[\RedEmph{Disorder Terms}]  thermal and static disorder in real
+      systems should be properly considered: A topic of its own.
+
+    \end{description}
+
+    \end{minipage}
+
+    \vspace{3mm}
+
+    We'll skip the details on these for now.
+
+\vfill
+\end{slide}
+
+\begin{slide}{The EXAFS Equation (one last time!)}
+
+  Even with all those complications and caveats, we still use
+  the {\BlueEmph{EXAFS Equation}}:
+  \vspace{-1mm}
+
+  \begin{center}
+    \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
+        e^{-2{\Blue{R_j}}/{\Red{\lambda(k)}}}
+        e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+      {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
+  \end{center}
+
+  \vmm
+
+  where $\Red{f(k)}$ and $\Red{\delta(k)}$ are
+  {\RedEmph{photo-electron scattering properties}} of the neighboring
+  atom and $ \Red{\lambda(k)} $ is the photo-electron mean-free-path.
+
+  \vmm
+
+  \begin{center}
+    \begin{postitbox}{105mm}
+      But now we will keep in mind that $\Red{f(k)}$, $\Red{\delta(k)}$,
+      and $\Red{\lambda(k)}$       might include some of the complications
+      {\BlueEmph{AND}} the sum over paths includes multiple-scattering
+    \end{postitbox}
+  \end{center}
+
+  \vmm
+Again, if we know these properties, we can determine:
+  \onslide+<2->
+    \begin{description}
+      \settowidth{\labelwidth}{15mm}
+      \setlength{\itemindent}{15mm}
+      \setlength{\leftmargin}{15mm}
+    \item[$R$] distance to neighboring atom.
+    \item[$N$] coordination number of neighboring atom.
+    \item[$\sigma^2$] mean-square disorder of neighbor distance.
+    \end{description}
+
+  \vmm
+  \onslide+<3>
+  ${\Red{f(k)}}$ and ${\Red{\delta(k)}}$ depend on atomic number
+  {\BlueEmph{Z}} of the scattering atom, so we can also determine the
+  species of the neighboring atom.
+
+\end{slide}

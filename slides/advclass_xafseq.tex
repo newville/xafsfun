@@ -1,0 +1,262 @@
+
+%% Slide
+\begin{slide}{The EXAFS Equation in IFEFFIT}
+    
+    The simplest useful version of the EXAFS Equation is
+
+    {\large
+      \begin{center}
+        \fcolorbox{black}{lightyellow2}{
+          $ \displaystyle {\bchi(k) = {{f(k)e^{-2R/\lambda(k)}}\over{kR^2}}
+            {\bsin[{2kR + \bdelta(k)]}} }
+          $ 
+        }
+      \end{center}  }
+    
+    \vmm
+        
+    which is the contribution for 1 scattering path with at atom at
+    distance ${R}$.
+
+    \vmm
+    For real analysis we need to include  effects of
+
+    \begin{itemize}\setlength{\itemindent}{3mm}
+    \item paths at several distances (a ``shell'').
+    \item having ${N}$ neighboring atoms in a given ``shell''.
+    \item paths with different scattering atom types.
+    \item thermal and static disorder: a range the distances within a ``shell''.
+    \end{itemize}
+
+
+    The simplest approach (ie, usually the best approach) is:
+
+
+    \begin{enumerate}\setlength{\itemindent}{3mm}
+    \item sum over independent paths.
+    \item multiply each path's contribution by  ${N}$: the
+      ``coordination number''.
+    \item wrap thermal and static disorder into ${\sigma^2}$: a
+      mean-square-displacement.
+    \end{enumerate}
+    
+    This doesn't cover every case, but it's a start.
+
+\vfill
+\end{slide} 
+
+\begin{slide}{The EXAFS Equation}
+    
+    With a sum over paths and model for disorder, we have the
+    EXAFS Equation:
+    
+    {\large
+      \begin{center}
+        \fcolorbox{black}{lightyellow2}{
+          ${\displaystyle \bchi(k) = \sum_j {{{\Blue{N_j}} S_0^2 {\Red{f_j(k)}}
+                e^{-2{\Blue{R_j}}/{\Red{\blambda(k)}}}\, 
+                e^{-2k^2{\Blue{\bsigma_j^2}}}}\over{k{\Blue{R_j}}^2}}
+            {\sin[{2k{\Blue{R_j}} + {\Red{\bdelta_j(k)}}] }}}$
+        }
+      \end{center}
+    }
+    
+    \vmm \vmm
+    this sum over photo-electron ``scattering paths''  may include multiple scatterings.
+    
+    \vmm \hrule \vmm
+    
+    If we know the {\RedEmph{scattering}} properties of the neighboring
+    atom: \feffc{f(k)}, \feffc{\delta(k)}, and the mean-free-path
+    \feffc{\lambda(k)} (from {\feff}) we can determine:
+   
+      
+    \vmm
+    \begin{cenpage}{80mm}
+      \begin{description}  \setlength{\itemindent}{3mm}
+      \item[${{\Blue{R}}}$]  distance to neighboring atom.  
+      \item[${{\Blue{N}}}$]  coordination number of neighboring atom.
+      \item[${{\Blue{\bsigma^2}}}$] mean-square disorder of
+      neighbor distance.
+      \end{description}
+    \end{cenpage}
+
+    \vmm \vmm
+  
+    The scattering amplitude \feffc{f(k)} and phase-shift \feffc{\delta(k)}
+    depend on atomic number, so that XAFS is also sensitive to
+    {\BlueEmph{Z}} of the neighboring atom.
+    
+  \vfill
+\end{slide} 
+
+
+
+%% Slide
+\begin{slide}{The EXAFS Equation in IFEFFIT }
+    \vmm  
+    {\ifeffit} uses a slightly more complex version of the EXAFS Equation:
+    
+    \[ 
+    {\displaystyle{ 
+        \bchi_{\rm model}(k) = {\rm Im} \Biggl\{ 
+        \sum_{j=1}^{N_{\rm Paths}}
+        \bchi_j(k, {\Red{\rm FEFF}}_j, {\Blue{\rm Parameters_j}}). }}
+    \Biggr\}
+    \]
+    
+    where \vmm
+    
+    \fcolorbox{black}{lightyellow2}{\begin{minipage}{103mm}
+        \begin{eqnarray*}
+          {\bchi_j(k)} = & 
+          {\displaystyle{ \hspace{-2mm}
+              \frac{\feffc{f(k)}\times \feffc{N} \times {\pthpar{S02}}}
+              {k( \reff + \pthpar{delR} ) ^2}
+            }
+            \enskip\bexp(-2p''\reff - 2p^2\pthpar{sigma2} + \twothirds p^4 \pthpar{fourth}) } \\
+          &  
+          {\times \enskip\bexp \biggl\{ i\big[
+            2k\reff + \feffc{\delta(k)}
+            + 2p(\pthpar{delR} - 2{\textstyle{\pthpar{sigma2}\over\reff }})
+            -\fourthirds p^3\pthpar{third}
+            \big]  \biggr\}     } 
+        \end{eqnarray*}
+      \end{minipage} }
+    
+    \vmm 
+    where the components from {\Red{\feff}} and the {\Blue{Path Parameters}} depend on Path
+    $j$.  
+    ${k}$ is the ``real'' photoelectron wavenumber:
+    
+    \vspace{-1mm}
+    \[ {k} = {\sqrt{ \feffc{k_{\rm FEFF}}^2 - \pthpar{e0}\,
+        \masse}}\hspace{24mm}
+    \]
+    
+    and {{${p = p' + ip''}$}} is the {\RedEmph{complex
+        photoelectron wavenumber}} 
+    from {\feff}:
+    
+    \vspace{-1mm}
+    \[
+    {p} = {  \sqrt{ \Bigl[ {\feffc{real\_p(k)}} +
+        { i / \feffc{\lambda(k)}} \Bigr]^2 - i \,  \pthpar{ei} \, \masse  }} 
+    \]
+    
+  \vfill
+\end{slide} 
+
+
+
+
+%% Slide
+\begin{slide}{The EXAFS Equation in IFEFFIT (part 2)}
+
+    
+    \fcolorbox{black}{lightyellow2}{
+      \begin{minipage}{103mm}
+        \begin{eqnarray*}
+          {\bchi_j(k)} = & 
+          {\displaystyle{
+              \frac{\feffc{f(k)}\times \feffc{N} \times {\pthpar{S02}}}
+              {k( \reff + \pthpar{delR} ) ^2}
+            }
+            \enskip\bexp(-2p''\reff - 2p^2\pthpar{sigma2} + \twothirds p^4 \pthpar{fourth}) } \\
+          &  
+          {\times \enskip\bexp \biggl\{ i\big[
+            2k\reff + \feffc{\delta(k)}
+            + 2p(\pthpar{delR} - 2{\textstyle{\pthpar{sigma2}\over\reff }})
+            -\fourthirds p^3\pthpar{third}
+            \big]  \biggr\}     } \\
+          {p^2} = & {   \Bigl[ {\feffc{real\_p(k)}} +
+            { i / \feffc{\lambda(k)}} \Bigr]^2 - i \,  \pthpar{ei} \, \masse } \hspace{35mm} \\
+          {k^2} = & {\feffc{k_{\rm FEFF}}^2 -  \pthpar{e0}\,
+          \masse} \hspace{56mm}  
+      \end{eqnarray*} 
+    \end{minipage}       
+  }
+  
+  \vmm 
+  A few notes on this mess:
+    
+  \begin{itemize}
+
+  \item \feffc{f(k)}, \feffc{\delta(k)}, \feffc{\lambda(k)}, \feffc{N},
+    \reff, \feffc{real\_p(k)}, and \feffc{k_{\rm FEFF}} all come from
+    {\feff} (\feffndat).
+    
+    
+  \item The Path Parameters \pthpar{S02}, \pthpar{e0}, \pthpar{ei}, 
+    \pthpar{delR}, \pthpar{sigma2}, \pthpar{third}, and \pthpar{fourth}  are
+    all simple real numbers with physical meaning, and can be adjusted in
+    a fit.
+    
+  \item $p$ -- which includes the mean-free-path -- is used in the EXAFS
+    equation for the cumulants ( \pthpar{delR}, \pthpar{sigma2},
+    \pthpar{third}, and \pthpar{fourth})
+   
+  \item $k$ is used to reconstruct {\feff}'s ${\chi(k)}$ and to
+    refer to the data's energy grid.
+  \end{itemize}
+
+  \vfill
+\end{slide} 
+
+
+%% Slide
+\begin{slide}{An IFEFFIT Path }
+    
+    \vmm {\ifeffit} uses a {\tt{path()}} command like this:
+
+    \vmm \vmm 
+
+    \begin{tabular}{ll}
+        \begin{CodeBlock}{40mm}{Path Command}
+path({\Blue{index}}  = 1,  
+     {\Blue{feff }}  = directory/feff0001.dat,
+     {\Blue{degen}}  = 12, 
+     {\Blue{e0   }}  = e0,
+     {\Blue{s02  }}  = S02 * N\_1, 
+     {\Blue{delr }}  = deltar, 
+     {\Blue{sigma2}} = ss2,  
+     {\Blue{third}}  = third\_expr, 
+     {\Blue{fourth}} = fourth\_expr, 
+     {\Blue{ei   }}  = ei\_expr ) 
+   \end{CodeBlock}
+   & 
+   \begin{minipage}{49mm}
+
+     Legend:
+
+     \begin{description}
+     \item[{\pthpar{index}}]: internal Path Number.
+     \item[{\pthpar{feff}}]:  name of {\feffndat} file.
+     \item[{\pthpar{degen}}]: override {\feff}'s degeneracy {\feffc{N}}
+     \item[{\pthpar{e0}} \ldots {\pthpar{ei}}]:   numerical parameters to go into 
+       {\ifeffit}'s EXAFS Equation.
+     \end{description}
+     
+       \vmm \vmm
+       
+
+    \end{minipage}\\
+    
+  \end{tabular}    
+    
+  \vmm \vmm  \vmm 
+  
+
+  In {\ifeffit} (and {\Program{artemis}},{\Program{feffit}}, and
+  {\Program{sixpack}}), the ``value'' (right-hand-side) for each Numerical  Path
+  Parameter 
+  {\pthpar{e0}},{\pthpar{s02}},{\pthpar{delr}}, \ldots {\pthpar{ei}}
+  can be a {\RedEmph{formula}}, written in terms of 
+  user-defined variables.
+
+  \vmm \vmm  \vmm 
+
+  More on this later \ldots.
+  \vfill
+\end{slide} 
+

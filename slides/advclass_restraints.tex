@@ -1,0 +1,310 @@
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Restraints: Imprecise Prior Knowledge}
+    
+    A {\BlueEmph{Constraint}} expresses exact ``Prior Knowledge'' (e.g.,
+    force 1 $E_0$ for all paths), and reduces the number of variables 
+    $\vec{x}$ in the least-squares problem:
+
+    \pause
+
+    \[ 
+    \chi^2  =  \sum_{i}
+    \biggl[ { {  \chi_{i}^{\rm data} - \chi_{i}^{\rm model}(\vec{x})
+      }\over{\epsilon_i}} 
+    \biggr]^2  
+    \]
+
+    \hrule \vmm
+    
+    A {\BlueEmph{Restraint}} expresses imprecise ``Prior Knowledge'', and
+    adds another term to the least-squares problem:
+   
+    \[ 
+    \chi^2  =  \sum_{i}
+    \biggl[ { {  \chi_{i}^{\rm data} - \chi_{i}^{\rm model}(\vec{x})
+      }\over{\epsilon_i}} 
+    \biggr]^2  
+    + 
+    {\Red{
+     \biggl[\frac{\lambda_0 - \lambda(\vec{x})}{\delta\lambda}\biggr]^2
+      }}
+    \]
+    
+    \vmm
+    
+    We add ``Data'' $\lambda_0$ to the fit, with ``Model''
+    $\lambda(\vec{x})$ and confidence level $\delta\lambda$:
+    
+    \vmm
+
+    {\hspace{25mm}} \highlightbox{{\Red{ $ \Lambda = [\lambda_0 -
+          \lambda(\vec{x})]/{\delta\lambda} $ }}} {\hspace{5mm}} 
+
+    \vmm
+    becomes another part of the ``Vector to Minimize'' in the least-squares
+    sense.
+    
+    
+    \vmm \hrule  \vmm 
+
+    \begin{center}
+      \fcolorbox{black}{lightyellow2}{
+        \begin{minipage}{88mm}  \setlength{\baselineskip}{10pt}
+          
+    Restraints give us a {\RedEmph{Bayesian}} approach to analysis:
+    if we can quantify our ``Prior Knowledge'', we can use it in our fit 
+    along side our data.
+        \end{minipage}
+        }
+    \end{center}
+
+
+    \vmm
+\vfill
+\end{slide} 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Restraints as ``Soft Limits'' on Parameters}
+    
+  \vmm
+  For some parameters (say, \pthpar{s02}), there may be an acceptable
+  range of values.   
+
+  \vmm
+  
+  \begin{tabular}{ll}
+    \begin{minipage}{35mm}
+      You could use a {\BlueEmph{constraint}} as a ``hard wall'': \end{minipage} &
+    \begin{minipage}{54mm}
+      \begin{VerbSMBox}{50mm} \bfseries
+   guess S02_Var = 0.8
+   path(1,  S02 = {\Red{max(0.6, min(1.0, S02_Var)) }} )
+
+      \end{VerbSMBox}
+    \end{minipage}\\
+  \end{tabular}
+  
+\vmm This complicates finding error bars when the free variable
+{\tt{S02\_Var}} goes outside the limits $[0.6,1.0]$.  And we do want the
+error bars!
+
+   \vmm \hrule \vmm
+    
+   An alternative: use a Restraint to make an increasingly worse fit when a
+   variable is ``out-of-bounds'':
+
+   \begin{tabular}{lr}
+     \begin{minipage}{45mm} \vspace{-5mm}
+       \[ \Lambda(x) =  \left\{ 
+       \begin{array}{ll}
+         x - x_{\rm hi} & x > x_{\rm hi} \\
+         0  &    x_{\rm hi} \ge x \ge x_{\rm lo} \\
+         x_{\rm lo} - x &     x_{\rm lo} \ge x\\
+       \end{array}
+     \right.
+     \]
+     \end{minipage}
+   & 
+   \hspace{1mm}\begin{minipage}{45mm} \wgraph{45mm}{restraints/penalty} \end{minipage}
+   \\ 
+ \end{tabular}
+
+ \vspace{-0.3mm}
+ \begin{tabular}{ll}
+   \begin{minipage}{80mm}
+     \begin{VerbSMBox}{60mm} \bfseries
+  guess S02_Var = 0.8
+  path(1,  S02 = S02_Var)
+  feffit(\ldots , restraint = {\Red{penalty(S02_Var,0.6,1.0)}} )
+     \end{VerbSMBox}
+   \end{minipage} &      \begin{minipage}{20mm}   \hspace{20mm}  \end{minipage}
+   \\
+ \end{tabular}
+ 
+ \vmm
+
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Example Restraint: Bond Valence Sums}
+    
+    
+    The {\BlueEmph{Bond Valence}} expresses the Valence of an ion $i$ in terms
+    of its ligands. It is commonly parametrized as [Altermatt and Brown,
+    {\emph{Acta Cryst.} {\bf{B41}}} (1985)]
+    
+    \[  V_i =  \sum_{j=1}^N \exp[(R'_{ij} - R_{ij})/ 0.37]   \]
+    
+    where $R_{ij}$ is the interatomic distance and $R'_{ij}$ is an
+    empirical parameter for atom types (Fe-S, Cu-O, etc).
+
+    \vmm
+    
+    We usually can tell the formal valence from XANES, and this model
+    correlates this with $N$ and $R$ to keep them {\RedEmph{Chemically
+        Reasonable}}.
+    
+    \vmm \vmm
+    \vmm \vmm
+    
+    The Bond Valence Sums work to $\sim$ 10\% -- inappropriate for a
+    constraint.
+
+
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Bond Valence Sums as Restraint}
+    
+    As a {\Red{Restraint}}, the Bond Valence Sum becomes a ``Model''
+    that we fit to our  Valence ``Data'' ($V_{\rm XANES} = 2,3,\ldots$):
+
+    \[ \Lambda   = \frac{V_{\rm XANES} - \sum_{j=1}^N \exp[(R'_{j} -
+      R_{j})/ 0.37]}{\delta\lambda} \]
+
+    
+    \vmm \vmm
+    
+    $\delta\lambda$ is our ``Bayesian Parameter'', letting us control how
+    much we prefer what our $\chi(k)$ data tells us about $N$ and $R$
+    compared to our ``Prior Knowledge'' of what the XANES and Bond Valence
+    Sum tells us about $N$ and $R$:
+
+    \vmm \vmm
+
+    \begin{center} 
+      \begin{tabular}{lll} \hline
+        ${\delta \lambda} \rightarrow 0$ & Force $V = V_{\rm XANES}$ &
+        {\Blue{constraint}} \\
+
+        ${\delta \lambda} \rightarrow \infty$ & $V$ determined by our
+        data alone &  {\Blue{no prior knowledge}}  \\ 
+        Finite ${\delta \lambda}$ & 
+
+        $V$ influenced by our data and $V_{\rm XANES}$  & {\Blue{restraint}}\\
+        \hline
+
+      \end{tabular}
+    \end{center} 
+
+    \vmm \vmm \vmm\vmm
+    
+    \begin{cenpage}{85mm}
+    Bond Valence Sums give a simple, flexible way to restrain the EXAFS
+    results to agree with the qualitative XANES interpretation. 
+    \end{cenpage}
+
+\vfill
+\end{slide} 
+
+
+\begin{slide}{Bond Valence Restraint for {$\mathsf{Mn_2O_3}$}}
+    
+    \vmm 
+    
+    $\mathsf{Mn_2O_3}$ has two Mn(III)-O octahedra and ~3 different Mn-O
+    distances
+    \begin{itemize}
+    \item one regular   (6 O @ 1.993\AA).
+    \item one distorted ({2 O @ 1.985\AA, 2 O @ 1.899\AA,  and  2 O @ 2.248\AA}). 
+    \end{itemize}
+    
+    The data I have (from Lytle) is limited to $12\rm\mathsf\,\AA^{-1}$ ($2\Delta k
+    \Delta R/\pi \approx 7$) -- hard to measure all distances!! 
+    
+    \vmm 
+    \begin{center}
+      \fcolorbox{black}{lightyellow2}{
+        \begin{minipage}[c]{87mm}
+          Can the Bond Valence Sum help us see the splitting in the
+          Mn-O shell?
+        \end{minipage}
+      }
+    \end{center}
+
+\ThinGreyLine
+
+We assert the following ``prior information'':
+\begin{itemize}
+\item The Valence for both sites should be close to  +3.
+\item one Mn site has 6 O at one distance 
+\item the other Mn site has 2 bonds that are the same length as the regular 
+  octahedron, 2 ``short'' O bonds, and 2 ``long'' O bonds.
+\end{itemize}
+
+We'll vary 3 distances, $N$, $E_0$ and $\sigma^2$, and set $S_0^2$ to 0.7
+(6 variables).
+
+\ThinGreyLine
+
+And, we'll {\Red{\emph{restrain}}} both sites to have a Bond Valence Sum near 3:
+
+\vspace{-3mm}
+
+\begin{eqnarray*}  \hspace{10mm}
+  \lambda_1 &=& \bigl[ {{({V(R_1) - {V_0}})}/ {{{\delta V}}}} \bigr]^2
+  \hfill \\
+  \lambda_2 &=& \bigl[ {{({V(R_1,R2,R3) - {V_0}})}/ {{{\delta V}}}} \bigr]^2
+  \hspace{50mm} \hfill \\
+\end{eqnarray*}
+   
+
+\vfill  
+\end{slide} %%%--------------------------------------------
+
+
+
+\begin{slide}{Bond Valence Restraint for {$\mathsf{Mn_2O_3}$}}
+
+  \begin{cenpage}{74mm}{\wgraph{73mm}{restraints/fit_mn2o3_r}} \end{cenpage} 
+
+\vspace{-3mm}
+
+\vmm \hrule \vmm
+
+    Using {\Red {$ {\delta V}$ = 1}}: 
+ 
+    \scriptsize
+
+    \begin{tabular}{cc}
+      \begin{minipage}{27mm}
+        \begin{tabular}{ll}
+          Parameter      & Value \\ 
+          \noalign{\smallskip} \hline
+          $C(N,R_1)$      &   0.2 \\
+          $V_1$ (regular)   &   3.40\\
+          $V_2$ (distorted) &   3.00\\
+          \noalign{\smallskip} \hline
+          $\cal R$        & 0.007 \\
+          $\chi^2$        & 91.8 \\
+          $2\Delta k \Delta R/\pi$ &  7.2 \\ 
+          \noalign{\smallskip} \hline
+        \end{tabular}
+      \end{minipage}
+      &
+      \begin{minipage}{48mm}
+        \begin{tabular}{lllc}
+          Fit Variable &  \multicolumn{2}{l}{Best-Fit Value} & Predicted \\
+          \noalign{\smallskip} \hline
+          $N$         & 5.86   &(0.7)     & 6 \\
+          $E_0$       & 1.2    &(1.9)   & \\
+          $\sigma^2$  & 0.005  &(0.004) & \\
+          \noalign{\smallskip} \hline
+          {$R_1\quad (8x)$}   & {1.96}  &(0.02) &  1.99 \\
+          {$R_2\quad (2x)$}   & {1.85}  &(0.09) &  1.90 \\
+          {$R_3\quad (2x)$}   & {2.28}  &(0.05) &  2.25 \\
+          \noalign{\smallskip} \hline
+        \end{tabular} 
+      \end{minipage}
+    \end{tabular}
+
+
+\vfill  
+\end{slide} %%%--------------------------------------------

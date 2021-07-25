@@ -1,0 +1,36 @@
+
+%% Slide
+\begin{slide}{Multiple Scattering for XANES}
+
+    \vmm
+
+    
+    The Multiple Scattering (propagate,scatter,propagate,\ldots) approach 
+    works well for EXAFS because the sum converges rapidly since:
+
+    \begin{center} terms with 5 or more scatterings don't contribute
+      strongly to EXAFS \end{center}
+
+
+    This is due the combination of 
+    \begin{itemize}
+      \item finite size of $\lambda$
+      \item $1/kR^2$
+      \item disorder term:  $e^{-2k^2\sigma^2}$
+    \end{itemize}
+      
+    \vmm   
+    \hrule
+    \vmm
+    
+    For XANES, the series does not converge rapidly (as $\lambda >
+    10\rm\,\AA$, and effect of thermal disorder is small), but a
+    {\RedEmph{Full Multiple Scattering}} approach can be used:
+   
+    \[ G = G^0 ( 1 - t G^0)^{-1} \]
+    
+    This is more computationally intensive (as a large scattering matrix
+    must be inverted), but no longer prohibitive.
+
+  \vfill
+\end{slide} 

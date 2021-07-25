@@ -1,0 +1,39 @@
+
+
+\begin{frame}  \frametitle{EXAFS Analysis Strategy:  How to get $N$, $R$, etc?}
+
+  \begin{cenpage}{99mm}
+
+    % \begin{center}\begin{minipage}[t][12mm]{90mm}
+      \[
+      \chi(k) = \sum_j {{ S_0^2 {\Blue{N_j}} {\Red{f_j(k)}}  e^{-2R_j/\lambda(k)}
+          e^{-2k^2{\Blue{\sigma_j^2}}}}\over{k{\Blue{R_j}}^2}}
+      {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}} ]}
+      \]
+   %% \end{minipage}  \end{center}
+
+   \vmm
+   Steps:
+   \begin{enumerate}
+   \item Calculate theoretical XAFS spectra  with {\feff},  starting with a guess of the local structure.
+   \item  {\RedEmph{Refine}} $R$, $N$, and $\sigma^2$  to best match  experimental data.
+   \item Compare lots of refined models.
+   \end{enumerate}
+
+\vmm \vmm \hrule \vmm\vmm
+
+ Questions you might have (and we might answer!):
+
+  \begin{itemize}
+  \item How do we run {\feff} to generate $\Red{f(k)}$, $\Red{\delta(k)}$,
+    and  $\Red{\lambda(k)}$?
+  \item What correction factors do we need to worry about?
+  \item How do we fit experimental data?
+  \item How do we interpret the results?
+  \item Any advice for making all this, um, easier?
+  \end{itemize}
+
+\vfill
+   \end{cenpage}
+
+\end{frame}

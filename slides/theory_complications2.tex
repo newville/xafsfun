@@ -1,0 +1,45 @@
+%% Slide
+\begin{slide}{The EXAFS Equation: What we left out}
+
+    \vmm
+\begin{cenpage}{110mm}
+
+  For {\BlueEmph{quantitative}} EXAFS calculations, it's important to
+  also consider:
+
+    \begin{description}
+    \item[\RedEmph{Photo-electron mean free path}]  Accounts for inelastic
+      scattering of the photo-electron and finite lifetime of the core-hole.
+
+    \item[\RedEmph{Fast Relaxation of the Excited State}]   The other
+      electrons in the excited atom can respond to the core-hole.
+
+    \item[\RedEmph{Multiple Scattering}] the photo-electron can scatter
+      from multiple atoms.  Most important at low $k$, and leads to a
+      {\BlueEmph{Path Expansion}}.
+
+    \item[\RedEmph{Polarization Effects}] synchrotron beams are highly
+      polarized, which needs to be taken into account.  Simple for
+      $K$-edges ($s\rightarrow p$ is dipole). Less simple for $L$-edges.
+
+    \item[\RedEmph{Disorder Terms}]  thermal and static disorder in real
+      systems should be properly considered: A topic of its own.
+
+    \item[\RedEmph{Muffin-Tin Approximation:}] The scattering calculation needs
+      a real-space potential, and a muffin-tin approximation is most
+      tractable.  But this approximation is not so good for XANES.
+
+    \end{description}
+
+    {\BlueEmph{Good News}}:   The {\feff} calculations (or others) try to include these effects.
+
+
+    \vmm \vmm
+    We'll discuss of few of these in more detail \ldots.
+
+\end{cenpage}
+
+
+\vfill
+
+\end{slide}

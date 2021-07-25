@@ -1,0 +1,50 @@
+\begin{slide}{EXAFS Analysis Example: Modeling the 1st Shell of FeO}
+
+    \begin{tabular}{ll}
+      \begin{minipage}{85mm} 
+        FeO has a rock-salt structure.
+        \vmm\vmm
+    
+        To model the FeO EXAFS, we'll calculate the scattering amplitude
+        ${{\Red{f(k)}}}$ and phase-shift ${{\Red{\delta(k)}}}$, based on a
+        guess of the structure, with Fe-O distance ${R=2.14\rm\,\AA}$ (a
+        regular octahedral coordination).
+        
+        \vspace{2mm}
+        
+        We'll use these functions to {\BlueEmph{refine}} the values
+        {\Blue{${R}$}}, {\Blue{${N}$}},
+        {\Blue{${\sigma^2}$}}, and {\Blue{${E_0}$}} so our
+        model EXAFS function matches our data.
+        \vspace{2mm}
+
+      \end{minipage}
+      &
+    \begin{minipage}{22mm} {\wgraph{20mm}{molecules/feo}}
+    \end{minipage}
+
+    \end{tabular}
+
+ 
+    \begin{tabular}{ll}
+      \begin{minipage}{65mm} {\wgraph{60mm}{fits/feo_r_1sh_mag}}  
+        ${|\chi(R)|}$ for FeO {\Blue{data}} and {\Red{${\rm 1^{st}}$ shell fit}}.
+      \end{minipage}
+      &
+      \begin{minipage}{30mm}  \setlength{\baselineskip}{10pt}
+        \vspace{1mm} 
+        Fit results:   \vspace{2mm}
+        \begin{tabbing}[ll]\= aaaaaaa\= aaaaaaaaaaaaaaaa\kill 
+          \> ${N}$           \>= 5.8 ${\pm}$ 1.8\\
+          \> ${R}$           \>= 2.10 ${\pm}$ 0.02\AA\\
+          \> ${\Delta E_0}$ \>= -3.1 ${\pm}$ 2.5 eV\\
+          \> ${\sigma^2}$   \>= 0.015 ${\pm}$ 0.005
+          ${\rm\,\AA^2}$.\\
+          \end{tabbing}
+
+        \vfill
+    \end{minipage}
+  \end{tabular}
+  
+\vfill
+\end{slide} 

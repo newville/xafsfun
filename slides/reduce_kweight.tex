@@ -1,0 +1,37 @@
+
+\begin{slide}{Data Reduction: $\chi(k)$, $k$-weighting}
+  \small \setlength{\baselineskip}{10pt}
+  \begin{center}
+  \begin{tabular}{ll}
+    \begin{minipage}{65mm}  {\wgraph{65mm}{reduction/chi}}  \end{minipage}
+    &
+    \begin{minipage}{37mm}  \setlength{\baselineskip}{10pt}
+      {\Red{${\chi(k)}$}}\vspace{0.5mm}
+      
+      The raw EXAFS ${\chi(k)}$ usually decays quickly with
+      ${k}$, and difficult to assess or interpret by itself.
+
+      \vspace{1mm} 
+
+      It is customary to weight the higher-${k}$ portion of the spectra by
+      multiplying by  ${k^2}$ or ${k^3}$.
+      \vfill
+    \end{minipage}\\
+    \begin{minipage}{65mm} 
+      \onslide+<2->
+      {\wgraph{65mm}{reduction/chik}}   \end{minipage}
+    &
+    \begin{minipage}{37mm} \setlength{\baselineskip}{10pt}
+      \onslide+<2->{
+      {\Red{${k}$-weighted ${\bchi(k)}$:
+      ${k^2\bchi(k)}$}}\vspace{0.5mm}
+      
+      ${\bchi(k)}$ is composed of sine waves, so we'll Fourier
+      Transform from ${k}$ to ${R}$-space.  To avoid
+      ``ringing'', we'll multiply by a {\BlueEmph{window function}}.
+      \vfill}
+    \end{minipage}
+  \end{tabular}
+  \end{center}    
+\vfill
+\end{slide} 

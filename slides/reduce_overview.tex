@@ -1,0 +1,33 @@
+
+\begin{slide}{XAFS Data Reduction: Strategy}
+ 
+  Step for reducing measured data to ${\mu(E)}$ and then
+  to ${\chi(k)}$:
+
+  \begin{enumerate}
+  \item convert measured intensities to ${\mu(E)}$
+  \item subtract a smooth pre-edge function, to get rid of any instrumental
+    background, and absorption from other edges. 
+  \item normalize ${\mu(E)}$ to go from 0 to 1, so that it represents the
+    absorption of 1 x-ray.
+  \item remove a smooth post-edge background function to approximate
+    ${\mu_0(E)}$ to isolate the XAFS ${\chi}$.
+  \item identify the threshold energy ${E_0}$, and convert from
+    ${E}$ to ${k}$ space: ${ k=
+      \sqrt{{{2m(E-E_0)}\over{\hbar^2}}} }$
+  \item weight the XAFS ${\chi(k)}$ and Fourier transform from
+    ${k}$ to ${R}$ space.
+  \item  isolate the ${\chi(k)}$ for an individual
+  ``shell''  by Fourier filtering.
+  \end{enumerate}
+
+
+  \vmm\vmm
+
+  After we get this far, we'll model ${f(k)}$ and
+  ${\delta(k)}$ and analyze ${\chi(k)}$ to get distance
+  ${R}$, coordination number ${N}$.
+
+
+\vfill
+\end{slide} 

@@ -1,0 +1,44 @@
+
+\begin{slide}{Fourier Filtering}
+  \small \setlength{\baselineskip}{10pt}
+  \begin{center}
+  \begin{tabular}{ll}
+    \begin{minipage}{65mm}  {\wgraph{65mm}{reduction/chir_win}}  \end{minipage}
+    &
+    \begin{minipage}{37mm}  \setlength{\baselineskip}{10pt}
+      {\Red{${\chi(R)}$}} often has well-separated peaks for 
+      different ``shells''. \vspace{0.5mm}      
+
+      This shell can be isolated by a Filtered Back-Fourier Transform,
+      using the window shown for the first shell of FeO.
+       \vspace{1mm}
+
+    \end{minipage}\\
+    \begin{minipage}{65mm}  
+      \onslide+<2->
+      {\wgraph{65mm}{reduction/chiq}}
+    \end{minipage}
+    &
+    \begin{minipage}{37mm} \setlength{\baselineskip}{10pt}
+      \onslide+<2->{
+      \vspace{1mm} 
+      
+      This results in the filtered ${\chi(k)}$ for the selected
+      shell.  
+
+      \vspace{1mm}
+      
+      Many analysis programs use such filtering to remove shells at higher
+      $R$.
+      
+      Beyond the first shell, isolating a shell in this way can be
+      difficult.
+
+      \vspace{3mm}
+    }
+    \end{minipage}
+  \end{tabular}
+  \end{center}    
+
+\vfill
+\end{slide} 

@@ -1,0 +1,40 @@
+%% Slide
+\begin{slide}{The EXAFS Equation}
+
+    
+  We have an equation we can use to model and interpret EXAFS:
+    
+  \begin{center}
+    \highlightbox{
+      \begin{minipage}{100mm} 
+        \[ \chi(k) = \sum_j \frac{ {\Blue{N_j}} S_0^2 {\Red{f_j(k)}}
+            e^{-2{\Blue{R_j}}/{\Red{\lambda(k)}}}\, 
+            e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+          \sin{ [ 2k{\Blue{R_j}} + \Red{\delta_j(k)} ]} \] \end{minipage}
+      }
+    \end{center}
+
+    
+    \vmm
+    where the sum is over ``shells'' of atoms or ``scattering paths'' for
+    the photo-electron -- nearly the same concept.
+
+    \vmm If we know the {\RedEmph{scattering}} properties of the
+    neighboring atom: ${{\Red{f(k)}}}$ and $\Red{\delta(k)}$, and the
+    mean-free-path $\Red{\lambda(k)}$ we can determine:
+   
+      
+    \vmm
+    \begin{description}  \settowidth{\labelwidth}{10mm}
+      \setlength{\itemindent}{5mm}
+    \item[$\Blue{R}$]  distance to neighboring atom.  
+    \item[$\Blue{N}$]  coordination number of neighboring atom.
+    \item[$\Blue{\sigma^2}$] mean-square disorder of    neighbor distance.
+    \end{description}
+
+    
+    The scattering amplitude $\Red{f(k)}$ and phase-shift $\Red{\delta(k)}$
+    depend on atomic number, so that XAFS is also sensitive to
+    {\BlueEmph{Z}} of the neighboring atom.
+    
+\end{slide} 

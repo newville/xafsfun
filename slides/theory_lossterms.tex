@@ -1,0 +1,99 @@
+%% Slide
+\begin{slide}{What we left out}
+  \vmm
+    
+    This simple description is qualitatively right, but for quantitative
+    EXAFS calculations, it's important to include a few additional points:
+    
+    \begin{description}
+    \item[\RedEmph{Curved Wave Effects}] proper scattering calculation
+      including partial waves.
+      
+    \item[\RedEmph{Extrinsic Losses}] Photo-electron mean-free path,
+      including self-energy and finite core-hole lifetime.
+      
+    \item[\RedEmph{Intrinsic Losses}] losses due to relaxation of excited
+      atom to the sudden presence of the core hole.
+      
+    \item[\RedEmph{Multiple Scattering}] 
+
+    \item[RedEmph{Polarization Effects}] 
+
+
+    \item[RedEmph{Disorder Terms}]  thermal and static disorder should be
+    properly accounted for
+      
+    \end{description}
+
+    we need to take many-body exchange
+    and loss terms into account.
+
+
+    To account for many-body effects
+
+
+
+    Another important {\Red{Amplitude Reduction Term}} is due to the relaxation
+    of all the other electrons in the absorbing atom to the hole in the
+    core level:
+
+    \vspace{3mm}
+
+    { \begin{center}
+     $
+     {\displaystyle
+       S_0^2 =  {  |{\langle \Phi^{N-1}_f |\Phi^{N-1}_0 \rangle}|^2 }  }     $
+     \end{center}
+     }
+     \vspace{1mm}
+     
+     where ${\langle \Phi^{N-1}_f|}$ accounts for the relaxation of
+     the other ($N-1$) electrons relative to these electrons in the
+     unexcited atom: ${| \Phi^{N-1}_0 \rangle }$.
+     Typically, $\Red{S_0^2}$ is taken as a constant:
+
+     \vspace{2mm}
+
+     \begin{center}
+       \fcolorbox{black}{lightyellow2}{
+         \begin{minipage}{25mm}
+           \begin{center}
+           $ 0.7 < S_0^2 < 1.0 $ \end{center}
+         \end{minipage}}
+     \end{center}
+    
+     which is found for a given central atom, and simply multiplies the
+     XAFS {$\chi$}.
+     
+     \vspace{3mm} 
+
+     \begin{center}
+       {\Blue{Note that $\Red{S_0^2}$ is Completely Correlated with $N$
+           (!!!)}}
+     \end{center}
+
+     \vspace{3mm}      
+
+     \begin{center}
+       \fcolorbox{black}{lightyellow2}{
+         \begin{minipage}{68mm}
+           
+           This, and other experimental and theoretical issues, make EXAFS
+           amplitudes (and therefore {\Blue{$N$}}) less precise than EXAFS
+           phases (and therefore {\Blue{$R$}}).
+
+         \end{minipage}}
+     \end{center}
+     
+     \vspace{3mm}
+
+
+     Usually $\Red{S_0^2}$ is found from a ``standard'' (data from a sample
+     with well-known structure) and applied to a set of unknowns as a scale
+     factor.     
+
+     
+     \vspace{2mm}
+
+\vfill
+\end{slide} 

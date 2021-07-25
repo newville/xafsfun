@@ -1,0 +1,79 @@
+%%\begin{CodeBlock}{51mm}{\file{feff.inp} file:}
+
+\subsection{Constraints}
+\begin{slide}{ Constraints in {\feffit} }
+  
+  Examples of Path Parameters written as functions of the Generalized
+  Variables:
+  \vmm
+  \setbeamertemplate{blocks}[rounded][shadow=true]
+
+  \begin{tabular}{ll}
+    \begin{minipage}{45mm}
+     \begin{block} 
+        {Parameter = Variable}
+{\tiny{\begin{alltt}
+
+{\Red{guess e0    = 1.0 }}
+path(1,  e0 = e0)
+path(2,  e0 = e0)
+\end{alltt}}}
+ \end{block}
+   \vspace{1.75mm}
+   \onslide+<2->
+   \begin{block}
+{mixed coordination shell}
+
+{\tiny{\begin{alltt}
+ set S02   = 0.80
+
+ {\Red{guess x   = 0.5}}
+
+ path(1,  Amp= S02 * x )
+ path(2,  Amp= S02 * (1-x))
+
+\end{alltt}}}
+   \end{block}
+   \end{minipage} 
+    & \hspace{0.2mm}
+     \begin{minipage}{65mm}
+       %% \onslide+<3->  
+%       \begin{block}
+%  { Fit Einstein Temperature }
+
+% {\tiny{\begin{alltt}
+  
+%  set   factor  = 24.254337   {\Blue{#= (hbar*c)^2/(2 k_boltz)}}
+% {\Blue{# mass and reduced mass in amu}}
+%  set   mass1 = 63.54,  mass2 = 63.54
+%  set   r_mass =  1/ (1/mass1 +  1/mass2)
+
+% {\Blue{# the Einstein Temp will be adjusted in the fit!}}
+%  {\Red{guess thetaE = 200}}
+% {\Blue{# use for data set 1, T=77}}
+%  set   temp1 = 77
+%  {\Red{def ss2_path1 = factor*coth(thetaE/(2*temp1))/r_mass )}}
+%  path(101,  sigma2 = ss2_path1   )
+
+% {\Blue{# use for data set 2, T=300}}
+%  set   temp2 = 300
+%  {\Red{def ss2_path2 = factor*coth(thetaE/(2*temp2))/r_mass )}}
+%  path(201,  sigma2 = ss2_path2   )
+% \end{alltt}}
+% \end{block}
+\end{minipage}\\
+\end{tabular}    
+
+\vmm \vmm
+
+\onslide+<4-> Other Examples:
+
+\begin{itemize} 
+\item force one $R$ for the same bond for data taken from different  edges.
+\item model complex distortions (height of a sorbed atom above a surface).
+\end{itemize}
+ 
+\end{slide}
+
+
+

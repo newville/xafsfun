@@ -1,0 +1,345 @@
+\section{Error Analysis}
+
+\begin{slide}{Fitting Strategies in IFEFFIT }
+    
+
+    The general idea is to find a {\RedEmph{Model}} that best matches the {\BlueEmph{Data}}.
+
+    \vmm
+    
+    We use $\bchi^2$ (don't confuse with EXAFS $\bchi$!!) to describe our
+    fit:
+
+    \[ \displaystyle{\mathbf{
+        \chi^2  =   \sum_i^{N_{\rm fit}} \frac{[\chi_i^{\rm data} - \chi_i^{\rm
+            model}({x})]^2}{\epsilon^2} 
+      }} \]
+
+    
+    \vmm $\mathbf{N_{\rm fit}} = $ number of points to fit, 
+    $\mathbf{x} = $  the set of variables, and $\mathbf{\epsilon} =$ the estimated noise
+    level in the data.
+
+    \vmm \hrule \vmm
+    
+    But we usually oversample our data (that is, $\mathbf{N_{\rm fit} >
+      N_{\rm idp} } $), so we renormalize this to $ \mathbf{N_{\rm idp}}$,
+    and assert that $\epsilon$ is a constant:
+
+    \begin{center} \highlightbox{
+        $ \displaystyle{\mathbf{
+            \chi^2  =  \frac{ N_{\rm idp}}{\epsilon^2 N_{\rm fit}}
+            \sum_i^{N_{\rm fit}} [\chi_i^{\rm data} - \chi_i^{\rm model}({x})]^2
+          }} 
+        $
+      } 
+    \end{center}
+
+    \vmm
+
+    \begin{center}
+       {\RedEmph{ The Best Fit is that with lowest $\bchi^2$. }}
+    \end{center}
+
+    \vmm \hrule \vmm
+
+    \vmm
+    
+    The fitting algorithm finds the set of variables $\mathbf{x} $ which
+    minimizes $[\mathbf{\chi_i^{\rm data} - \chi_i^{\rm model}({x})}]$ in
+    this ``least-squares'' sense.
+
+
+\vfill
+\end{slide} 
+
+\begin{slide}{Other Fitting Statistics}
+\small
+
+    Other ``goodness-of-fit statistics'':
+    \begin{description}
+    \item[{\Red{chi-square}}] As before: \vmm
+
+      $ \displaystyle{\mathbf{
+          \chi^2  =  \frac{ N_{\rm idp}}{\epsilon^2 N_{\rm fit}}
+          \sum_i^{N_{\rm fit}} [\chi_i^{\rm data} - \chi_i^{\rm model}({x})]^2
+        }} 
+      $
+      
+      
+    \item[{\Red{reduced chi-square}}] scale $\mathbf{N_{\rm varys}}$ by the 
+      ``degrees of freedom'' : \vmm
+
+      $ \chi^2_\nu =  \chi^2 / (N_{\rm idp}-N_{\rm varys}) $
+
+
+      \vmm
+
+      
+      For a ``Good Fit'', $\chi^2_\nu$ should be $\sim$ 1 (This
+      {\RedEmph{never}} happens!!).
+
+    \item[{\Red{R-factor}}] $\mathbf{\cal{R}}$  gives a ``fractional misfit'': \vmm
+
+      $ \displaystyle{\mathbf{
+          {\cal{R}} = 
+          {\sum_i^{N_{\rm fit}}[\chi_i^{\rm data} - \chi_i^{\rm model}({x})]^2 }
+          / 
+           { \displaystyle{\sum_i^{N_{\rm fit}} [{\chi_i^{\rm data}}]^2}}
+        }}
+      $
+
+      \vmm $\mathbf{\cal{R}}$ is useful because it is not scaled to the data
+    uncertainty $\epsilon$. 
+
+    \end{description}
+\vfill
+\end{slide} 
+
+
+\begin{slide}{Fitting in $R$-space, $k$-space, etc.}
+    
+    The $\bchi^2$ definition didn't say anything about what our data
+    {\Blue{$\chi_i^{\rm data}$}} is.
+
+    \vmm  We usually fit in $R$-space, because 
+    we can throw out unwanted ``shells'':
+    
+    \vmm \vmm \vmm 
+
+    {
+      \begin{tabular}{ll}
+        \hspace{-10mm} \begin{minipage}{54mm}{\wgraph{53mm}{reduction/chik}}  \end{minipage} &
+        \hspace{-5mm}  \begin{minipage}{54mm}{\wgraph{53mm}{reduction/chir_win}}\end{minipage}
+    \end{tabular}
+    }
+
+    \vmm 
+    Fitting in $R$-space gives more meaningful fit statistics when we know that
+    we're not fitting all the spectral features.
+    
+    \vmm 
+    {\RedEmph{AND:}} We can also have the data {\Blue{$\chi_i^{\rm data}$}}
+    extend over {\Red{multiple data sets}}, {\Red{multiple $k$-weightings}},
+    etc, as long as we generate {\Red{$\mathbf{\chi_i^{\rm model}(x)}$}} to
+    match these data.
+
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{$\mathbf\epsilon$: The Noise Levels in Data }
+
+    
+    Here are some typical EXAFS spectra (both transmission, 1 sec/point), 
+    and their estimated noise $\epsilon$ in $\bchi(k)$:
+
+
+    \vmm
+
+      \begin{tabular}{lcl}\setlength{\baselineskip}{2pt}
+        0.2 mM Zn nitrate solution & & Cu foil Room Temperature   \\
+        \hspace{-7mm} \wgraph{48mm}{errors/noise_data01} & \hspace{2mm} & 
+        \hspace{-5mm} \wgraph{48mm}{errors/noise_data02} \\
+        $\epsilon \approx 6.6 \times 10^{-4}$ ``Normal Data''& &
+        $\epsilon \approx 1.6 \times 10^{-4}$ ``Good Data''\\
+      \end{tabular}
+
+      \vmm
+
+      For the Zn solution, this noise level is consistent with counting
+      statistics for ``Number of Photons in Ion Chambers''! 
+
+\vfill
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{$\epsilon$: Noise Levels in Data}
+\small
+\hspace{-.1mm}
+\begin{center}
+  \begin{minipage}{95mm}\setlength{\baselineskip}{10pt}
+    
+    $\epsilon$ is estimated from the high-$R$ (15
+    to 25 \AA) components of the data:
+    
+    \vmm
+      \begin{tabular}{lcl}
+        $|\chi(R)|$ &    &  $ \hspace{4mm} \log_{10}(|\chi(R)|)$ \\
+        \vspace{-3mm}\hspace{-10mm} \wgraph{50mm}{errors/znnoise01} &      & 
+        \hspace{-5mm}  \wgraph{50mm}{errors/znnoise02} \\
+      \end{tabular}
+      
+      \begin{itemize}
+        \item The Zn data really shows ``white noise''.
+          
+        \item The Cu data has signal well above the noise level past 10\AA!
+
+      \item Using the range $R=[15,25]\rm\, \AA$ may 
+        {\RedEmph{overestimate}} $\epsilon$ for good data.
+      \end{itemize}
+      
+      A general property of Fourier transforms (Parseval's Theorem) translates
+      the noise in $\bchi(R)$ to the noise in $\bchi(k)$. 
+      
+
+      \begin{center}
+        \highlightbox{ \begin{minipage}{70mm} When fitting in $R$-space, we want
+            $\epsilon_R$, the noise in $\bchi(R)$, but $\epsilon_k$, the noise
+            in $\bchi(k)$, is easier to interpret.
+      \end{minipage}}\end{center}
+
+  \end{minipage}
+\end{center}
+\vspace{1mm}
+\vfill
+\end{slide} 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Error Bars: the uncertainities in the fit variables}
+\small
+\hspace{-.1mm}
+\begin{center}
+  \begin{minipage}{95mm}\setlength{\baselineskip}{10pt}
+    
+    A fit finds $\Blue{\mathbf{x_0}}$, the ``best fit values'' of the variables
+    $\Blue{\mathbf{x}}$ by minimizing $\bchi^2$.
+
+    
+    \vmm \vmm The uncertaintes in $\Blue{\mathbf{x}}$ are found by increasing
+    the best $\bchi^2$ by 1:
+
+    \vmm
+    \begin{center} \wgraph{60mm}{errors/ellipse} 
+    \end{center}
+      
+    \vmm
+
+    {\RedEmph{increase by 1}} implies that the fit is ``Good'' ($\chi^2_\nu
+    \approx 1$).
+    
+    \vmm Sadly, we typically get {\highlightbox{$\chi^2_\nu \gtrsim 50$!! }}
+    even for very good fits.
+    So, we increase the best $\bchi^2$ by $\bchi^2_\nu$.
+    
+    \vmm 
+    \begin{center}{\highlightbox{
+          The ``$\bchi^2 + 1$'' error bars $\delta x$ are multiplies by
+          $\mathbf{\sqrt{\bchi^2_\nu}}$.
+        }}
+    \end{center}
+    
+  \end{minipage}
+\end{center}
+\vspace{1mm} \vfill
+\end{slide} 
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Error Bars: correlations between fit variables}
+\small
+\hspace{-.1mm}
+\begin{center}
+  \begin{minipage}{95mm}\setlength{\baselineskip}{10pt}
+    
+    Pairs of variables can be {\RedEmph{correlated}}: changing one variable away
+    from its optimum value can be compensated by changing another variable away
+    from its best value.  The uncertainties needs to take correlations into
+    account.
+
+    \vmm
+    \begin{center} \wgraph{60mm}{errors/ellipse2}   \end{center}
+      
+
+    \vmm 
+    The uncertainty in $x$ is $\delta x$, NOT  $\delta x'$!
+    
+    \vmm 
+    
+    The correlations values are useful statistics, measuring the ellipse shape.
+
+    \vmm
+    
+    In EXAFS, ($R$, $E_0$) and ($N$, $\sigma^2$) are usually very highly
+    correlated ($>0.85$).
+
+
+  \end{minipage}
+\end{center}
+\vspace{1mm}
+\vfill
+\end{slide} 
+
+
+
+\begin{slide}
+  \small
+  \begin{cenpage}{80mm}\setlength{\baselineskip}{10pt}
+    \vfill
+    \begin{center}
+      {\Huge\BlueEmph{ Some Fit Examples}   }
+  
+    \end{center}
+    \vfill
+  \end{cenpage}
+\end{slide} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}{Room Temperature Cu Fit }
+\small
+\hspace{-.1mm}
+\begin{center}
+  \begin{minipage}{100mm}\setlength{\baselineskip}{10pt}
+    
+    Simple fit to first shell of Cu foil (300K): $k = [2,16] \rm\,
+    \AA^{-1}$, $R = [1.7,2.6] \rm\, \AA$, $k$-weight=2, $N_{\rm idp} = 8.4
+    $.  Fit results and statistics:
+    
+
+    {
+      \hspace{0.1mm}\begin{tabular}{lll}
+        $R = 2.548(0.007) \, \rm\AA$ 
+        &     
+        $\Delta E_0 = 4.5(0.6)$ 
+        &  
+        $C_3      = 9(9) \times10^{-5} \rm\, \AA^3$ 
+        \\
+        $\epsilon_k = 1.6 \times 10^{-4}$ 
+        &
+        $S_0^2 = 0.96(0.04)$  
+        &
+        $\sigma^2 = 8.5(0.3) \times10^{-3} \rm\, \AA^2$ 
+        \\
+        $\chi^2 = 678$ &
+        $\chi^2_\nu = 196.7$   & ${\cal{R}} = 0.00107 $\\
+      \end{tabular}
+    }
+
+    \vmm
+      \begin{tabular}{lcl}
+        \hspace{-10mm} \wgraph{49mm}{errors/cufit02} & \hspace{2mm} & 
+        \hspace{-3mm}  \wgraph{49mm}{errors/cufit01} \\
+      \end{tabular}
+
+      \begin{itemize}
+      \item ${\cal{R}} = 0.1\% $ -- a good fit!  But like $\chi^2_\nu$,
+        ${\cal{R}}$ is larger than the $\epsilon_k$ suggests.
+      \item These error bars account for correlations.  They increase
+        $\chi^2$ by $\chi^2_\nu$ (not 1), which scales them by
+        $\sqrt{\chi^2_\nu}\approx 14$ over ``increase $\chi^2$ by 1''.
+      \end{itemize}
+
+      \vmm
+
+  \end{minipage}
+\end{center}
+\vspace{1mm}
+\vfill
+\end{slide} 
+
+

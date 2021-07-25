@@ -1,0 +1,46 @@
+
+%% Slide
+\begin{slide}{Calculating  ${f(k)}$ and ${\delta(k)}$ with {\feff} }
+
+    
+    These days, we can calculate ${\Red{f(k)}}$ and
+    ${{\Red{\delta(k)}}}$ with computer programs: {\feff}.
+    
+    Though not necessarily ``User-Friendly'', this program takes as input:
+
+    \begin{enumerate}
+    \item a list of atomic x,y,z coordinates for a physical structure (
+      tools %% such as {\Program{atoms}} and {\Program{crystalff}} 
+      exist to
+      use convert crystallographic data to the required list).  
+    \item a selected central atom.
+    \end{enumerate}
+    
+    \pause It can be more painful than that, but is still pretty easy \ldots
+
+    \vmm \pause
+    The result is a set of files: 
+
+    {\Red{\file{feff0001.dat}}},
+    {\Red{\file{feff0002.dat}}}, \ldots, each containing the
+    ${\Red{f(k)}}$, ${{\Red{\delta(k)}}}$,
+    ${{\Red{\lambda(k)}}}$ for a particular scattering ``shell'' or
+    ``scattering path'' for that cluster of atoms.
+    
+    \vmm \vmm
+    
+    Many analysis programs use these {\feff} files directly to model EXAFS
+    data.
+
+    \vmm
+    
+    \begin{cenpage}{89mm}
+      
+      A structure that is close to the expected structure can be used to
+      generate a {\feff} model, and used in the analysis programs to refine
+      distances and coordination numbers.
+      
+    \end{cenpage}
+
+  \vfill
+\end{slide} 

@@ -1,0 +1,93 @@
+
+%% Slide
+\begin{slide}{Photo-Electron Mean-Free Path}
+
+
+
+\begin{cenpage}{100mm}
+
+  To get to
+
+    \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
+        e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+      {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
+
+ we used a spherical wave for the photo-electron:
+
+  \begin{cenpage}{45mm}
+    {$\displaystyle        \psi(k,r) \sim  \frac{{e^{ikr}}}{kr}  $}
+  \end{cenpage}
+
+
+    {\Blue{But}}:  The photo-electron can also scatter {\BlueEmph{inelastically}}, and may
+    not be able to get back the absorbing atom coherently.
+
+ \vmm
+
+ A {\RedEmph{mean free path}} ($\lambda$) describes how far the
+ photo-electron can go before it scatters from and loses energy to other
+ electrons, phonons, etc.
+
+\vmm\vmm  Using a damped wave-function:
+
+\begin{cenpage}{40mm}
+  {$\displaystyle \psi(k,r) \sim \frac{e^{ikr} e^{-r/\lambda(k)}}{kr} $ }
+\end{cenpage}
+
+adds another term to the EXAFS equation.
+\end{cenpage}
+\end{slide}
+
+
+\begin{frame} \frametitle{ $\lambda(k)$: The Photo-Electron Mean-Free Path }
+
+\begin{cenpage}{108mm}
+
+\hfsetfillcolor{yellow!60}
+\hfsetbordercolor{yellow!60}
+
+   \[ \chi(k) = \sum_j {\frac{{\Blue{N_j}} {\Red{f_j(k)}}
+       {  \tikzmarkin{a}(-0.02,-0.08)(1.3,0.35){  e^{-2{\Blue{R_j}}/{\Red{\lambda(k)}}} }}
+      e^{-2k^2{\Blue{\sigma_j^2}}}}{k{\Blue{R_j}}^2}
+     {\sin[{2k{\Blue{R_j}} + {\Red{\delta_j(k)}}] }}} \]
+
+ \vfill
+  The $ e^{-2R/\lambda(k)} $ term in the XAFS Equation accounts for how far the
+  photo-electron can travel and still return coherently) to the excited atom.
+
+
+ \begin{columns}
+   \begin{column}{54mm}
+     \rgraph{58mm}{lambda.png}
+   \end{column}
+   \begin{column}{64mm}
+     \begin{itemize}
+     \item $\lambda$ is mostly independent of atom, molecule, environment.
+     \item  can include effect of finite lifetime ($\lesssim$fs) of the core-hole.
+     \item  $\lambda$ and $R^{-2}$ make EXAFS a  {\RedEmph{local probe}}.
+     \end{itemize}
+     \vmm
+   \end{column}
+ \end{columns}
+
+\vmm
+
+\begin{center}
+  \begin{tabular}{lccl}
+    Regime &  $k$ values  ( $\rm\AA^{-1}$)
+   & $\lambda$ range ($\rm\AA$) & effect\\
+    \noalign{\smallskip}
+     \noalign{\hrule}
+    \noalign{\smallskip}
+    EXAFS  &   3 to 12 &  $< 20 \rm\,\AA$  &   {\RedEmph{local  atomic  probe}} \\
+    \noalign{\smallskip}
+    XANES &    $< 3$  &  $> 20 \rm\,\AA$  &   {\RedEmph{extended   probe}}    \\
+    \noalign{\smallskip}
+    \noalign{\hrule}
+    \end{tabular}
+
+\end{center}
+
+  \end{cenpage}
+ \vfill
+ \end{frame}

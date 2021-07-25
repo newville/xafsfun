@@ -1,0 +1,232 @@
+\section{Practical FEFF}
+
+\begin{slide}{ Practical {\feff} }
+
+    \begin{cenpage}{110mm}
+
+{\RedEmph{Good News}}: you don't have to worry about the hard parts (mostly)!
+
+\begin{enumerate}
+\item Start with a structure close to the {\BlueEmph{local}} atomic structure
+  of your sample, and generate x,y,z coordinates for the atoms. Often a
+  crystal structure is close -- it does not have to be perfect!
+
+\item Run {\feff}.  This creates a {\feffndat} files for each path.
+
+\item Use these  Path Files in to model measured XAFS.
+\end{enumerate}
+
+  {\larch} and {\xasviewer} helps you find crystal structures, create and
+  edit input filess, run {\feff}, and sort and use the results. 
+
+\begin{columns}
+      \begin{column}[T]{88mm}
+        \begin{block}{ run {\feff} in a specified folder  }
+          \begin{semiverbatim} {\footnotesize larch>
+{\LFunc{feff8l}}({\LString{'feff8.inp'}}, folder={\LString{'CuS\_Feff'}}) }
+          \end{semiverbatim}
+        \end{block}
+
+      \end{column}
+      \begin{column}[T]{1mm} \end{column}
+    \end{columns}
+
+
+\end{cenpage}
+
+  Having good starting structures can be important, but you do not need the
+  exact structure to use {\feff}.
+
+\vmm
+
+
+  You can (may need to) mix structural models to model real data.
+
+\end{slide}{
+
+\subsection{Anatomy of {\file{feff.inp}}}
+\begin{frame}[fragile] \frametitle{Anatomy of {\file{feff.inp}}}
+
+\begin{cenpage}{100mm}
+  {\feff} is a very old program that runs from an input file -- it
+  {\bf{must}} be called {\file{feff.inp}}.   {\larch} can help with this.
+  \vmm
+
+  Each calculation should be in its own folder/subdirectory.
+\end{cenpage}
+
+
+\begin{tabular}{lr}
+  \begin{CodeBlock}{48mm}{\file{feff.inp} file ({\feff} 8):}
+{\Blue{TITLE    FeO, rock salt structure}}
+{\Blue{EDGE K}}
+{\Blue{S02   1.0}}
+{\Blue{CONTROL  1 1 1 1 1 1}}  {\Red{\# which parts of code to run}}
+{\Blue{PRINT    1 0 0 0 0 3}}  {\Red{\# which output files to write}}
+{\Blue{RPATH   6.0}}   {\Red{\# How far in R to build paths}}
+
+{\Blue{POTENTIALS }}      {\Red{\# list of Atomic Potentials}}
+* potential  z  label
+      0     26  Fe   {\Red{\# Absorbing Atom}}
+      1      8  O    {\Red{\# 1 Potential for each Z}}
+      2     26  Fe
+
+{\Blue{ATOMS}}  {\Red{\# list of Atomic X, Y, Z, Potential }}
+ 0.00000     0.00000     0.00000    0   Fe
+ 0.00000     0.00000    -2.13870    1   O
+-2.13870     0.00000     0.00000    1   O
+ 0.00000    -2.13870     0.00000    1   O
+ 0.00000     0.00000     2.13870    1   O
+ 2.13870     0.00000     0.00000    1   O
+ 0.00000     2.13870     0.00000    1   O
+ 0.00000     2.13870     2.13870    2   Fe
+ 0.00000    -2.13870    -2.13870    2   Fe
+\end{CodeBlock} &
+\begin{minipage}{67mm}
+
+\onslide<2->
+
+{\file{feff.inp}} includes:
+
+\vmm
+
+\begin{enumerate}
+  \onslide<2->\item A list of unique Atomic Potentials:
+  \begin{itemize}
+  \item 1 Absorbing Atom, always Potential 0 
+  \item 1 Potential per atomic species (Z)
+  \end{itemize}
+
+  \onslide<2->\item List of atomic coordinates (in {\AA}):
+
+  {\hmm\hmm}  $x$, $y$, $z$, $Pot$
+
+  for each atom in the cluster of atoms 
+
+  \vmm
+  The cluster can be non-crystalline.
+
+  \vmm
+  The absorber can be at (0, 0, 0), or not.
+
+  \vmm
+  Hint:  better off removing H atoms!
+
+\end{enumerate}
+\end{minipage}\\
+\end{tabular}
+
+  \onslide<2->
+   \begin{postitbox}{90mm}
+     \Red{You can edit the atomic positions, and add or change potentials.}
+   \end{postitbox}
+
+\end{frame}
+
+
+\begin{slide}{Input Parameters for {\file{feff.inp}  ({\feff} 8)}}
+
+\begin{cenpage}{100mm}
+  {\feff} has many  inputs, but only a few of them are really
+  important for EXAFS Analysis (some are {\Red{\texttt{required}}}, some {\Blue{\texttt{optional}}}):
+
+  \begin{description}[POTENTIALSXX]
+  \item[{\Red{\texttt{EDGE}}}]   which edge  absorbs  the x-ray ({\tt{K}}, {\tt{L3}}, etc.)
+
+  \item[{\Red{\texttt{POTENTIALS}}}]   list of atomic potentials (0 = absorbing atom)
+
+  \item[{\Red{\texttt{ATOMS}}}]   list of atomic $x$, $y$, $z$, Potential
+
+  \item[{\Red{\texttt{CONTROL}}}]   which ``Modules'' to run.  Use  ``1 1 1 1 1 1''.
+
+  \item[{\Red{\texttt{PRINT}}}]   which ``Outputs'' to write. Use  ``1 0 0  0 0 3''.
+
+
+  \item[{\Blue{\texttt{RPATH}}}]   how far out (in {\AA}) to consider the  cluster of atoms.
+
+  \item[{\Blue{\texttt{POLARIZATION}}}]   polarization vector of incident
+    x-ray (in same coordinate system as atomic coordinates)
+
+  \item[{\Blue{\texttt{EXCHANGE}}}]   which model to use for the exchange energy.
+    Use the default (Hedin-Lundqvist model) unless you know why.
+
+  \end{description}
+
+\end{cenpage}
+
+\end{slide}
+
+
+
+\subsection{ Converting CIF data into {\feff} inputs}
+\begin{frame}[fragile] \frametitle{Converting CIF data into {\feff} inputs}
+
+\begin{cenpage}{95mm}
+
+  {\larch} comes with about 9000 crystral structures from the 
+
+\end{cenpage}
+
+  \begin{cenpage}{75mm}
+    American Mineralogist Crystal Structure Database 
+  \end{cenpage}
+
+\begin{cenpage}{95mm}
+
+
+  and can convert these as {\RedEmph{Crystallographic Information Format}}
+  (CIF) files to {\feff} input files.
+
+  \vmm
+  It handles fractional site occupancy with weighted substitutions -- use
+  with caution!
+
+  \vmm
+  It can also read some CIF files from other sources (work-in-progress!).
+
+  \vmm
+  This is a convenient way to generate a {\feff} input, but not necessary!
+
+\begin{postitbox}{84mm}
+  The cluster used by {\feff} does not need to be a crystal!
+\end{postitbox}
+
+\vmm
+Atomic clusters may also come from:
+
+\vmm
+Protein Data Bank, Molecular Dynamics Simulations, 
+Density Functional Theory Calculations, \ldots.
+
+
+\end{cenpage}
+\end{frame}
+
+
+\begin{slide}{{\feff}:  what {\em{should}} you worry about?}
+
+  Using {\feff} in a real analysis, we'll be {\BlueEmph{refining}}
+  bond lengths and coordination numbers.  For this to work, here are some
+  ``rules of thumb'':
+
+  \begin{cenpage}{90mm}
+
+\begin{enumerate}
+   \item refining distances by {\bf{more than $0.1\rm\,\AA$}} probably means
+  the calculation should be re-run -- the overlap of atomic potentials may
+  not be accurate.
+
+   \item  refining energy origins $E_0$ by {\bf{more than $10\rm\,eV$}} may
+  mean the calculation -- or the selection of $E_0$ in the data reduction
+  -- is wrong or needs to be re-examined.
+
+ \item  {\feff} can set $S_0^2$ and make a simple attempt at
+  $\sigma^2$ values.  {\bf{don't use these}}.
+
+ \item You {\bf{should set $S_0^2$}} for a particular group
+  of data (central atom, beamline energy resolution, etc), based on an
+  experimental standard, or have uncertain values for $N$.
+  \end{enumerate}
+  \end{cenpage}
+
+\end{slide}

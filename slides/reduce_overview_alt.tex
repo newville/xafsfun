@@ -1,0 +1,64 @@
+
+\begin{slide}{XAFS Data Reduction}
+  We begin with {\BlueEmph{Data Reduction}}:
+
+  \onslide+<2->
+  \begin{center}
+    Converting measured data to ${\mu(E)}$ and then to ${\chi(k)}$
+  \end{center}
+  
+  \vmm
+  \onslide+<3->
+  This won't tell us $R$, $N$, and neighbor species, but it will:
+  
+  \vmm
+  \begin{enumerate}
+  \item help us determine data quality
+    
+    \onslide+<4->
+  \item can be useful for ``spectroscopic'' analysis: \par fingerprinting,
+    linear combinations of spectra, etc.
+
+    \onslide+<5->
+  \item needed to get to ${\chi(k)}$ for further modeling.
+  \end{enumerate}
+
+  \vmm \vfill
+\end{slide}
+
+\begin{slide}{XAFS Data Reduction: Strategy}
+
+  Step for reducing measured data to ${\mu(E)}$ and then to ${\chi(k)}$:
+
+  \begin{enumerate}
+  \item convert measured intensities to ${\mu(E)}$
+    \pause
+  \item subtract a smooth pre-edge function, to get rid of any instrumental
+    background, and absorption from other edges. 
+    \pause
+  \item normalize ${\mu(E)}$ to go from 0 to 1, so that it represents the
+    absorption of 1 x-ray.
+    \pause
+  \item remove a smooth post-edge background function to approximate
+    ${\mu_0(E)}$ to isolate the XAFS ${\chi}$.
+    \pause
+  \item identify the threshold energy ${E_0}$, and convert from
+    ${E}$ to ${k}$ space: ${ k=
+      \sqrt{{{2m(E-E_0)}\over{\hbar^2}}} }$
+    \pause
+  \item (optional) weight the XAFS ${\chi(k)}$ and Fourier transform from
+    ${k}$ to ${R}$ space.
+    \pause
+  \item  (optional) isolate the ${\chi(k)}$ for an individual
+  ``shell''  by Fourier filtering.
+  \end{enumerate}
+
+
+  \vmm
+%   After we get this far, we'll model ${f(k)}$ and
+%   ${\delta(k)}$ and analyze ${\chi(k)}$ to get distance
+%   ${R}$, coordination number ${N}$.
+
+
+\vfill
+\end{slide} 

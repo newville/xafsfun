@@ -1,0 +1,239 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Information Content}
+\begin{frame}
+  \frametitle{XAFS Analysis: Information Content in XAFS }
+
+  The Number of Parameters we can measure from our data is limited:
+
+  \vmm
+
+  \begin{center}  {\Red{
+        $\displaystyle  N \approx { { 2 \Delta k \Delta R} \over{ \pi}}  $
+      }}
+  \end{center}
+
+  \vmm
+
+  where $\Red{ \Delta k}$ and $\Red{ \Delta R}$ are the $k$- and
+  $R$-ranges of the data.
+
+  Typical:  $k = [2.0, 12.0] \rm\,\AA^{-1}$ and $R =
+  [1.0, 3.0]\rm\,\AA$, gives  $\sim 12$ Parameters.
+
+  \pause \vmm \hrule \vmm
+
+  Fit statistics, and Error Bars  need to reflect this limit.
+
+  \vmm
+  \pause
+
+  Need to {\Red{constrain}} Parameters $R$, $N$,
+  $\sigma^2$ for different paths  and different data sets (different
+  edge elements, temperatures, etc)
+
+  \vmm
+
+  \begin{postitbox}{90mm}
+    Use as much outside information about the system as possible!
+  \end{postitbox}
+
+   \vmm \pause
+   It's also possible to add {\Red{restraints}} to describe external
+   knowledge of the system (crystallography, Bond Valence, etc).
+
+
+\end{frame}
+
+
+\subsection{Building Models}
+\begin{frame}
+ \frametitle{XAFS Analysis: Building Models }
+
+  The basic difficulties in  EXAFS Analysis are
+
+  \begin{enumerate}
+
+  \item The scattering factors \feffc{f(k)}, \feffc{\delta(k)} are
+    non-trivial (we use {\feff}).
+
+ \item The basis functions (Paths) are not very well resolved, and their
+    number grows exponentially with $R$.
+
+  \item There's not much information in a real measurement:
+    \[ N_{\rm idp} \approx \frac{2\Delta k\Delta R}{\pi} \]
+
+  \end{enumerate}
+
+    \hrule \vmm \pause
+
+    We address these with methods to:
+
+    \begin{enumerate}
+    \item {reduce} the number of Paths to consider (Fourier analysis).
+
+    \item parameterize {\emph{ab initio}} calculations of
+      \feffc{f(k)}, \feffc{\delta(k)} (use {\feff})
+
+    \item reduce the number of  variables in the fit, while keeping a
+      meaningful analysis.
+
+    \end{enumerate}
+
+    \hrule \vmm
+
+    We parameterize the EXAFS with a physical model and then
+    put {\RedEmph{Constraints}} on the  %%% and {\RedEmph{Restraints}} on the
+    parameters in a least-squares fit.
+
+    \vmm
+\end{frame}
+
+\subsection{Constraints}
+\begin{frame}[fragile]
+  \frametitle{Constraints in {\larch} /  {\artemis} }
+
+  All Path Parameters written as expressions of  Variables refined in Fit.
+  \vmm
+
+  \setbeamertemplate{blocks}[rounded][shadow=true]
+
+  \begin{tabular}{ll}
+    \begin{minipage}{45mm}
+      \begin{block}
+        {Parameter = Variable}
+{\tiny{\begin{alltt}
+
+{\Red{guess e0    = 1.0 }}
+path(1,  e0 = e0)
+path(2,  e0 = e0)
+\end{alltt}}}
+ \end{block}
+   \vspace{1.75mm}
+   \onslide+<2->
+   \begin{block}
+{mixed coordination shell}
+
+{\tiny{\begin{alltt}
+ set S02   = 0.80
+
+ {\Red{guess x   = 0.5}}
+
+ path(1,  Amp= S02 * x )
+ path(2,  Amp= S02 * (1-x))
+
+\end{alltt}}}
+   \end{block}
+   \end{minipage}
+    & \hspace{0.2mm}
+    \begin{minipage}{65mm}
+      \onslide+<3->   \begin{block}
+ { Fit Einstein Temperature }
+
+{\tiny{\begin{alltt}
+
+ set   factor  = 24.254337   {\Blue{#= (hbar*c)^2/(2 k_boltz)}}
+{\Blue{# mass and reduced mass in amu}}
+ set   mass1 = 63.54,  mass2 = 63.54
+ set   r_mass =  1/ (1/mass1 +  1/mass2)
+
+{\Blue{# the Einstein Temp will be adjusted in the fit!}}
+ {\Red{guess thetaE = 200}}
+{\Blue{# use for data set 1, T=77}}
+ set   temp1 = 77
+ {\Red{def ss2_path1 = factor*coth(thetaE/(2*temp1))/r_mass )}}
+ path(101,  sigma2 = ss2_path1   )
+
+{\Blue{# use for data set 2, T=300}}
+ set   temp2 = 300
+ {\Red{def ss2_path2 = factor*coth(thetaE/(2*temp2))/r_mass )}}
+ path(201,  sigma2 = ss2_path2   )
+\end{alltt}}}
+        \end{block}
+    \end{minipage}\\
+  \end{tabular}
+
+  \vmm \vmm
+
+  \onslide+<4-> Other Examples:
+
+\begin{itemize}
+\item force one $R$ for the same bond for data taken from different  edges.
+\item model complex distortions (height of a sorbed atom above a surface).
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Fit statistics}
+\begin{frame}\frametitle{Fitting with {\ifeffit} / {\artemis} }
+
+  {\ifeffit} optimizes the Fitting Parameters with a least-squares fit to the
+  Data
+
+  \begin{postitbox}{90mm}
+    Find the variables that make the Model best match the Data
+  \end{postitbox}
+
+
+  \pause \vmm
+
+
+  $\chi^2$ (don't confuse with EXAFS $\chi$!!) describe the fit:
+
+  \[
+  \chi^2  =   \sum_i^{N_{\rm fit}} \frac{[\chi_i^{\rm data} - \chi_i^{\rm
+      model}({x})]^2}{\epsilon^2}
+  \]
+
+  ${N_{\rm fit}} = $ number of data points, ${x} = $ set of variables,
+  $\epsilon =$ noise level in the data. \pause
+
+  We should consider only $ N_{\rm idp} $ data points:
+
+  \begin{postitbox}{88mm}
+    \[   \chi^2  =  \frac{ N_{\rm idp}}{\epsilon^2 N_{\rm fit}}
+    \sum_i^{N_{\rm fit}} [\chi_i^{\rm data} - \chi_i^{\rm model}({x})]^2 \]
+  \end{postitbox}
+
+  \pause   Fitting is typically done in $R$-space to ignore higher shells.
+
+\end{frame}
+
+\subsection{More Fit Statistics}
+\begin{frame}
+\frametitle{Goodness of Fit and Error Bars}
+
+  Goodness-of-Fit statistics:
+  \begin{itemize}[<+->]
+  \item{\Red{chi-square}}:     $  \chi^2  =  \frac{ N_{\rm idp}}{\epsilon^2 N_{\rm fit}}
+    \sum_i^{N_{\rm fit}} [\chi_i^{\rm data} - \chi_i^{\rm model}({x})]^2   $
+
+  \item{\Red{reduced chi-square}}:  scale $\chi^2$ by the  ``degrees of freedom''
+
+    $ \chi^2_\nu =  \chi^2 / (N_{\rm idp}-N_{\rm varys}) $
+
+    A Good Fit should have $\chi^2_\nu \sim 1$. This {\RedEmph{never}}
+    happens!
+
+    $ \chi^2_\nu \sim 10 $ or higher, typically.
+
+
+  \item{\Red{R-factor}}:  Fractional misfit.
+    \[
+    {\cal{R}} =
+    {\sum_i^{N_{\rm fit}}[\chi_i^{\rm data} - \chi_i^{\rm model}({x})]^2 }
+    /
+    { \displaystyle{\sum_i^{N_{\rm fit}} [{\chi_i^{\rm data}}]^2}}
+    \]
+
+  \end{itemize}
+
+\hrule \vmm \onslide+<4->
+
+  Error bars for Fitting Parameters are calculated, and
+  increase $\chi^2$ by $\chi^2_\nu$.
+
+  \vmm
+  Correlations between parameters are also calculated.
+
+\end{frame}
