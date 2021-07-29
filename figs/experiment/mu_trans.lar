@@ -1,0 +1,13 @@
+
+
+a = read_ascii('fe_ion.dat')
+opts = dict(xlabel='Energy (eV)', new=True, grid=False, fullbox=False, linewidth=4)
+
+plot(a.energy, a.j0, ymin=0, ylabel='$I_0$', **opts)
+save_plot('i0.png')
+
+plot(a.energy, a.j, ymin=0,  ylabel='$I_t$', **opts)
+save_plot('i1.png')
+
+plot(a.energy, -ln(a.j/a.j0),  ylabel='$\mu$', **opts)
+save_plot('mu.png')

@@ -1,0 +1,27 @@
+
+
+a = read_ascii('FeXANES_LW0.001')
+opts = dict(xlabel='Energy (eV)', new=True,
+            axisfontsize=13,
+            labelfontsize=11,
+            show_legend=False, grid=False, fullbox=False, linewidth=4)
+
+plot(a.energy, a.i0, ymin=0, ylabel='$I_0$', **opts)
+save_plot('i0_fluor.png')
+
+plot(a.energy, (a.sum_fe_ka/a.i0),  ylabel='$\mu$', **opts)
+save_plot('mu_fluor.png')
+
+
+plot(a.energy, a.fe_ka_mca1, ymin=0,  ylabel='$I_f$', label='Chan1', **opts)
+opts['new'] = False
+opts['show_legend'] = True
+opts['legend_loc'] = 'ul'
+plot(a.energy, a.fe_ka_mca2, ymin=0,  ylabel='$I_f$', label='Chan2', **opts)
+plot(a.energy, a.fe_ka_mca3, ymin=0,  ylabel='$I_f$', label='Chan3', **opts)
+plot(a.energy, a.fe_ka_mca4, ymin=0,  ylabel='$I_f$', label='Chan4', **opts)
+plot(a.energy, a.fe_ka_mca5, ymin=0,  ylabel='$I_f$', label='Chan5', **opts)
+plot(a.energy, a.fe_ka_mca6, ymin=0,  ylabel='$I_f$', label='Chan6', **opts)
+plot(a.energy, a.fe_ka_mca7, ymin=0,  ylabel='$I_f$', label='Chan7', **opts)
+save_plot('if_multi.png')
+

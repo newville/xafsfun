@@ -1,0 +1,42 @@
+#
+# Reduction of FeO XAFS Data:   data  -->  chi(R)
+
+feo = read_ascii('feo.dat', labels='energy time i0 it')
+feo.xmu = ln(feo.i0/feo.it)
+autobk(feo.energy, feo.xmu, group=feo, e0=7122, kweight=2., rbkg=1.0)
+
+fftparams = dict(kmin=2.5, kmax=14.0, kweight=2, dk=4, window='Kaiser')
+
+
+xftf(feo.k, feo.chi, group=feo, **fftparams)
+
+opts = dict(xlabel='Energy (eV)', new=True,
+            axisfontsize=13,
+            labelfontsize=11,
+            show_legend=False, grid=False, fullbox=False, linewidth=4)
+
+
+
+plot(feo.energy, feo.xmu, xlabel='Energy (eV)',
+        ylabel=r'$\mu(E)$', xmin=7000, xmax=7600, win=1, **opts)
+save_plot('feo_mu.png')
+
+
+plot(feo.k, feo.chi*feo.k**2, xlabel=r'$k\rm\,(\AA^{-1})$',
+        ylabel=r'$k^2\chi(k)\rm\,(\AA^{-2})$', xmax=14.5, win=1, **opts)
+save_plot('feo_chik.png')
+
+plot(feo.r, feo.chir_mag, xlabel=r'$R\rm\,(\AA)$',
+        ylabel=r'$|\chi(R)| \rm\,(\AA^{-3})$', xmax=8, win=1, **opts)
+save_plot('feo_chir.png')
+# plot_text('Fe-O ', x=1.3, y=0.6, win=2)
+# plot_text('Fe-Fe ', x=2.3, y=1.1, win=2)
+
+
+#
+
+
+
+
+
+
