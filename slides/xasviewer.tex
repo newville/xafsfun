@@ -6,7 +6,7 @@
   Steps for reducing measured data to {\mue} and then to {\chik}:
 
 \begin{cenpage}{125mm}
-  \begin{enumerate}[<+->]
+  \begin{enumerate}
   \item convert measured intensities to {\mue}.
   \item subtract a smooth pre-edge function, removing instrumental
     background and absorption from other edges.
@@ -26,7 +26,7 @@
 \end{cenpage}
 
 \vmm\vmm
-\onslide+<7->
+\onslide+<2->
   After we get the EXAFS $\chi(k)$, we can model this with {\feff}
   calculations.
 
@@ -40,6 +40,9 @@
   {\xasviewer} (part of Larch) provides a GUI for
   processing beamline data to $\chi(k)$.
 
+  \vmm
+  {\athena} and {\sixpack} too!
+    
   \begin{columns}
     \begin{column}{45mm}
       
@@ -276,7 +279,9 @@ Important issues when processing data
   \end{itemize}
 \end{cenpage}
 
-{\xasviewer}  can help with these.
+{\xasviewer}  can help with these. So can {\athena} and {\sixpack}.
+
+
 
 \end{slide}
 
@@ -340,6 +345,41 @@ Important issues when processing data
   \end{tabular}
     \end{cenpage}  
 \end{frame}
+
+
+\begin{frame}\frametitle{Data Reduction: Normalization with tabulated $\mu(E)$}
+
+  \begin{cenpage}{130mm}
+    
+  \begin{tabular}{ll}
+    \begin{minipage}{70mm}  \includegraphics[width=60mm]{figs/experiment/mu_mback}  \end{minipage}
+    &
+    \begin{minipage}{45mm}  \setlength{\baselineskip}{10pt}
+      \hspace{-3mm}{\Red{Using tabulated $\mu(E)$ }}\vspace{0.5mm}
+
+      Tabulated values (Chanter, et al) can also be used to normalize the
+      data.
+
+      \vmm
+      This can improve consistency, as the same functional fom is
+      used for all spectra of an element and edge.
+      
+    \end{minipage}\\
+    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/mu_mback_poly}  \end{minipage}
+    &
+    \begin{minipage}{45mm}  \setlength{\baselineskip}{10pt}
+      \hspace{-3mm}{\Red{Polynomial vs tabulated values}}\vspace{0.5mm}
+
+      The difference is typically at the margin, but consistency is good!
+
+      \vmm
+      This is based on the {\mback} procedure of T.C. Weng, et al.
+            
+    \end{minipage}
+  \end{tabular}
+    \end{cenpage}  
+\end{frame}
+
 
 \begin{frame} \frametitle{Data Reduction: Post-Edge Background Subtraction}
 
@@ -437,7 +477,9 @@ Important issues when processing data
           ${k^2\chi(k)}$}}\vspace{0.5mm}
 
       {\chik} is composed of sine waves, so we'll Fourier Transform from
-      $k$ to $R$-space.  To avoid ``ringing'', we'll multiply by a
+      $k$ to $R$-space.
+
+      \vmm To avoid ``ringing'', we'll multiply by a
       {\BlueEmph{window function}}.  \vfill
     \end{minipage}
   \end{tabular}
