@@ -1,0 +1,243 @@
+#
+kmin= 2
+kmax=16
+dk  = 3
+
+feo = read_ascii('../../experiment/feo.dat', labels='energy time i0 it')
+
+opts = dict(grid=False, fullbox=False, linewidth=4,
+            axisfontsize=13, labelfontsize=13,
+            legendfontsize=11,
+            show_legend=False)
+
+# xlabel='Energy (eV)',
+
+# newplot(feo.energy, feo.i0/feo.time, xlabel= 'E (eV)', ylabel= 'Intensity',   linewidth=4)
+# newplot(feo.energy, feo.it/feo.time, key = 'I')
+
+
+feo.xmu = ln(feo.i0/feo.it)
+
+# newplot(feo.energy, feo.xmu, xlabel= 'E (eV)', ylabel=r'$\mu(E)$')
+
+#
+# pre-edge subtraction:
+
+pre_edge(feo.energy, feo.xmu, norm1=150, norm2=750, group=feo)
+autobk(feo.energy, feo.xmu, group=feo, kweight=2.5, rbkg=0.99, kmax=14.7)
+
+p1 = group(k=feo.k, chi=feo.chi)
+
+
+opts = dict(grid=False, fullbox=False, linewidth=4,
+            axisfontsize=13, labelfontsize=13,
+            legendfontsize=11,
+            show_legend=False)
+
+kopts = {'xlabel': r'$k\, \rm\AA^{-1}$', 'ylabel': r'$f(k)$'}
+kopts.update(opts)
+ropts = {'xlabel': r'$ R \rm\, (\AA)$',
+                    'ylabel': r' $ |f(R)|\rm\, (\AA^{-3})$', 'xmax':5}
+ropts.update(opts)
+
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=0, window='hanning')
+p1.kwin_han0 = p1.kwin*1.0
+p1.chir_mag_han0 = p1.chir_mag*1.0
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=2, window='hanning')
+p1.kwin_han2 = p1.kwin*1.0
+p1.chir_mag_han2 = p1.chir_mag*1.0
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=3, window='hanning')
+p1.kwin_han3 = p1.kwin*1.0
+p1.chir_mag_han3 = p1.chir_mag*1.0
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=4, window='hanning')
+p1.kwin_han4 = p1.kwin*1.0
+p1.chir_mag_han4 = p1.chir_mag*1.0
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=6, window='hanning')
+p1.kwin_han6 = p1.kwin*1.0
+p1.chir_mag_han6 = p1.chir_mag*1.0
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=3, window='welch')
+p1.kwin_wel3 = p1.kwin*1.0
+p1.chir_mag_wel3 = p1.chir_mag*1.0
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=3, window='parzen')
+p1.kwin_par3 = p1.kwin*1.0
+p1.chir_mag_par3 = p1.chir_mag*1.0
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=3, window='kaiser')
+p1.kwin_kai3 = p1.kwin*1.0
+p1.chir_mag_kai3 = p1.chir_mag*1.0
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=5, window='kaiser')
+p1.kwin_kai5 = p1.kwin*1.0
+p1.chir_mag_kai5 = p1.chir_mag*1.0
+
+
+opts = dict(grid=False, fullbox=False, linewidth=4,
+            axisfontsize=13, labelfontsize=13,
+            legendfontsize=11,
+            show_legend=False)
+
+kopts = {'xlabel': r'$k\, (\rm\AA^{-1})$', 'ylabel': r'$f(k)$', 'xmax':16}
+kopts.update(opts)
+kopts['ylabel'] =  r'$\rm Window(k)$'
+ropts = {'xlabel': r'$ R \rm\, (\AA)$',
+         'ylabel': r' $ |f(R)|\rm\, (\AA^{-3})$', 'xmax':5}
+ropts.update(opts)
+
+
+plot(p1.k, p1.kwin_han3 + 1.5, new=True,  ymax=3.0, **kopts)
+plot(p1.k, p1.kwin_par3 + 1.0, **kopts)
+plot(p1.k, p1.kwin_wel3 + 0.5, **kopts)
+plot(p1.k, p1.kwin_kai3 + 0.0, **kopts)
+
+plot_text(r'Hanning, dk=3', 6, 2.6)
+plot_text(r'Parzen, dk=3', 6, 2.1)
+plot_text(r'Welch,  dk=3', 6, 1.6)
+plot_text(r'Kaiser-Bessel,  dk=3', 5, 1.1)
+
+save_plot('../ftwin_zoo.png')
+
+kopts['ylabel'] =  r'$k^2\chi(k) \rm\, (\AA^{-2})$'
+kopts['ylabel'] =  r'$k^2\chi(k) \rm\, (\AA^{-2})$'
+
+plot(p1.k,  p1.chi*p1.k**2, new=True,  ymax=1.75, ymin=-1.75, **kopts)
+plot(p1.k, p1.kwin_han3, **kopts)
+
+plot_axvline(11.6, linewidth=2., ymin=0.5, ymax=(0.5 + 0.5/1.75), color='black', linestyle='dashed', zorder=3)
+plot_axvline(14.4, linewidth=2., ymin=0.5, ymax=(0.5 + 0.5/1.75), color='black', linestyle='dashed', zorder=3)
+
+
+
+plot_axhline(0., linewidth=1, xmin=0, xmax=1, color='black', zorder=3)
+
+panel = get_display().panel
+panel.axes.annotate('', xy=(11.5, 0.85), xycoords='data',
+                    xytext=(14.5, 0.85), textcoords='data',
+                    arrowprops=dict(arrowstyle="<->", color='black', linewidth=2.))
+
+
+panel.axes.annotate('', xy=(13.0, -0.7), xycoords='data',
+                    xytext=(13.0,  0.5), textcoords='data',
+                    arrowprops=dict(arrowstyle="<-", color='black', linewidth=2.))
+
+panel.axes.annotate('', xy=(2.5, -0.7), xycoords='data',
+                    xytext=(2.5,  0.5), textcoords='data',
+                    arrowprops=dict(arrowstyle="<-", color='black', linewidth=2.))
+
+plot_text(r'$k_{\rm min}$', 2.4, -0.9)
+plot_text(r'$k_{\rm max}$', 13., -0.9)
+plot_text(r'dk', 13., 0.95)
+
+save_plot('../ftwin_anat.png')
+
+
+kopts['xmax'] = 6
+plot(p1.k, p1.kwin_han3, new=True,  ymax=1.1,  **kopts)
+plot(p1.k, p1.kwin_par3, ymax=1.1, **kopts)
+plot(p1.k, p1.kwin_wel3, ymax=1.1,  **kopts)
+
+
+plot_text(r'Hanning, $cos^2(k)$', 2.0, 0.2, color='#1F77B4')
+plot_text(r'Parzen, linear',      3.3, 0.7, color='#D62728')
+plot_text(r'Welch,  $k^2$',       0.5, 0.6, color='#2CA02C')
+
+save_plot('../ftwin_sills.png')
+
+
+
+kopts['xmax'] =16
+
+plot(p1.k,  p1.chi*p1.k**2, new=True,  ymax=1.75, ymin=-1.75, **kopts)
+plot(p1.k, p1.kwin_han0, **kopts)
+plot(p1.k, p1.kwin_han3, **kopts)
+plot(p1.k, p1.kwin_han6, **kopts)
+
+save_plot('../ftwin_kdk.png')
+ropts['xmax'] = 6
+
+ropts['ylabel'] = r' $ |f(R)|\rm\, (\AA^{-3})$'
+
+plot(p1.r, p1.chir_mag_han0, new=True, **ropts)
+plot(p1.r, p1.chir_mag_han3+0.5, **ropts)
+plot(p1.r, p1.chir_mag_han6+1.0, **ropts)
+
+plot_text(r'dk=0',      4.2, 0.4, color='#1F77B4')
+plot_text(r'dk=3',      4.2, 0.9, color='#D62728')
+plot_text(r'dk=6',      4.2, 1.4, color='#2CA02C')
+
+
+save_plot('../ftwin_rdk.png')
+
+
+plot(p1.r, p1.chir_mag_han3, new=True, **ropts)
+plot(p1.r, p1.chir_mag_par3+0.5, **ropts)
+plot(p1.r, p1.chir_mag_wel3+1.0, **ropts)
+plot(p1.r, p1.chir_mag_kai3+1.5, **ropts)
+
+plot_text(r'Hanning, dk=3',  4.1, 0.45, color='#1F77B4')
+plot_text(r'Parzen, dk=3',   4.1, 0.95, color='#D62728')
+plot_text(r'Welch, dk=3',    4.1, 1.45, color='#2CA02C')
+plot_text(r'Kaizer, dk=3',   4.1, 1.95, color='#FF7F0E')
+
+
+save_plot('../ftwin_wins.png')
+
+
+xftf(p1, kweight=0, kmin=2.5, kmax=13.0, dk=3, window='hanning')
+p1.chir_mag_kw0 = p1.chir_mag*10.0
+pscale = max(p1.chir_mag_kw0)
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=3, window='hanning')
+p1.chir_mag_kw1 = p1.chir_mag* pscale / max(p1.chir_mag)
+
+xftf(p1, kweight=2, kmin=2.5, kmax=13.0, dk=3, window='hanning')
+p1.chir_mag_kw2 = p1.chir_mag* pscale / max(p1.chir_mag)
+
+xftf(p1, kweight=3, kmin=2.5, kmax=13.0, dk=3, window='hanning')
+p1.chir_mag_kw3 = p1.chir_mag* pscale / max(p1.chir_mag)
+
+plot(p1.r, p1.chir_mag_kw0, new=True, **ropts)
+plot(p1.r, p1.chir_mag_kw1+0.5, **ropts)
+plot(p1.r, p1.chir_mag_kw2+1.0, **ropts)
+plot(p1.r, p1.chir_mag_kw3+1.5, **ropts)
+
+plot_text(r'kw=0',   4.1, 0.25, color='#1F77B4')
+plot_text(r'kw=1',   4.1, 0.75, color='#D62728')
+plot_text(r'kw=2',   4.1, 1.25, color='#2CA02C')
+plot_text(r'kw=3',   4.1, 1.75, color='#FF7F0E')
+
+save_plot('../ftwin_kw.png')
+
+
+
+xftf(p1, kweight=2, kmin=0, kmax=13.0, dk=3, window='hanning')
+p1.chir_mag_kmin0 = p1.chir_mag
+
+xftf(p1, kweight=2, kmin=2., kmax=13.0, dk=3, window='hanning')
+p1.chir_mag_kmin2 = p1.chir_mag
+
+xftf(p1, kweight=2, kmin=4.0, kmax=13.0, dk=3, window='hanning')
+p1.chir_mag_kmin4 = p1.chir_mag
+
+xftf(p1, kweight=2, kmin=6, kmax=13.0, dk=3, window='hanning')
+p1.chir_mag_kmin6 = p1.chir_mag
+
+
+plot(p1.r, p1.chir_mag_kmin0, new=True, **ropts)
+plot(p1.r, p1.chir_mag_kmin2+0.5, **ropts)
+plot(p1.r, p1.chir_mag_kmin4+1.0, **ropts)
+plot(p1.r, p1.chir_mag_kmin6+1.5, **ropts)
+
+plot_text(r'kmin=0',   4.1, 0.4, color='#1F77B4')
+plot_text(r'kmin=2',   4.1, 0.95, color='#D62728')
+plot_text(r'kmin=4',   4.1, 1.35, color='#2CA02C')
+plot_text(r'kmin=6',   4.1, 1.75, color='#FF7F0E')
+
+save_plot('../ftwin_kmin.png')
+

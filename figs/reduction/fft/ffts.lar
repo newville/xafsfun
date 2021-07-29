@@ -1,0 +1,166 @@
+#
+kmin= 2
+kmax=16
+dk  = 3
+
+p1 = group(k=linspace(0, 20,  401))
+p2 = group(k=linspace(0, 20,  401))
+p3 = group(k=linspace(0, 20,  401))
+p4 = group(k=linspace(0, 20,  401))
+p5 = group(k=linspace(0, 20,  401))
+
+p1.chi = sin(2*p1.k *  1.6) * exp(-p1.k*p1.k* 0.006)
+p2.chi = cos(2*p1.k *  1.6) * exp(-p1.k*p1.k* 0.006)
+p3.chi = sin(2*p1.k *  2.3) * exp(-p1.k*p1.k* 0.006)
+p4.chi = sin(2*p1.k *  2.4) * exp(-p1.k*p1.k* 0.006)
+
+p5.chi = (p3.chi + p4.chi)/2
+
+
+
+xftf(p1, kweight=2, kmin=2, kmax=16, dk=3, window='hanning')
+xftf(p2, kweight=2, kmin=2, kmax=16, dk=3, window='hanning')
+xftf(p3, kweight=2, kmin=2, kmax=16, dk=3, window='hanning')
+xftf(p4, kweight=2, kmin=2, kmax=16, dk=3, window='hanning')
+xftf(p5, kweight=2, kmin=2, kmax=16, dk=3, window='hanning')
+
+
+opts = dict(grid=False, fullbox=False, linewidth=4,
+            axisfontsize=13, labelfontsize=13,
+            legendfontsize=11,
+            show_legend=False)
+
+kopts = {'xlabel': r'$k\, \rm(\AA^{-1})$', 'ylabel': r'$f(k)$'}
+kopts.update(opts)
+ropts = {'xlabel': r'$ R \rm\, (\AA)$',
+                    'ylabel': r' $ |f(R)|\rm\, (\AA^{-3})$', 'xmax':5}
+ropts.update(opts)
+
+plot(p1.k, p1.chi, new=True, **kopts)
+plot(p1.k, p1.kwin, **kopts)
+plot_text(r'$ { R=1.6{\rm\, \AA}} $ ', 11, -0.6)
+plot_text(r'$ { \sigma^2=0.003{\rm\, \AA^2}} $ ', 11, -0.85)
+
+save_plot('../sine_k0.png')
+
+
+plot(p1.r, p1.chir_mag, new=True, **ropts)
+save_plot('../sine_r0.png')
+
+
+plot(p1.k, p1.chi, new=True, **kopts)
+plot(p2.k, p2.chi+1.5, **kopts)
+plot(p3.k, p3.chi+3.0, **kopts)
+
+plot_text(r'sin, R=1.6$\rm\AA$', 12.7, 0.6)
+plot_text(r'cos, R=1.6$\rm\AA$', 12.7, 2.1)
+plot_text(r'sin, R=2.3$\rm\AA$', 12.7, 3.6)
+
+save_plot('../sine_k.png')
+
+
+plot(p1.r, p1.chir_mag, new=True, **ropts)
+plot(p2.r, p2.chir_mag+35, **ropts)
+plot(p3.r, p3.chir_mag+70, **ropts)
+
+plot_text(r'sin, R=1.6$\rm\AA$', 3.1, 15)
+plot_text(r'cos, R=1.6$\rm\AA$', 3.1, 50)
+plot_text(r'sin, R=2.3$\rm\AA$', 3.1, 85)
+
+save_plot('../sine_r.png')
+
+ropts['ylabel'] = r' $\rm Re[f(R)]\rm\, (\AA^{-3})$'
+
+plot(p1.r, p1.chir_re, new=True, **ropts)
+plot(p2.r, p2.chir_re+35, **ropts)
+plot(p3.r, p3.chir_re+70, **ropts)
+
+plot_text(r'sin, R=1.6$\rm\AA$', 3.1, 15)
+plot_text(r'cos, R=1.6$\rm\AA$', 3.1, 50)
+plot_text(r'sin, R=2.3$\rm\AA$', 3.1, 85)
+
+save_plot('../sine_r2.png')
+
+
+ropts['ylabel'] = r' $ |f(R)|\rm\, (\AA^{-3})$'
+
+
+plot(p1.k, p3.chi, new=True, **kopts)
+plot(p2.k, p4.chi, **kopts)
+plot(p3.k, p5.chi+2.0, **kopts)
+
+plot_text(r'R=2.3$\rm\AA$', 12.7, -0.6)
+plot_text(r'R=2.4$\rm\AA$', 12.7, +0.6)
+plot_text(r'sum/2', 12.7, 2.6)
+
+save_plot('../beat_k.png')
+
+
+plot(p1.r, p3.chir_mag, new=True, **ropts)
+plot(p2.r, p4.chir_mag, **ropts)
+plot(p3.r, p5.chir_mag+1.0, **ropts)
+
+plot_text(r'R=2.3$\rm\AA$', 1.0, 120, color='#1F77B4')
+plot_text(r'R=2.4$\rm\AA$', 2.7, 120, color='#D62728')
+plot_text(r'sum/2',          2.7,  60, color='#2CA02C')
+
+save_plot('../beat_r.png')
+
+
+
+# 
+# pause
+# 
+# 
+# fftf(real = p2.chi, kweight=2, kwindow='hanning')
+# fftf(real = p3.chi, kweight=2, kwindow='hanning')
+# fftf(real = p4.chi, kweight=2, kwindow='hanning')
+# 
+# echo 'B'
+# 
+# p1.chirx = p1.chir_mag+0
+# p2.chirx = p2.chir_mag+40
+# p3.chirx = p3.chir_mag+80
+# 
+# plot p1.r, p1.chirx, new=1, xmax=5
+# plot p1.r, p2.chirx
+# plot p1.r, p3.chirx
+# 
+# write_data(file='sine_r1.dat', p1.r, p1.chirx, p2.chirx, p3.chirx)
+# pause
+# 
+# p1.chirr = p1.chir_re+0
+# p2.chirr = p2.chir_re+40
+# p3.chirr = p3.chir_re+80
+# 
+# 
+# plot p1.r, p1.chirr, new=1, xmax=5
+# plot p1.r, p2.chirr
+# plot p1.r, p3.chirr
+# 
+# write_data(file='sine_r2.dat', p1.r, p1.chirr, p2.chirr, p3.chirr)
+# 
+# ######
+# set x1.chi = sin(2*p1.k *  2.3) * exp(-p1.k*p1.k* 0.006)
+# set x2.chi = sin(2*p1.k *  2.4) * exp(-p1.k*p1.k* 0.006)
+# set x3.chi = (x1.chi + x2.chi)
+# set x3.chix = x3.chi+1
+# 
+# write_data(file='beat_k.dat', p1.k, x1.chi, x2.chi, x3.chix)
+# 
+# fftf(real = x1.chi, kweight=2, kwindow='hanning')
+# fftf(real = x2.chi, kweight=2, kwindow='hanning')
+# fftf(real = x3.chi, kweight=2, kwindow='hanning')
+# 
+# 
+# pause 
+# plot p1.k, x1.chi, new=1
+# plot p1.k, x2.chi
+# plot p1.k, x3.chix
+# pause
+# 
+# plot p1.r, x1.chir_mag, new=1, xmax=5
+# plot p1.r, x2.chir_mag
+# plot p1.r, x3.chir_mag
+# 
+# write_data(file='beat_r.dat', p1.r, x1.chir_mag, x2.chir_mag, x3.chir_mag)
