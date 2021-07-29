@@ -207,10 +207,10 @@ plot(p1.r, p1.chir_mag_kw1+0.5, **ropts)
 plot(p1.r, p1.chir_mag_kw2+1.0, **ropts)
 plot(p1.r, p1.chir_mag_kw3+1.5, **ropts)
 
-plot_text(r'kw=0',   4.1, 0.25, color='#1F77B4')
-plot_text(r'kw=1',   4.1, 0.75, color='#D62728')
-plot_text(r'kw=2',   4.1, 1.25, color='#2CA02C')
-plot_text(r'kw=3',   4.1, 1.75, color='#FF7F0E')
+plot_text(r'w=0',   4.1, 0.25, color='#1F77B4')
+plot_text(r'w=1',   4.1, 0.75, color='#D62728')
+plot_text(r'w=2',   4.1, 1.25, color='#2CA02C')
+plot_text(r'w=3',   4.1, 1.75, color='#FF7F0E')
 
 save_plot('../ftwin_kw.png')
 
