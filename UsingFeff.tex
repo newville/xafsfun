@@ -4,7 +4,7 @@
 \begin{document}
 
 
-\title[Virtual XAFS School]{EXAFS Data Analysis with FEFF and FEFF fitting}
+\title[Virtual XAFS School]{Using FEFF for EXAFS Data Analysis}  %%  and FEFF fitting}
 \author[M Newville]{Matthew Newville}
 \date{July-2021}
 
@@ -28,15 +28,57 @@
 \section{The EXAFS Equation (REVIEW)}
 
 \input{slides/feff_xafseq}
-
 \input{slides/feffpractice}
 \input{slides/modeling}
-\input{slides/fit_statistics}
-\input{slides/fitspace}
-\input{slides/modeling_2nd}
+
+% \input{slides/fit_statistics}
+% \input{slides/fitspace}
+% \input{slides/modeling_2nd}
 % \input{slides/pathparams}
 % \input{slides/constraints}
 % \input{slides/model_cu_3temp}
 % \input{slides/theory_conclusions}
+
+
+
+
+\begin{slide}{Using FEFF for EXAFS Analysis}
+
+
+  \begin{cenpage}{126mm}
+
+    Using {\feff} to calculate the scattering factors does not need to be
+    too hard.
+
+    \begin{itemize}
+    \item   Start with a crystal structure that close to your structure.
+    \item   Make sure you have the absorbing element and edge right!
+    \item    Pay attention to the {\RedEmph{degeneracy}}, or coordination number for    each path.
+    \item    Don't be afraid to alter the atoms list in {\feffinp}, especially    replacing atom types or importing structures from simulations.
+    \item    Don't be afraid to mix paths from different calculations.
+    \item   Don't worry too much about the rest of it -- let the GUI programs    ({\xasviewer}, {\artemis}) help you manage these calculations.
+    \end{itemize}
+
+        \vmm     \hrule \vmm
+
+  More information on X-rays and X-ray Absorption Spectroscopy:
+
+  \begin{itemize}
+  \item[] {\Blue{https://xafs.xrayabsorption.org/}}
+  \item[] {\BlueEmph{Fundamentals of XAFS}} M. Newville, Reviews in  Mineralogy \& Geochemistry {\bf{78}}, 2014.
+  \item[] {\BlueEmph{Introduction to XAFS}} G. Bunker, Cambridge Univ  Press,  2010.
+  \item[] {\BlueEmph{XAFS for Everyone}} S. Calvin, CRC Press, 2013.
+  \item[]  {\BlueEmph{Elements of Modern X-ray Physics}}  J.~Als-Nielsen
+    \& D.~McMorrow,  John Wiley \& Sons. 2001
+
+  \end{itemize}
+
+\end{cenpage}
+
+
+ \vfill
+\end{slide}
+
+
 
 \end{document}
