@@ -200,8 +200,9 @@
       \BrightBlue{#1}}}\hfill\par%
   \vspace{-3.5mm}\GreyLine\vspace{-0.1mm}}
 
+
 \newenvironment{ListingBlock}[2]%
-{\begin{minipage}{#1}\begin{block}{\small{#2}}\begin{lstlisting}}
+{\begin{minipage}{#1}\begin{block}{\small{#2}}\begin{lstlisting}}%
 {\end{lstlisting}\end{block}\end{minipage}}%%
 
 \newenvironment{figblock}[3]%
@@ -257,6 +258,7 @@
 \newenvironment{slide}[1]%%  begin named slide
 {\begin{frame}\frametitle{#1}}%
 {\end{frame}}%%
+
 
 \newenvironment{fslide}[1]%%  begin named slide
 {\subsection{#1}\begin{frame}[fragile]\frametitle{#1}}%
