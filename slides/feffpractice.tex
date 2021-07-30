@@ -2,7 +2,7 @@
 
 \begin{slide}{ Practical {\feff} }
 
-    \begin{cenpage}{110mm}
+  \begin{cenpage}{120mm}
 
 {\RedEmph{Good News}}: you don't have to worry about the hard parts (mostly)!
 
@@ -32,7 +32,7 @@
     \end{columns}
 
 
-\end{cenpage}
+    \vmm\vmm
 
   Having good starting structures can be important, but you do not need the
   exact structure to use {\feff}.
@@ -41,18 +41,21 @@
 
   You can (may need to) mix structural models to model real data.
 
+  \end{cenpage}
+
 \end{slide}
 
 \subsection{Anatomy of {\file{feff.inp}}}
 \begin{frame}[fragile] \frametitle{Anatomy of {\file{feff.inp}}}
 
-\begin{cenpage}{100mm}
-  {\feff} is a very old program that runs from an input file -- it
-  {\bf{must}} be called {\file{feff.inp}}.   {\larch} can help with this.
-  \vmm
+  \begin{cenpage}{135mm}
+    \begin{cenpage}{100mm}
+      {\feff} is a very old program that runs from an input file -- it
+      {\bf{must}} be called {\file{feff.inp}}.   {\larch} can help with this.
+      \vmm
 
-  Each calculation should be in its own folder/subdirectory.
-\end{cenpage}
+      Each calculation should be in its own folder/subdirectory.
+    \end{cenpage}
 
 
 \begin{tabular}{lr}
@@ -120,12 +123,13 @@
      \Red{You can edit the atomic positions, and add or change potentials.}
    \end{postitbox}
 
+ \end{cenpage}
 \end{frame}
 
 
 \begin{slide}{Input Parameters for {\file{feff.inp}  ({\feff} 8)}}
 
-\begin{cenpage}{100mm}
+\begin{cenpage}{125mm}
   {\feff} has many  inputs, but only a few of them are really
   important for EXAFS Analysis (some are {\Red{\texttt{required}}}, some {\Blue{\texttt{optional}}}):
 
@@ -160,17 +164,14 @@
 \subsection{ Converting CIF data into {\feff} inputs}
 \begin{frame}[fragile] \frametitle{Converting CIF data into {\feff} inputs}
 
-\begin{cenpage}{95mm}
+\begin{cenpage}{125mm}
 
   {\larch} comes with about 9000 crystral structures from the
 
-\end{cenpage}
 
   \begin{cenpage}{75mm}
     American Mineralogist Crystal Structure Database
   \end{cenpage}
-
-\begin{cenpage}{95mm}
 
 
   and can convert these as {\RedEmph{Crystallographic Information Format}}
@@ -204,13 +205,15 @@ Density Functional Theory Calculations, \ldots.
 
 \begin{slide}{{\feff}:  what {\em{should}} you worry about?}
 
+  \begin{cenpage}{125mm}
+
   Using {\feff} in a real analysis, we'll be {\BlueEmph{refining}}
   bond lengths and coordination numbers.  For this to work, here are some
   ``rules of thumb'':
 
-  \begin{cenpage}{90mm}
 
-\begin{enumerate}
+
+\begin{enumerate}\setlength{\parskip}{3mm}
    \item refining distances by {\bf{more than $0.1\rm\,\AA$}} probably means
   the calculation should be re-run -- the overlap of atomic potentials may
   not be accurate.
@@ -219,13 +222,15 @@ Density Functional Theory Calculations, \ldots.
   mean the calculation -- or the selection of $E_0$ in the data reduction
   -- is wrong or needs to be re-examined.
 
- \item  {\feff} can set $S_0^2$ and make a simple attempt at
-  $\sigma^2$ values.  {\bf{don't use these}}.
+ \item  {\feff} allows you set $S_0^2$ and  $\sigma^2$ values in
+   {\feffinp}.  {\bf{Do not set these in {\feffinp}}}.
 
- \item You {\bf{should set $S_0^2$}} for a particular group
+\item You {\bf{should set $S_0^2$}} in the analysis for a particular group
   of data (central atom, beamline energy resolution, etc), based on an
   experimental standard, or have uncertain values for $N$.
-  \end{enumerate}
-  \end{cenpage}
+
+\end{enumerate}
+
+\end{cenpage}
 
 \end{slide}

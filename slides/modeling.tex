@@ -2,8 +2,8 @@
 
 \subsection{Path Parameters}
 \begin{frame}
-\frametitle{XAFS Analysis with  {\larch} and {\feff}}
-
+\frametitle{XAFS Analysis with  {\feff} and {\larch} (and {\artemis})}
+\begin{cenpage}{125mm}
 To model XAFS as a Sum of Paths:
 
 \[
@@ -16,13 +16,12 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
 
 \begin{center}
   \begin{tabular}{lll}
-    In XAFS           &  {\larch}     &  Physical \\
-    Equation         &  Parameter  & Meaning \\
+    XAFS  Equation    &  {\larch}  Paramaeter    &  Physical  Meaning\\
     \noalign{\hrule} \noalign{\smallskip}
-    $N S_0^2 $     & {\tt{s02}}    &  Amplitude Factor:   $N$ and $ S_0^2$ \\
+    $S_0^2 N_j$     & {\tt{s02}}    &  Amplitude Factor:   Both $N_j$ and $ S_0^2$ \\
     $E_0$             & {\tt{e0}}     &  Energy Shift (where $k=0$) \\
-    $\Delta R$     & {\tt{deltar}}   &  Change in path length $R = \Delta R + R_{\rm  eff}$ \\
-    $\sigma^2 $  & {\tt{sigma2}} &  Mean-square-displacement in  $R$ \\
+    $\Delta R$     & {\tt{deltar}}   &  Change in path length $R_j = \Delta R_j + {R_{\rm  eff}}_j$ \\
+    $\sigma^2_j $  & {\tt{sigma2}} &  Mean-square-displacement in  $R_j$ \\
     \noalign{\hrule}
   \end{tabular}
 \end{center}
@@ -37,7 +36,7 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
 \item In principle, any parameter for any path could be refined.
 
 \end{itemize}
-
+\end{cenpage}
 
 \end{frame}
 
@@ -120,7 +119,12 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
         {\Red{${1^{st}}$ shell fit in ${k}$ space.}}
         \vmm
 
-        There is clearly another component in the XAFS!
+        Yes, that is the best fit!  But only to the first shell, completely
+        ignoring $R > 2 {\rm \AA} $.
+
+        \vmm
+
+        There is clearly another component in the XAFS besides just Fe-O.
         \vfill
       \end{minipage}
     \\
@@ -139,8 +143,9 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
         {\BlueEmph{${\rm Re[\chi(R)]}$}} for
           FeO (blue), and a ${\rm 1^{st}}$ shell fit (red).  \vspace{1mm}
 
-        Though the fit to the magnitude isn't perfect,
-        the fit to ${\rm Re[\chi(R)]}$ looks very good.
+        Although the fit to the magnitude is not perfect,
+        the fit to ${\rm Re[\chi(R)]}$ is very good.
+
         \vfill
       \end{minipage}
   \end{tabular}
