@@ -42,29 +42,29 @@
 
   \vmm
   {\athena} and {\sixpack} too!
-    
+
   \begin{columns}
     \begin{column}{45mm}
-      
+
       \includegraphics[width=35mm]{figs/experiment/feo_mu}
 
       \vmm
       Collected Spectra $\mu(E)$
-      
+
     \end{column}
     \begin{column}{45mm}
       \includegraphics[width=35mm]{figs/experiment/feo_chik}
 
       \vmm
-      Isolated $\chi(k)$, $k$-weighted 
-      
+      Isolated $\chi(k)$, $k$-weighted
+
     \end{column}
     \begin{column}{45mm}
-      \includegraphics[width=35mm]{figs/experiment/feo_chir} 
+      \includegraphics[width=35mm]{figs/experiment/feo_chir}
 
       \vmm
-      $\chi(R)$, Fourier Transform of $\chi(k)$ 
-      
+      $\chi(R)$, Fourier Transform of $\chi(k)$
+
     \end{column}
   \end{columns}
 
@@ -77,7 +77,7 @@
     \begin{column}{65mm}
       \onslide+<2->
 
-      Data Proceessing  features:      
+      Data Processing  features:
       \begin{itemize}
       \item  Data Visualization
       \item  Read in beamline data, merge data sets.
@@ -103,11 +103,11 @@
    Data Corrections:
    \begin{itemize}
    \item  Deglitching.
-   \item  Eneergy Alignment. 
+   \item  Energy Alignment.
    \item  Over-absorption Corrections.
    \item Smooth, Rebin, Deconvolutions.
    \end{itemize}
-   
+
  \end{column}
 \end{columns}
 
@@ -128,12 +128,12 @@
       Panels for Normalization, Pre-edge Peak Fitting, PCA, Linear
       Combination Fitting, EXAFS (Background Subtraction+Fourier
       Transform), and Feff Fitting.
-      
+
       \vfill
     \end{column}
     \begin{column}{30mm}
       \includegraphics[width=30mm]{figs/Screenshots/XASViewer_MainPlot}
-      
+
       \vmm
       \includegraphics[width=30mm]{figs/Screenshots/XASViewer_EXAFS_plot1}
 
@@ -149,7 +149,7 @@
         \vmm \vfill
     \end{column}
 \end{columns}
-  
+
 % \begin{tabular}{ll}
 %   \begin{minipage}{75mm}  \wpdf{72mm}{figs/Athena_Screenshot} \end{minipage} &
 %   \begin{minipage}{40mm}
@@ -173,68 +173,68 @@
 
   \begin{cenpage}{145mm}
     Step 1:   Starting with measured intensities,  we construct {\mue}:
-    
+
     \vmm\vmm
 
     {    \only<1> {
     {\Blue{Transmission XAFS:}}   $ I_t = I_0 e^{-\mu(E)t)}  $  \hspace{10mm}  $ \mu(E)t =  - \ln(I_t/I_o)  $
-    
+
     \vmm
     \begin{columns}
       \begin{column}{40mm}
         \includegraphics[width=40mm]{figs/experiment/mu}
-        
+
         \hspace{15mm}        $\mu = -ln(I_t/I_0)$
       \end{column}
-      \begin{column}{40mm}         
+      \begin{column}{40mm}
         \includegraphics[width=40mm]{figs/experiment/i1}
-        
+
         \hspace{15mm}        $I_t$
       \end{column}
-      \begin{column}{40mm}                  
+      \begin{column}{40mm}
         \includegraphics[width=40mm]{figs/experiment/i0}
-        
+
         \hspace{15mm}        $I_0$
        \end{column}
      \end{columns}
 
      \vmm
-     
+
   Transmission measurements are needed for high concentration elements, above
   ($\sim 5 {\rm wt \%}$).
-         
+
 
 
    }}
- 
+
  {\only<2> {
-    
-    {\Blue{Fluorescence XAFS:}}   $ \mu(E) \propto I_f / I_0 $ 
-    
+
+    {\Blue{Fluorescence XAFS:}}   $ \mu(E) \propto I_f / I_0 $
+
     \vmm
     \begin{columns}
       \begin{column}{40mm}
         \includegraphics[width=40mm]{figs/experiment/mu_fluor}
-        
+
         \hspace{15mm}        $\mu = (I_f/I_0)$
       \end{column}
-      \begin{column}{40mm}         
+      \begin{column}{40mm}
         \includegraphics[width=40mm]{figs/experiment/if_multi}
-        
+
         \hspace{15mm}        $I_f$
       \end{column}
-      \begin{column}{40mm}                  
+      \begin{column}{40mm}
         \includegraphics[width=40mm]{figs/experiment/i0_fluor}
-        
+
         \hspace{15mm}        $I_0$
        \end{column}
      \end{columns}
 
  \vmm\vmm
 
- 
+
  here $I_f$ may be:
- 
+
  \begin{itemize}
  \item  the intensity from a single fluorescence ion chamber (Lytle detector).
  \item  the {\RedEmph{sum}} of several signals from a multi-element solid-state detector.
@@ -242,15 +242,15 @@
  \end{itemize}
 
  \vmm
-  
- 
+
+
  Fluorescence measurements are generally better for
  elements at concentrations below  ($\sim 5 {\rm wt  \%}$).
 
 }}
 
   \vfill
-  
+
 \end{cenpage}
 \end{slide}
 
@@ -322,7 +322,7 @@ Important issues when processing data
 \begin{frame}\frametitle{Data Reduction: Normalized XANES and ${E_0}$}
 
   \begin{cenpage}{130mm}
-    
+
   \begin{tabular}{ll}
     \begin{minipage}{70mm}  \includegraphics[width=60mm]{figs/experiment/mu_norm_xanes}  \end{minipage}
     &
@@ -343,14 +343,14 @@ Important issues when processing data
       we may need to refine this value later on.
     \end{minipage}
   \end{tabular}
-    \end{cenpage}  
+    \end{cenpage}
 \end{frame}
 
 
 \begin{frame}\frametitle{Data Reduction: Normalization with tabulated $\mu(E)$}
 
   \begin{cenpage}{130mm}
-    
+
   \begin{tabular}{ll}
     \begin{minipage}{70mm}  \includegraphics[width=60mm]{figs/experiment/mu_mback}  \end{minipage}
     &
@@ -363,7 +363,7 @@ Important issues when processing data
       \vmm
       This can improve consistency, as the same functional fom is
       used for all spectra of an element and edge.
-      
+
     \end{minipage}\\
     \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/mu_mback_poly}  \end{minipage}
     &
@@ -374,10 +374,10 @@ Important issues when processing data
 
       \vmm
       This is based on the {\mback} procedure of T.C. Weng, et al.
-            
+
     \end{minipage}
   \end{tabular}
-    \end{cenpage}  
+    \end{cenpage}
 \end{frame}
 
 
@@ -415,7 +415,7 @@ Important issues when processing data
 
     \end{minipage}
   \end{tabular}
-    \end{cenpage}    
+    \end{cenpage}
 
 \end{frame}
 
@@ -425,7 +425,7 @@ Important issues when processing data
   \begin{cenpage}{130mm}
 
     \begin{tabular}{ll}
-    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/chie}  \end{minipage}      
+    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/chie}  \end{minipage}
     &
     \begin{minipage}{45mm}  \setlength{\baselineskip}{10pt}
       \hspace{-3mm}{\Red{$ \chi(E)$ }}\vmm
@@ -436,7 +436,7 @@ Important issues when processing data
 
       \vfill
     \end{minipage}\\
-    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/chik}  \end{minipage}            
+    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/chik}  \end{minipage}
     &
     \begin{minipage}{45mm} \setlength{\baselineskip}{10pt}
       \hspace{-3mm}{\Red{$\chi(k)$}}       \vmm
@@ -456,7 +456,7 @@ Important issues when processing data
 
   \begin{cenpage}{130mm}
   \begin{tabular}{ll}
-    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/chikw}  \end{minipage}                
+    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/chikw}  \end{minipage}
     &
     \begin{minipage}{45mm}  \setlength{\baselineskip}{10pt}
       \hspace{-3mm}{\Red{\chik}}\vmm
@@ -491,13 +491,13 @@ Important issues when processing data
 
   \begin{cenpage}{130mm}
     \begin{tabular}{ll}
-    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/chir}  \end{minipage}                
+    \begin{minipage}{70mm} \includegraphics[width=60mm]{figs/experiment/chir}  \end{minipage}
     &
     \begin{minipage}{50mm}  \setlength{\baselineskip}{10pt}
       \hspace{-3mm}{\Red{$\chi(R)$}}
 
       \vspace{0.5mm}
-      
+
 
       Peaks in {\chir} often correspond to ``coordination shells''.
       The Fe-O distance in FeO is 2.14{\AA}  -- the  first
@@ -540,7 +540,7 @@ Important issues when processing data
 
     &
       \begin{minipage}{50mm}  \setlength{\baselineskip}{10pt}
-        
+
         \hspace{-3mm}{\Red{$\chi(R)$}}
 
         often has well-separated peaks for different

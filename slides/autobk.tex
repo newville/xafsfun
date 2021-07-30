@@ -1,14 +1,11 @@
-
 \section{Background Subtraction: autobk algorithm}
 
 
 \begin{frame} \frametitle{Background Subtraction: $\mu_0(E)$}
 
 \begin{cenpage}{130mm}
-  
 
   \[ \chi(E) = \frac{\mu(E) - \mu_0(E)}{\Delta \mu_0(E_0)} \]
-
 
 \vmm
 We don't know ${\mu_0(E)}$, so use a {\BlueEmph{spline}}: a smooth, adjustable function.
@@ -36,7 +33,7 @@ This could be dangerous -- a flexible enough spline would remove all the XAFS.
 \end{enumerate}
 
 
-\vmm  \hrule \vmm 
+\vmm  \hrule \vmm
 
 Most important parameters:
 
@@ -53,7 +50,7 @@ Most important parameters:
 \begin{frame} \frametitle{Background Subtraction in {\xasviewer} }
 
   \begin{cenpage}{130mm}
-    
+
 Effect of \feffc{R_{\rm bkg}}  on XAFS $\chi(k)$ and $\chi(R)$:
 
 \begin{tabular}{ll}
@@ -97,7 +94,7 @@ Rules of thumb:
 
   \begin{cenpage}{130mm}
 
-    
+
 Don't make \feffc{R_{\rm bkg}} too big!
 
 \begin{tabular}{ll}
@@ -121,7 +118,7 @@ Don't make \feffc{R_{\rm bkg}} too big!
 
     \vmm
     Having $R_{\rm bkg}$ too big is the most important thing to avoid.
-    
+
     \vmm
 
     $R_{\rm bkg}$  that's a little bit small  and gives a small peak at
@@ -132,5 +129,3 @@ Don't make \feffc{R_{\rm bkg}} too big!
 
 
 \end{frame}
-
-
