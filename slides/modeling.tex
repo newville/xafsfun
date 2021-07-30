@@ -45,6 +45,7 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
 \begin{frame}
 \frametitle{EXAFS Analysis: Modeling the 1st Shell of FeO}
 
+\begin{cenpage}{135mm}
     \begin{columns}
       \begin{column}{80mm}
         FeO has a rock-salt structure.
@@ -57,7 +58,7 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
 
         \vmm
 
-        We'll use these functions to {\BlueEmph{refine}} the values
+        We'll then  {\BlueEmph{refine}} the values
         {\Blue{${R}$}}, {\Blue{${N}$}},
         {\Blue{${\sigma^2}$}}, and {\Blue{${E_0}$}} so our
         model EXAFS function matches our data.
@@ -76,18 +77,25 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
     \onslide+<2->
 
     \begin{columns}
-     \begin{column}{65mm} {\wpdf{60mm}{figs/fits/feo_r_1sh_mag}}
-        ${|\chi(R)|}$ for FeO {\Blue{data}} and {\Red{${\rm 1^{st}}$ shell fit}}.
+      \begin{column}{65mm}
+
+        \vspace{-3mm}
+        \includegraphics[width=63mm]{figs/fits/feo_1sh_chirmag}
+
+        \vmm
+        ${|\chi(R)|}$ for FeO {\Blue{data}} and {\Red{${\rm 1^{st}}$ shell
+            fit}}.
+
       \end{column}
       \begin{column}{35mm}\onslide+<2->
         \setlength{\baselineskip}{10pt} \vmm
         Results:   \vmm
         \begin{tabbing}[ll]\= aaaaa\= aaaaaaaaaaaaaaaa\kill
           \> ${S_0^2}$     \>= 0.7 (fixed)\\
-          \> ${N}$           \>= 5.0 ${\pm}$ 1.0\\
-          \> ${R}$           \>= 2.10 ${\pm}$ 0.02\AA\\
-          \> ${\Delta E_0}$ \>= -3.3 ${\pm}$ 2.5 eV\\
-          \> ${\sigma^2}$   \>= 0.012 ${\pm}$ 0.003
+          \> ${N}$           \>= 5.1 ${\pm}$ 0.4\\
+          \> ${R}$           \>= 2.09 ${\pm}$ 0.01\AA\\
+          \> ${\Delta E_0}$ \>= -1.3 ${\pm}$ 0.9 eV\\
+          \> ${\sigma^2}$   \>= 0.012 ${\pm}$ 0.002
           ${\rm\,\AA^2}$.\\
           \end{tabbing}
 
@@ -95,17 +103,19 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
     \end{column}
   \end{columns}
 
-\vfill
+  \vfill
+  \end{cenpage}
 \end{frame}
 
 \begin{frame}
 \frametitle{Analysis Example:  1st Shell of FeO}
-
+  \begin{cenpage}{135mm}
     \begin{tabular}{ll}
-      \begin{minipage}{65mm} {\wpdf{64mm}{figs/fits/feo_k_1sh}}
+      \begin{minipage}{65mm}
+        \includegraphics[width=63mm]{figs/fits/feo_1sh_chik}
       \end{minipage}
       &
-      \begin{minipage}{43mm}  \setlength{\baselineskip}{10pt}
+      \begin{minipage}{55mm}  \setlength{\baselineskip}{10pt}
 
         {\Red{${1^{st}}$ shell fit in ${k}$ space.}}
         \vmm
@@ -115,11 +125,13 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
       \end{minipage}
     \\
     \onslide+<2->
-      \begin{minipage}{65mm} {\wpdf{64mm}{figs/fits/feo_r_1sh_cmplx}}
+      \begin{minipage}{65mm}
+        \vspace{-3mm}
+        \includegraphics[width=63mm]{figs/fits/feo_1sh_chirre}
       \end{minipage}
       &
     \onslide+<2->
-      \begin{minipage}{43mm}  \setlength{\baselineskip}{10pt}
+      \begin{minipage}{55mm}  \setlength{\baselineskip}{10pt}
         {\Red{${1^{st}}$ shell fit in ${R}$ space.}}
         \vspace{1mm}
 
@@ -133,5 +145,6 @@ we may refine these Parameters {\RedEmph{For Each Path}}:
       \end{minipage}
   \end{tabular}
 
-\vfill
+  \vfill
+    \end{cenpage}
 \end{frame}
