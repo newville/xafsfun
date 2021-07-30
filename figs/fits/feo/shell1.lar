@@ -1,13 +1,15 @@
 ## examples/feffit/doc_feffit4.lar
 
-feo_dat = read_ascii('feo_xafs.dat', labels = 'energy mu')
+feo_dat = read_ascii('feo.dat', labels = 'energy dtime i0 i1')
+
+feo_dat.mu = -log(feo_dat.i1/feo_dat.i0)
 
 autobk(feo_dat, kweight=2, rbkg=0.9, e0=7120)
 
 # define fitting parameter group
 pars = group(n1     = param(6, vary=True),
              # n2     = param(12, vary=False),
-             s02    = 0.750,
+             s02    = 0.70,
              de0    = guess(0.1),
              sig2_1 = param(0.002, vary=True),
              delr_1 = guess(0.),
@@ -43,6 +45,38 @@ print(feffit_report(out))
 ## run('doc_macros.lar')
 # write_report('doc_feffit4.out', feffit_report(out))
 
-plot_chifit(dset, title=None, rmax=7) # '1st shell fit to FeO')
 
-plot(dset.data.k, dset.data.kwin, linewidth=3, win=1, label='Window', zorder=4)
+opts = dict(grid=False, fullbox=False, linewidth=4,
+            axisfontsize=11, labelfontsize=11,
+            legendfontsize=11,
+            show_legend=False)
+
+kopts = {'xlabel': r'$k\, \rm(\AA^{-1})$', 'ylabel': r'$k^2\chi(k)\rm\, (\AA^{-2})$' }
+kopts.update(opts)
+
+ropts = {'xlabel': r'$ R \rm\, (\AA)$',
+        'ylabel': r' $ |\chi(R)|\rm\, (\AA^{-3})$' }
+ropts.update(opts)
+
+
+plot(dset.data.r, dset.data.chir_mag, xmax=7, new=True, win=1, **ropts)
+plot(dset.model.r, dset.model.chir_mag, xmax=7, win=1, **ropts)
+
+save_plot('feo_1sh_chirmag.png')
+
+plot(dset.data.r, dset.data.chir_mag, xmax=7, new=True, win=1, **ropts)
+plot(dset.data.r, dset.data.chir_re,  xmax=7, win=1, color='#1F77B4', **ropts)
+
+plot(dset.model.r, dset.model.chir_mag, xmax=7, win=1, color='#D62728', **ropts)
+plot(dset.model.r, dset.model.chir_re, xmax=7, win=1, color='#D62728', **ropts)
+
+save_plot('feo_1sh_chirre.png')
+
+
+plot(dset.data.k, dset.data.chi*dset.data.k**2, new=True, win=1, **kopts)
+plot(dset.model.k, dset.model.chi*dset.data.k**2,  win=1, color='#D62728', **kopts)
+
+save_plot('feo_1sh_chik.png')
+
+
+# plot(dset.data.k, dset.data.kwin, linewidth=3, win=1, label='Window', zorder=4)
