@@ -1,0 +1,39 @@
+cu10 = read_ascii('fit_10.dat', labels='r dat fit')
+
+opts = dict(grid=False, fullbox=False, linewidth=4,
+            axisfontsize=11, labelfontsize=11,
+            legendfontsize=11,
+            show_legend=False)
+
+kopts = {'xlabel': r'$k\, \rm(\AA^{-1})$', 'ylabel': r'$k^2\chi(k)\rm\, (\AA^{-2})$' }
+kopts.update(opts)
+
+ropts = {'xlabel': r'$ R \rm\, (\AA)$',
+        'ylabel': r' $ |\chi(R)|\rm\, (\AA^{-3})$' }
+ropts.update(opts)
+
+
+plot(cu10.r, cu10.dat, xmax=7, new=True, win=1, **ropts)
+plot(cu10.r, cu10.fit, xmax=7, win=1, **ropts)
+
+plot_text(' Cu foil, 10 K ', 3, 5)
+save_plot('cu3temp_mag10.png')
+
+ropts['ylabel'] = r'$ {\rm Re}[\chi(R)]\rm\, (\AA^{-3})$'
+
+cu50 = read_ascii('fit_50.dat', labels='r dat fit rdat rfit')
+
+plot(cu50.r, cu50.rdat, xmax=7, new=True, win=1, **ropts)
+plot(cu50.r, cu50.rfit, xmax=7, win=1, **ropts)
+
+plot_text(' Cu foil, 50 K ', 3, 5)
+save_plot('cu3temp_re50.png')
+
+
+cu150 = read_ascii('fit_150.dat', labels='r dat fit rdat rfit')
+
+plot(cu150.r, cu150.rdat, xmax=7, new=True, win=1, **ropts)
+plot(cu150.r, cu150.rfit, xmax=7, win=1, **ropts)
+
+plot_text(' Cu foil, 150 K ', 3, 5)
+save_plot('cu3temp_re150.png')

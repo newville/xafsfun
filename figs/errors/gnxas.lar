@@ -1,0 +1,41 @@
+from scipy.special import gamma
+
+
+
+sigma= 0.1
+beta = 0.5
+r0   = 3.0
+n    = 1
+q   = 4. / beta**2
+r =  linspace(2.5, 3.5, 201)
+alpha = q + (2*(r-r0)) / (beta*sigma)
+gr =  2 * n * exp(-alpha)*alpha**(q-1)/ (sigma*abs(beta)*gamma(q))
+gr[where(gr<0)] = 0.0
+newplot(r, gr, grid=False, fullbox=False, linewidth=4, xlabel=r'$R\,\rm(\AA)$', ylabel=r'$g(R)$')
+
+leftrightaxes(win=1)
+
+title = 'GNXAS-like distribution function'
+
+
+rx = linspace(2.5, 3.5, 21)
+ax = q + (2*(rx-r0)) / (beta*sigma)
+gx = 2 * n * exp(-ax)*ax**(q-1)/ (sigma*abs(beta)*gamma(q))
+
+# tgx = "n*beta^2/(2*sigma*beta) * exp[4/beta^2 + (r-r0)/(beta*sigma)] "
+gx[where(gx<0)] = 0
+
+newplot(r, gr, win=2, grid=False, fullbox=False, linewidth=4,xlabel=r'$R\,\rm(\AA)$', ylabel=r'$g(R)$')
+
+save_plot('gnxas.png')
+
+plot_text(r'$R_0 = 3.0$',    3.3, 4.1)
+plot_text(r'$N  = 1.0$',     3.3, 3.8)
+plot_text(r'$\sigma = 0.1$', 3.3, 3.5)
+plot_text(r'$\beta = 0.5$',  3.3, 3.2)
+
+panel = get_display(win=1).panel
+panel.axes.hist(rx, weights=gx, bins=len(rx), rwidth=0.25, color='k')
+
+panel.draw()
+save_plot('gnxas_histogram.png')
