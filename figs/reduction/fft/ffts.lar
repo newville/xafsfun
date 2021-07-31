@@ -108,59 +108,59 @@ save_plot('../beat_r.png')
 
 
 
-# 
+#
 # pause
-# 
-# 
+#
+#
 # fftf(real = p2.chi, kweight=2, kwindow='hanning')
 # fftf(real = p3.chi, kweight=2, kwindow='hanning')
 # fftf(real = p4.chi, kweight=2, kwindow='hanning')
-# 
+#
 # echo 'B'
-# 
+#
 # p1.chirx = p1.chir_mag+0
 # p2.chirx = p2.chir_mag+40
 # p3.chirx = p3.chir_mag+80
-# 
+#
 # plot p1.r, p1.chirx, new=1, xmax=5
 # plot p1.r, p2.chirx
 # plot p1.r, p3.chirx
-# 
+#
 # write_data(file='sine_r1.dat', p1.r, p1.chirx, p2.chirx, p3.chirx)
 # pause
-# 
+#
 # p1.chirr = p1.chir_re+0
 # p2.chirr = p2.chir_re+40
 # p3.chirr = p3.chir_re+80
-# 
-# 
+#
+#
 # plot p1.r, p1.chirr, new=1, xmax=5
 # plot p1.r, p2.chirr
 # plot p1.r, p3.chirr
-# 
+#
 # write_data(file='sine_r2.dat', p1.r, p1.chirr, p2.chirr, p3.chirr)
-# 
+#
 # ######
 # set x1.chi = sin(2*p1.k *  2.3) * exp(-p1.k*p1.k* 0.006)
 # set x2.chi = sin(2*p1.k *  2.4) * exp(-p1.k*p1.k* 0.006)
 # set x3.chi = (x1.chi + x2.chi)
 # set x3.chix = x3.chi+1
-# 
+#
 # write_data(file='beat_k.dat', p1.k, x1.chi, x2.chi, x3.chix)
-# 
+#
 # fftf(real = x1.chi, kweight=2, kwindow='hanning')
 # fftf(real = x2.chi, kweight=2, kwindow='hanning')
 # fftf(real = x3.chi, kweight=2, kwindow='hanning')
-# 
-# 
-# pause 
+#
+#
+# pause
 # plot p1.k, x1.chi, new=1
 # plot p1.k, x2.chi
 # plot p1.k, x3.chix
 # pause
-# 
+#
 # plot p1.r, x1.chir_mag, new=1, xmax=5
 # plot p1.r, x2.chir_mag
 # plot p1.r, x3.chir_mag
-# 
+#
 # write_data(file='beat_r.dat', p1.r, x1.chir_mag, x2.chir_mag, x3.chir_mag)

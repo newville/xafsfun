@@ -10,10 +10,10 @@
 #   clean     remove non-essential files
 #   all       make postscript, pdf, html
 #########################################################################
-TARGET    = Intro
+TARGET    = UsingFeff
 
 ## -*- Makefile -*-
-LATEXMK   = perl $(TOP)/bin/latexmk 
+LATEXMK   = perl $(TOP)/bin/latexmk
 INSTALLDIR = ./install
 TEXFILE  = $(TARGET).tex
 OUTFILE  = $(TARGET).out
@@ -33,19 +33,19 @@ PDFLATEX   = pdflatex
 .PHONY: !  ps pdf clean install_clean all html
 
 
-! : 
+! :
 	make pdf
 
 bib:
 	bibtex $(TARGET)
 
 
-pdf: 
+pdf:
 	$(PDFLATEX) $(TEXFILE)
 
-all: pdf 
+all: pdf
 
 
 
 clean:
-	rm -f *.aux *.dvi *.log *.toc *.nav *.snm *.out *.ind 
+	rm -f *.aux *.dvi *.log *.toc *.nav *.snm *.out *.ind *.synctex*
