@@ -1,10 +1,12 @@
 \subsection{Constraints and Generalized Variables}
 \begin{frame}[fragile] \frametitle{Constraints and Generalized Variables}
 
+  \begin{cenpage}{135mm}
+
   Instead of varying the Path Parameters directly, we write them in terms of
   {\RedEmph{Generalized Variables}}.  This allows simple {\RedEmph{Constraints}} and model building:
 
-\begin{columns}
+\begin{columns}[T]
   \begin{column}{53mm}
 
   \begin{CodeBlock}{50mm}{Parameter=Variable}
@@ -52,8 +54,7 @@ path1_300K = feffpath('fefe.dat', s02='amp', \ldots,
 
 \vmm This allows us to use {\BlueEmph{Prior  Knowledge}} into the data analysis, and
 consider more complicated problems:
-
-\vfill
+\vmm
 
   \begin{itemize}
   \item force one $R$ for the same bond for data taken from different
@@ -62,6 +63,11 @@ consider more complicated problems:
   \item model complex distortions (height of a sorbed atom above a surface).
   \end{itemize}
 
+  \vmm
+  {\RedEmph{Also}}: Each Parameter can have upper and lower bounds, say to ensure that $\sigma^2 \ge 0$.
+
+  \vfill
+\end{cenpage}
 
 \end{frame}
 

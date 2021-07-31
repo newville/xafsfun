@@ -1,15 +1,14 @@
-
 %%%%%%%%%%%%%%%%%%%%%%
 \subsection{Example: Cu metal at 3 temperature}
 \begin{frame}[fragile] \frametitle{Example: Cu metal at 3 temperature}
 
-
+\begin{cenpage}{130mm}
     A very simple example of a Multi-Data-Set Fit:
 
     Cu metal, at 3 different  temperatures: 10K, 50K 150K.
 
    \begin{columns}
-     \begin{column}{48mm}
+     \begin{column}{55mm}
         \vmm  Path Parameters:
        \begin{itemize}
        \item $E_0$:  Same for all $T$
@@ -27,9 +26,9 @@
        \vmm
        \hspace{2mm}  $k = [1.50, 18.50] \rm\, \AA^{-1}$
      \end{column}
-     \begin{column}{53mm}
+     \begin{column}{65mm}
 
-  \begin{CodeBlock}{55mm}{Cu at three temperatures}
+  \begin{CodeBlock}{60mm}{Cu at three temperatures}
 
 # define fitting parameter group
 pars = group(amp      = param(1, vary=True),
@@ -57,7 +56,7 @@ path1_150 = feffpath('feff0001.dat',
    \end{CodeBlock}
  \end{column}
 \end{columns}
-
+\end{cenpage}
 \end{frame}
 
 
@@ -65,8 +64,10 @@ path1_150 = feffpath('feff0001.dat',
 \subsection{Example: Cu metal Results}
 \begin{frame}[fragile] \frametitle{Example: Cu metal Results}
 
+  \begin{cenpage}{135mm}
+
   \begin{tabular}{ll}
-    \begin{minipage}{50mm}
+    \begin{minipage}{60mm}
       \begin{tabular}{lll}
         {\ } &{\tt{amp}}  &   $0.91(0.08)$ \\
         &{\tt{theta}}  &   $233.5(19.6) \rm\, K $ \\
@@ -76,16 +77,18 @@ path1_150 = feffpath('feff0001.dat',
       \end{tabular}
   \vmm
 \end{minipage} &
-\begin{minipage}{50mm}
-  \wpdf{49mm}{figs/Cu3temp/cu_3temp_mag10}
+\begin{minipage}{60mm}
+  \includegraphics[width=56mm]{figs/Cu3temp/cu3temp_mag10}
 \end{minipage} \\
-\begin{minipage}{50mm}
-  \wpdf{49mm}{figs/Cu3temp/cu_3temp_50}
+\begin{minipage}{60mm}
+  \includegraphics[width=56mm]{figs/Cu3temp/cu3temp_re50}
 \end{minipage} &
-\begin{minipage}{50mm}
-  \wpdf{49mm}{figs/Cu3temp/cu_3temp_150}
+\begin{minipage}{60mm}
+  \includegraphics[width=56mm]{figs/Cu3temp/cu3temp_re150}
 \end{minipage}\\
-\end{tabular}
+  \end{tabular}
+\end{cenpage}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%

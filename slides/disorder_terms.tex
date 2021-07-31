@@ -1,12 +1,12 @@
-
 \section{Disorder Terms}
+
 
 \begin{slide}{Structural Disorder and the Pair Distribution Function}
 
+  \begin{cenpage}{135mm}
+
   An EXAFS measurement averages billions of {\BlueEmph{snapshots}} of the
   local structure:
-
-\onslide+<2->
 
 \begin{cenpage}{88mm}
 \begin{itemize}
@@ -18,16 +18,16 @@
 \end{itemize}
 \end{cenpage}
 
-\vmm \onslide+<3->
+\vmm
  \vmm
 
 So far, we've put this in the EXAFS Equation as \hspace{2mm}
 $\chi \sim N \exp({-2k^2\sigma^2}) $
 
-\vmm \hrule \vmm \onslide+<4->
+\vmm \hrule \vmm \onslide+<2->
 
 \begin{columns}
-  \begin{column}{50mm}
+  \begin{column}{70mm}
     More generally, EXAFS samples the
 
     \vmm
@@ -41,18 +41,19 @@ $\chi \sim N \exp({-2k^2\sigma^2}) $
     \vspace{8mm}
 
     \end{column}
-  \begin{column}{70mm}
+  \begin{column}{65mm}
 
-      \scalebox{1}{\wgraph{65mm}{errors/gnxas}}
+    \includegraphics[width=60mm]{figs/errors/gnxas}
     \end{column}
   \end{columns}
-
+\end{cenpage}
 \end{slide}
 
 
 \begin{slide}{EXAFS and The Pair Distribution Function}
 
 
+  \begin{cenpage}{135mm}
   To fully account for a highly disordered local structure, we should use
 
 \[
@@ -84,23 +85,26 @@ The {\RedEmph{the cumulant expansion}} relates $\langle e^x\rangle$ to $\langle 
 
 
 \vfill
+\end{cenpage}
 \end{slide}
 
 %% Slide
 \begin{slide}{The Cumulants and Moments of a Distribution Function}
 
+  \begin{cenpage}{135mm}
   The cumulants $C_n$ of $g(R)$ are related to the moments of $g(R)$:
   $\langle r^n \rangle$,
 
   with $r= R - R_0$ and $R_0$ is the centroid of the distribution:
 
+  \vmm
+
     \begin{tabular}{lll}
-      \hspace{4mm} &
-      $C_1 $ & $ = \langle r \rangle    $    \hspace{4mm} {\RedEmph{$ = \Delta R$}} \\
-      & $C_2  $ & $ = \langle r^2 \rangle - \langle r \rangle^2    $  \hspace{4mm} {\RedEmph{$ = \sigma^2$}}\\
-      & $ C_3 $ & $ = \langle r^3 \rangle - 3 \langle r^2 \rangle
-      \langle r \rangle  + 2 \langle r \rangle^3   $  \\
-      & $ C_4 $ & $ =  \langle r^4 \rangle - 3 \langle r^2 \rangle^2
+      $C_1 = \Delta R$  & {\BlueEmph{\tt{deltar}}}    & $ = \langle r \rangle    $    \\
+      $C_2  = \sigma^2$ &  {\BlueEmph{\tt{sigma2}}} & $ = \langle r^2 \rangle - \langle r \rangle^2    $   \\
+      $ C_3 $ & {\BlueEmph{\tt{third}}} & $ = \langle r^3 \rangle - 3 \langle r^2 \rangle
+      \langle r \rangle  + 2 \langle r \rangle^3   $    \\
+      $ C_4 $ & {\BlueEmph{\tt{fourth}}} & $ =  \langle r^4 \rangle - 3 \langle r^2 \rangle^2
       - 4\langle r^3 \rangle \langle r \rangle
       +12  \langle r^2 \rangle  \langle r \rangle^2
       - 6\langle r \rangle^4  $   \\
@@ -108,37 +112,32 @@ The {\RedEmph{the cumulant expansion}} relates $\langle e^x\rangle$ to $\langle 
 
     \vmm
 
-    $C_3$ (the {\RedEmph{third cumulant}}) can be important For many EXAFS
-    problems.
+    \begin{postitbox}{80mm}
+    $C_3$ (the {\RedEmph{third cumulant}}) can be important in many cases.
+  \end{postitbox}
 
     \vmm\hrule\vmm
-
     \onslide+<2->
 
 \begin{columns}
-  \begin{column}{52mm}
+  \begin{column}{70mm}
 
+    But: Sometimes, the cumulant expansion isn't good enough.  One can also build models by using
+    paths spaced in $R$ (say, at 0.2 {\AA} steps), and model the amplitude of each Path with a
+    distribution like (following GNXAS):
 
-    Sometimes,  the cumulant expansion isn't good enough.
-    One can build more complicated models \ldots.
+    \[    g(R, N, R_0, \sigma, \beta) = \frac{2N [  e^{-\alpha} \alpha^{q-1}]}{\sigma\beta\Gamma(q) }\]
 
-    \onslide+<3->\vmm
-    {\RedEmph{Example}}:
+    where  $\alpha = q + 2(R-R_0)/(\beta\sigma)$,  and $q = 4/\beta^2$
 
-    \vmm Use many closely spaced paths to allow  for nearly any
-    distribution.
-
-    \vmm
-    Model the amplitude of each Path.
-
-    \vspace{5mm}
+\vspace{5mm}
 
     \end{column}
-  \begin{column}{70mm}
-    \onslide+<3->
-      \scalebox{1}{\wgraph{65mm}{errors/gnxas_histogram}}
+  \begin{column}{65mm}
+    \onslide+<2->
+      \includegraphics[width=60mm]{figs/errors/gnxas_histogram}
     \end{column}
   \end{columns}
 
+  \end{cenpage}
 \end{slide}
-

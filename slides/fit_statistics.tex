@@ -89,41 +89,69 @@
 
   \begin{cenpage}{135mm}
   Other ``goodness-of-fit statistics'':
-  \vmm
 
-  {\RedEmph{chi-square}}: As before:
-
-  \begin{postitbox}{54mm}  $ \displaystyle
-    \chi^2  =  \frac{ N_{\rm idp}}{\epsilon^2 N_{\rm fit}}
-    \sum_i^{N_{\rm fit}} [\chi_i^{\rm measured} - \chi_i^{\rm model}({x})]^2
-    $
-  \end{postitbox}
-
- \vmm
-  {\RedEmph{reduced chi-square}}: scale $N_{\rm varys}$ by the ``degrees of freedom'' :
-
-  \begin{postitbox}{38mm}
-    $ \chi^2_\nu =  \chi^2 / (N_{\rm idp}-N_{\rm varys}) $
-  \end{postitbox}
+\vmm\vmm
 
 
-  For a ``Good Fit'', $\chi^2_\nu$ should be $\sim$ 1.   This
-  {\RedEmph{never}} happens!
+  \begin{columns}[T]
+    \begin{column}{65mm}
+      {\RedEmph{chi-square}}: As before:
 
-\vmm
+    \begin{postitbox}{56mm}
+      \[
+      \chi^2  =  \frac{ N_{\rm idp}}{\epsilon^2 N_{\rm fit}}
+      \sum_i^{N_{\rm fit}} [\chi_i^{\rm measured} - \chi_i^{\rm model}({x})]^2
+      \]
+    \end{postitbox}
+    \end{column}
+    \begin{column}{65mm}
+      {\RedEmph{reduced chi-square}}: scale by the ``degrees of freedom'' :
 
-  {\RedEmph{R-factor}}: $\cal{R}$  gives a ``fractional misfit'' (and
-  not scaled by the data  uncertainty $\epsilon$):
+      \begin{postitbox}{56mm}
+        \[ \chi^2_\nu =  \chi^2 / (N_{\rm idp}-N_{\rm varys})      \]
+        \end{postitbox}
+    \end{column}
+  \end{columns}
 
-\vmm
+  \vmm  \vmm  \pause
 
-  \begin{postitbox}{50mm}
-    \[
-{\cal{R}} = \frac{\sum_i^{N_{\rm fit}}[\chi_i^{\rm measured} -
-      \chi_i^{\rm model}({x})]^2 }{
-      \sum_i^{N_{\rm fit}} [{\chi_i^{\rm measured}}]^2}
+  \begin{columns}[T]
+    \begin{column}{65mm}
+
+      {\RedEmph{R-factor}}: $\cal{R}$  gives a ``fractional misfit'' (and
+      not scaled by the data  uncertainty $\epsilon$):
+
+      \begin{postitbox}{56mm}
+        \[
+      {\cal{R}} = \frac{\sum_i^{N_{\rm fit}}[\chi_i^{\rm measured} -
+        \chi_i^{\rm model}({x})]^2 }{
+        \sum_i^{N_{\rm fit}} [{\chi_i^{\rm measured}}]^2}
     \]
   \end{postitbox}
+
+    \end{column}
+    \begin{column}{65mm}
+
+      {\RedEmph{Akaike Information Criterion}}: Also weights to account for
+      degrees of freedom in fit:
+
+      \begin{postitbox}{56mm}
+        \[
+          {\rm{AIC}} =N_{\rm data}  \log(\chi^2/N_{\rm data}) + 2 N_{\rm varys}
+        \]
+      \end{postitbox}
+
+    \end{column}
+  \end{columns}
+
+
+  \vmm
+  For a ``Good Fit'', $\chi^2_\nu$ should be $\sim$ 1.
+
+  This assumes that  we have an accurate estimate of $\epsilon$ which never really happens!
+
+\vmm
+
 
 \vfill
 \end{cenpage}
@@ -223,8 +251,11 @@
 
 \begin{cenpage}{105mm}
 
-    Using this $\delta\chi(k)$ array reduces the $\chi^2$
-    statistic by $2\times$ or  more.
+  Using this $\delta\chi(k)$ array as the estimate of the uncertainty of
+  the EXAFS $\chi(k)$ reduces the $\chi^2$ statistic by $2\times$ or more.
+  \vmm
+
+    This is now the default approach in {\larch}.
 
 \end{cenpage}
 
@@ -236,31 +267,32 @@
 %%%%%%%%%%%%%%%%%%%%%%
 \begin{slide}{Error Bars: the uncertainties in the fit variables}
 
-\begin{cenpage}{125mm}
-A fit finds a set of values $\Blue{x_0}$ that are the ``best fit'' of the variables
-$\Blue{x}$ -- they give the lowest value of  $\chi^2$.
+\begin{cenpage}{135mm}
+A fit finds the ``best-fit'' set of values for the variables $\{\Blue{x},
+{\Blue{y}}, \ldots\}$:  these  give the lowest  $\chi^2$ = $\chi^2_0$.
 
-\begin{center} Uncertainties in $\Blue{x}$ are estimated by increasing the
-  $\chi^2$ by 1: \end{center}
+\begin{center} Uncertainties in Parameters $\Blue{x}$ are estimated by increasing the
+  $\chi^2$ by 1:
+\end{center}
 
 
 \begin{columns}
-\begin{column}{58mm}
+\begin{column}{65mm}
 
 \onslide+<2->
 
- \wpdf{58mm}{figs/errors/ellipse}
+ \includegraphics[width=62mm]{figs/errors/ellipse}
 
 \end{column}
-\begin{column}{55mm}
+\begin{column}{60mm}
 
 {\onslide+<2->
 Some Parameters are {\RedEmph{Correlated}}:
 
 \vmm
 
-Changing {\Blue{$x$}} away from its best value will change the best value
-for {\Blue{$y$}}.
+Changing the value for parameter {\Blue{$x$}} away from its best value will change the best value
+for another parameter, {\Blue{$y$}}.
 
 \vmm
 
@@ -276,11 +308,15 @@ for {\Blue{$y$}}.
  \onslide+<2-> \vmm
  {\RedEmph{Increasing $\chi^2$ by 1 assumes we have a ``Good Fit'', with $\chi^2_\nu \approx 1$}}.
 
- \vmm We typically have  $\chi^2_\nu \gtrsim 50$  (Actually, we  {\emph{can
-     now do better}}!).
+ \vmm We typically have  $\chi^2_\nu \sim 10$,  so we increase the best $\chi^2$ by $\chi^2_\nu$ to estimate error bars.
 
 \vmm
-We increase the best $\chi^2$ by $\chi^2_\nu$ to estimate error bars.
+The reported uncertainties do take the correlation into account!
+
+\vmm
+More rigorous methods for uncertainty analysis is available from the {\larch}
+Python code.
+
 
 
 \vmm \vmm
